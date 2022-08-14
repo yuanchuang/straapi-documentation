@@ -16,7 +16,7 @@ const themeConfig = {
               link: '/developer-docs/latest/getting-started/introduction.html',
             },
             {
-              text: 'Setup & Deployment',
+              text: '设置 & 部署',
               link: '/developer-docs/latest/setup-deployment-guides/installation.html',
             },
             {
