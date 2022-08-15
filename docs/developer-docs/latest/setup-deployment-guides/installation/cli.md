@@ -56,8 +56,8 @@ yarn create strapi-app my-project
 
 2. 选择安装方式:
 
-   - `Quickstart (recommended)`, 使用默认数据库 (SQLite)
-   - `Custom (manual settings)`, 允许选择你更喜爱的数据库
+   - `Quickstart (recommended)` 使用默认数据库 (SQLite)
+   - `Custom (manual settings)` 允许选择你更喜爱的数据库
 
 3. (仅自定义安装类型) 在数据库列表中，为你的 Strapi 项目选择一个数据库。
 

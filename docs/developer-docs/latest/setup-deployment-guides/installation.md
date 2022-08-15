@@ -6,8 +6,8 @@ canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guid
 
 # 安装
 
-Strapi项目和应用程序既能安装在本地计算机上，也能安装在远程服务器上。
-以下安装指南将会逐步指导你如何安装和创建一个新的Strapi项目。
+Strapi 项目和应用程序既能安装在本地计算机上，也能安装在远程服务器上。
+以下安装指南将会逐步指导你如何安装和创建一个新的 Strapi 项目。
 
 ## 本地安装
 
