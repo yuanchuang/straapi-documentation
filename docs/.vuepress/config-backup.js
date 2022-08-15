@@ -16,13 +16,13 @@ const sidebar = {
       ],
     },
     {
-      title: '⚙️ Setup & Deployment',
+      title: '⚙️ 安装 & 部署',
       collapsable: false,
       sidebarDepth: 0,
       initialOpenGroupIndex: -1, // make sure that no subgroup is expanded by default
       children: [
         {
-          title: 'Installation',
+          title: '安装',
           path: '/developer-docs/latest/setup-deployment-guides/installation.html',
           collapsable: true,
           sidebarDepth: 1,
@@ -43,7 +43,7 @@ const sidebar = {
             ],
           ],
         },
-        ['/developer-docs/latest/setup-deployment-guides/file-structure.md', 'Project structure'],
+        ['/developer-docs/latest/setup-deployment-guides/file-structure.md', '项目结构'],
         {
           title: 'Configurations',
           path: '/developer-docs/latest/setup-deployment-guides/configurations.html',
@@ -819,7 +819,7 @@ module.exports = {
                 link: '/developer-docs/latest/getting-started/introduction.html',
               },
               {
-                text: 'Setup & Deployment',
+                text: '设置 & 部署',
                 link: '/developer-docs/latest/setup-deployment-guides/installation.html',
               },
               {

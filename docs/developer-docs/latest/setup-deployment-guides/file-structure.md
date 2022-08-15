@@ -1,6 +1,6 @@
 ---
-title: Project Structure - Strapi Developer Docs
-description: Discover the project structure of any default Strapi application.
+title: 项目结构 - Strapi 开发人员文档
+description: 了解任何默认 Strapi 应用程序的项目结构
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/file-structure.html
 ---
 
@@ -14,12 +14,12 @@ canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guid
   }
 </style>
 
-# Project structure
+# 项目结构
 
 :::: note
-If the Strapi project was created with the [starter CLI](https://strapi.io/blog/announcing-the-strapi-starter-cli), its structure includes both a `frontend` and `backend` folder, where the `backend` folder has the default structure.
+如果 Strapi 项目是用 [启动器 CLI](https://strapi.io/blog/announcing-the-strapi-starter-cli) 创建的，那么项目结构包括 `frontend` 和 `backend` 文件夹，其中 `backend` 文件夹有默认的结构。
 
-::: details Structure of a project created with the starter CLI
+::: details 使用启动器CLI创建的项目结构
 
 ```sh
 my-project
@@ -31,7 +31,7 @@ my-project
 :::
 ::::
 
-The default structure of a Strapi project created without the starter CLI depends on whether the project was created with vanilla JavaScript or with [TypeScript](/developer-docs/latest/development/typescript.md), and looks like the following:
+不使用启动器 CLI 创建的 Strapi 项目默认结构取决于项目使用普通的 JavaScript 创建还是 [TypeScript](/developer-docs/latest/development/typescript.md) 创建，如下所示
 
 :::: tabs card
 

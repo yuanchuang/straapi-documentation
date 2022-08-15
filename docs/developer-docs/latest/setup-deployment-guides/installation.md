@@ -1,14 +1,15 @@
 ---
-title: Installation - Strapi Developer Docs
-description: Learn many different options to install Strapi and getting started on using it.
+title: 安装 - Strapi 开发人员文档
+description: 了解许多不同选项来安装Strapi，并开始使用它
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/installation.html
 ---
 
-# Installation
+# 安装
 
-Strapi projects and applications can be installed either locally on a computer or on a remote server. The following installation guides will guide you step-by-step instructions on how to install and create a new Strapi project.
+Strapi 项目和应用程序既能安装在本地计算机上，也能安装在远程服务器上。
+以下安装指南将会逐步指导你如何安装和创建一个新的 Strapi 项目。
 
-## Local installations
+## 本地安装
 
 <div>
 	<InstallLink link="installation/cli.html">
@@ -25,9 +26,9 @@ Strapi projects and applications can be installed either locally on a computer o
         </g>
       </svg>
 		</template>
-		<template #title>CLI (recommended)</template>
+		<template #title>CLI (推荐)</template>
 		<template #description>
-			Create a project on your local machine using the CLI.
+			使用CLI在本地机器上创建一个项目。
 		</template>
 	</InstallLink>
 </div>
@@ -39,7 +40,7 @@ Strapi projects and applications can be installed either locally on a computer o
 		</template>
 		<template #title>Docker</template>
 		<template #description>
-      Create a project on your local machine using Docker.
+      使用Docker在本地机器上创建一个项目。
     </template>
 	</InstallLink>
 </div>
