@@ -195,7 +195,7 @@ const sidebar = {
       ],
     },
     {
-      title: '🔧 Development',
+      title: '🔧 开发',
       collapsable: false,
       initialOpenGroupIndex: -1, // make sure that no subgroup is expanded by default
       children: [

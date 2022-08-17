@@ -1,20 +1,20 @@
 ---
-title: Typescript - Strapi Developer Docs
-description: Learn how you can use Typescript for your Strapi application.
+title: Typescript - Strapi 开发人员文档
+description: 学习在 Strapi 应用程序中使用 Typescript。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/development/typescript.html
 ---
 
-# TypeScript development
+# TypeScript 开发
 
-TypeScript adds an additional type system layer above JavaScript, which means that existing JavaScript code is also TypeScript code. Strapi supports TypeScript in new projects on v4.3.0 and above. Existing JavaScript projects can [add TypeScript support](#add-typescript-support-to-an-existing-strapi-project) through a conversion procedure. TypeScript-enabled projects allow developing plugins with TypeScript as well as using TypeScript typings.
+TypeScript 为 JavaScript 增加了一个额外的类型系统，这意味着现有的 JavaScript 代码也是 TypeScript 代码。Strapi 在 v4.3.0 及更高版本的新项目中支持 TypeScript。现有的 JavaScript 项目可以通过转换过程 [添加 TypeScript 支持](#add-typescript-support-to-an-existing-strapi-project) 。支持 TypeScript 的项目允许使用 TypeScript 开发插件以及使用 TypeScript 类型。
 
-::: strapi Getting started with TypeScript
-To start developing in TypeScript, use the [CLI installation documentation](/developer-docs/latest/setup-deployment-guides/installation/cli.md) to create a new TypeScript project. For existing projects, [TypeScript support can be added](#add-typescript-support-to-an-existing-strapi-project) with the provided conversion steps. Additionally, the [project structure](/developer-docs/latest/setup-deployment-guides/file-structure.md) and [TypeScript configuration](/developer-docs/latest/setup-deployment-guides/configurations/optional/typescript.md) sections have TypeScript-specific resources for understanding and configuring an application.
+::: strapi 开始使用 TypeScript
+要开始在 TypeScript 中开发，请使用 [CLI 安装文档](/developer-docs/latest/setup-deployment-guides/installation/cli.md) 来创建一个新的 TypeScript 项目。对于现有项目，可以使用提供的转换步骤添加 [TypeScript 支持](#add-typescript-support-to-an-existing-strapi-project)。此外，[项目结构](/developer-docs/latest/setup-deployment-guides/file-structure.md) 和 [TypeScript 配置](/developer-docs/latest/setup-deployment-guides/configurations/optional/typescript.md) 部分具有特定于 TypeScript 的资源，用于理解和配置应用程序。
 :::
 
-## Start developing in TypeScript
+## 开始在 TypeScript 中开发
 
-Starting the development environment for a TypeScript-enabled project requires building the admin panel prior to starting the server. In development mode, the application source code is compiled to the `./dist/build` directory and recompiled with each change in the Content-type Builder. To start the application, run the following commands in the root directory:
+为启用了 TypeScript 的项目启动开发环境需要在启动服务器之前构建管理面板。在开发模式下，应用程序源代码被编译在 `./dist/build` 目录下，并在内容类型生成器中的每个更改中重新编译。要启动应用程序，请在根目录中运行以下命令：
 
 <code-group>
 
@@ -38,14 +38,14 @@ yarn develop
 
 </code-group>
 
-## Use TypeScript typings
+## 使用 TypeScript 类型
 
-Strapi provides typings on the `Strapi` class to improve the TypeScript developing experience. These typings come with an autocomplete feature that automatically offers suggestions while developing.
+Strapi 在 `Strapi` 类上提供类型支持，以改善 TypeScript 开发体验。这些类型带有自动补全功能，可在开发时自动提供建议。
 
-To experience TypeScript-based autocomplete while developing Strapi applications, you could try the following:
+要在开发 Strapi 应用程序时体验基于 TypeScript 的自动补全，您可以尝试以下操作：
 
-1. From your code editor, open the `./src/index.ts` file.
-2. In the `register` method, declare the `strapi` argument as of type `Strapi`:
+1. 在代码编辑器中，打开 `./src/index.ts` 文件。
+2. 在 `register` 方法中，将 `strapi` 参数声明为 `Strapi` 类型：
 
     ```js
     // path: ./src/index.ts
@@ -59,15 +59,15 @@ To experience TypeScript-based autocomplete while developing Strapi applications
     };
     ```
 
-2. Within the body of the `register` method, start typing `strapi.` and use keyboard arrows to browse the available properties.
-3. Choose `runLifecyclesfunction` from the list.
-4. When the `strapi.runLifecyclesFunctions` method is added, a list of available lifecycle types (i.e. `register`, `bootstrap` and `destroy`) are returned by the code editor. Use keyboard arrows to choose one of the lifecycles and the code will autocomplete.
+2. 在 `register` 方法的主体中，开始键入 `strapi.` 并使用键盘箭头浏览可用属性。
+3. 从列表中选择 `runLifecyclesfunction`。
+4. 当 `strapi.runLifecyclesFunctions` 方法被添加，代码编辑器返回可用的生命周期类型（例 `register`、`bootstrap` 和 `destroy`）列表。使用键盘箭头选择其中一个生命周期，代码将自动补全。
 
-## Generate typings for project schemas
+## 为项目架构生成类型
 
-To generate typings for your project schemas use the [`ts:generate-types` CLI command](/developer-docs/latest/developer-resources/cli/CLI.md#strapi-ts-generate-types). The `ts:generate-types` command creates the file `schemas.d.ts`, at the project root, which stores the schema typings. The optional `--verbose` flag returns a detailed table of the generated schemas.
+要为项目架构生成类型，请使用 [`ts:generate-types` CLI 命令](/developer-docs/latest/developer-resources/cli/CLI.md#strapi-ts-generate-types)。`ts:generate-types` 命令会在项目根目录下创建 `schemas.d.ts` 文件用于存储架构类型。可选的 `--verbose` 标志返回生成的架构的详细表。
 
-To use `ts:generate-types`run the following code in a terminal at the project root:
+要使用 `ts：generate-types`，请在项目根目录的终端中运行以下代码：
 
 <code-group>
 <code-block title="NPM">
@@ -89,7 +89,7 @@ yarn strapi ts:generate-types --verbose #optional flag
 </code-block>
 </code-group>
 
-## Develop a plugin using TypeScript
+## 使用 TypeScript 开发插件
 
 New plugins can be generated following the [plugins development documentation](/developer-docs/latest/development/plugins-development.md). There are 2 important distinctions for TypeScript applications:
 
@@ -129,13 +129,13 @@ const app = await strapi(appContext);
 
 ```
 
-## Add TypeScript support to an existing Strapi project
+## 将 TypeScript 添加到现有的 Strapi 项目
 
-Adding TypeScript support to an existing project requires adding 2 `tsconfig.json` files and rebuilding the admin panel. Additionally, the `eslintrc` and `eslintignore` files can be optionally removed. The TypeScript flag `allowJs` should be set to `true` in the root `tsconfig.json` file to incrementally add TypeScript files to existing JavaScript projects. The `allowJs` flag allows `.ts` and `.tsx` files to coexist with JavaScript files.
+向现有项目添加 TypeScript 支持需要添加 2 个 `tsconfig.json` 文件并重新构建管理面板。此外，可以选择删除 `eslintrc` 和 `eslintignore` 文件。TypeScript 标志 `allowJs` 应该在根 `tsconfig.json` 文件中设置为 `true`，以便以增量方式将 TypeScript 文件添加到现有的 JavaScript 项目中。`allowJs` 标志允许 `.ts`和 `.tsx` 文件与 JavaScript 文件共存。
 
-TypeScript support can be added to an existing Strapi project using the following procedure:
+按照以下步骤将 TypeScript 支持添加到现有的 Strapi 项目中：
 
-1. Add a `tsconfig.json` file at the project root and copy the following code, with the `allowJs` flag, to the file:
+1. 在项目根目录下添加一个 `tsconfig.json` 文件，并将以下代码（带有 `allowJs` 标志）复制到该文件中：
 
 ```json
 // path: ./tsconfig.json
@@ -166,7 +166,7 @@ TypeScript support can be added to an existing Strapi project using the followin
   
 ```
 
-2. Add a `tsconfig.json` file in the `./src/admin/` directory and copy the following code to the file:
+2. 在 `./src/admin/` 目录中添加一个 `tsconfig.json` 文件，并将以下代码复制到该文件中：
 
 ```json
 // path: ./src/admin/tsconfig.json
@@ -187,8 +187,8 @@ TypeScript support can be added to an existing Strapi project using the followin
   
 ```
 
-3. (optional) Delete the `.eslintrc` and `.eslintignore` files from the project root.
-4. Rebuild the admin panel and start the development server:
+3. (可选) 在项目根目录下删除 `.eslintrc` 和 `.eslintignore`。
+4. 重新生成管理面板并启动开发服务器：
 
 <code-group>
 <code-block title='NPM'>
@@ -210,4 +210,4 @@ yarn develop
 </code-block>
 </code-group>
 
-After completing the preceding procedure a `dist` directory will be added at the project route and the project has access to the same TypeScript features as a new TypeScript-supported Strapi project.
+完成上述步骤后，`dist` 目录将在项目路由中添加，并且项目可以访问与新的 TypeScript 支持的 Strapi 项目相同的 TypeScript 功能。
