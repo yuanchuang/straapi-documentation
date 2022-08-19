@@ -54,7 +54,7 @@ const themeConfig = {
                 '/user-docs/latest/content-types-builder/introduction-to-content-types-builder.html',
             },
             {
-              text: 'Users, Roles, and Permissions',
+              text: '用户、角色、权限',
               link:
                 '/user-docs/latest/users-roles-permissions/introduction-to-users-roles-permissions.html',
             },
