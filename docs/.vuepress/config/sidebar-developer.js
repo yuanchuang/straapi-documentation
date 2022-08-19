@@ -408,13 +408,13 @@ const developer = [
     ],
   },
   {
-    title: '🧩 Strapi plugins',
+    title: '🧩 Strapi 插件',
     path: '/developer-docs/latest/plugins/plugins-intro.html',
     collapsable: false,
     children: [
       ['/developer-docs/latest/plugins/graphql', 'GraphQL'],
       ['/developer-docs/latest/plugins/i18n', 'Internationalization (i18n)'],
-      ['/developer-docs/latest/plugins/users-permissions', 'Users & Permissions'],
+      ['/developer-docs/latest/plugins/users-permissions', '用户 & 权限'],
       ['/developer-docs/latest/plugins/email', 'Email'],
       ['/developer-docs/latest/plugins/upload', 'Upload'],
       ['/developer-docs/latest/plugins/sentry', 'Sentry'],

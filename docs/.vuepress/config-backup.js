@@ -420,13 +420,13 @@ const sidebar = {
       ],
     },
     {
-      title: '🧩 Strapi plugins',
+      title: '🧩 Strapi 插件',
       path: '/developer-docs/latest/plugins/plugins-intro.html',
       collapsable: false,
       children: [
         ['/developer-docs/latest/plugins/graphql', 'GraphQL'],
         ['/developer-docs/latest/plugins/i18n', 'Internationalization (i18n)'],
-        ['/developer-docs/latest/plugins/users-permissions', 'Users & Permissions'],
+        ['/developer-docs/latest/plugins/users-permissions', '用户 & 权限'],
         ['/developer-docs/latest/plugins/email', 'Email'],
         ['/developer-docs/latest/plugins/upload', 'Upload'],
         ['/developer-docs/latest/plugins/documentation', 'API Documentation'],
@@ -523,7 +523,7 @@ const sidebar = {
     },
     {
       collapsable: false,
-      title: 'Users, Roles & Permissions',
+      title: '用户、角色、权限',
       children: [
         [
           '/user-docs/latest/users-roles-permissions/introduction-to-users-roles-permissions',
@@ -857,7 +857,7 @@ module.exports = {
                   '/user-docs/latest/content-types-builder/introduction-to-content-types-builder.html',
               },
               {
-                text: 'Users, Roles, and Permissions',
+                text: '用户、角色、权限',
                 link: '/user-docs/latest/users-roles-permissions/introduction-to-users-roles-permissions.html',
               },
               {

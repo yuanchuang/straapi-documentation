@@ -1,59 +1,56 @@
 ---
-title: Roles & Permissions - Strapi Developer Docs
-description: Protect your API with a full authentication process based on JWT and manage the permissions between the groups of users.
+title: 角色 & 权限 - Strapi 开发人员文档
+description: 通过基于 JWT 的完整身份验证过程保护你的 API，并管理用户组之间的权限。
 sidebarDepth: 2
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html
 ---
 
-# Roles & Permissions
+# 角色 & 权限
 
-This plugin provides a way to protect your API with a full authentication process based on JWT. This plugin comes also with an ACL strategy that allows you to manage the permissions between the groups of users.
+此插件提供了一种通过基于 JWT 的完整身份验证过程来保护你的 API 的方法。此插件还附带了 ACL 策略，允许你管理用户组之间的权限。
 
-To access the plugin admin panel, click on the **Settings** link in the left menu and then everything will be under the **USERS & PERMISSIONS PLUGIN** section.
+要访问插件管理面板，请单击左侧菜单中的 **Settings** 链接，然后所有内容都将位于 **USERS & PERMISSIONS PLUGIN** 部分下。
 
-## Concept
+## 概念
 
-When this plugin is installed, it adds an access layer on your application.
-The plugin uses [`jwt token`](https://en.wikipedia.org/wiki/JSON_Web_Token) to authenticate users.
+安装此插件后，它会在你的应用程序上添加一个访问层。
+该插件使用 [`jwt token`](https://en.wikipedia.org/wiki/JSON_Web_Token) 效验用户。
 
-Each time an API request is sent, the server checks if an `Authorization` header is present and verifies if the user making the request has access to the resource.
+每次发送 API 请求时，服务器便会检查 `Authorization` 协议头是否存在，并验证发出请求的用户是否有权访问资源。
 
-To do so, your JWT contains your user ID and we are able to match the group your user is in and at the end to know if the group allows access to the route.
+为此，你的 JWT 包含你的用户 ID，并且我们能够匹配你的用户所在的组，并在最后知道该组是否允许访问路由。
 
-## Manage role permissions
+## 管理角色权限
 
-### Public role
+### 公共角色
 
-This role is used when you receive a request that doesn't have an `Authorization` header.
-If you allow some permissions in this role, everybody will be able to access the endpoints you selected.
-This is common practice to select `find` / `findOne` endpoints when you want your front-end application to access all the content without developing user authentication and authorization.
+当发送没带有 `Authorization` 协议头的请求时，将使用此角色。
+如果您允许此角色的某些权限，则每个人都可以访问您选择的选项。
+当您希望前端应用程序在不开发用户身份验证和授权的情况下访问所有内容时，选择 `find` / `findOne` 选项是常见的做法。
 
-### Authenticated role
+### 经过身份验证的角色
 
-This is the default role that is given to every **new user** if no role is provided at creation. In this role you will be able to define routes that a user can access.
+在创建用户时未提供任何角色，则为每个**新用户**提供的默认角色（Authenticated role）。在此角色中，您将能够定义用户可以访问的路由。
 
-### Permissions management
+### 权限管理
 
-By clicking on the **Role** name, you will be able to see all functions available in your application (and these functions are related to a specific route)
+通过单击 **Role** 名称，您将能够看到应用程序中可用的所有功能（并且这些功数与特定路由相关）如果勾选功能名称，则会使您正在编辑的当前角色可以访问此路由。在右侧边栏上，您将能够看到与此功能相关的 URL。
 
-If you check a function name, it makes this route accessible by the current role you are editing.
-On the right sidebar you will be able to see the URL related to this function.
+### 更新默认角色
 
-### Update the default role
+当你使用 `/api/auth/local/register` 路由创建一个无角色的用户时，将会为该用户分配 `authenticated` 角色。
 
-When you create a user without a role or if you use the `/api/auth/local/register` route, the `authenticated` role is given to the user.
+要修改默认角色，请单击 `高级设置`(`Advanced settings`) 标签并且更新 `经过身份验证的用户的默认角色`(`Default role for authenticated users`) 选项。
 
-To change the default role, go to the `Advanced settings` tab and update the `Default role for authenticated users` option.
+## 认证
 
-## Authentication
+### Token 用法
 
-### Token usage
+jwt token 可用于发出受权限限制的 API 请求。要以用户身份发出 API 请求，请将 jwt token 放入 GET 请求的 `Authorization` 协议头中。默认情况下，没有令牌的请求将采取 `公共`(`public`) 角色权限。在管理仪表板中修改每个用户角色的权限。身份验证失败将返回 401（未经授权）错误。
 
-A jwt token may be used for making permission-restricted API requests. To make an API request as a user, place the jwt token into an `Authorization` header of the GET request. A request without a token, will assume the `public` role permissions by default. Modify the permissions of each user's role in admin dashboard. Authentication failures return a 401 (unauthorized) error.
+#### 用法
 
-#### Usage
-
-- The `token` variable is the `data.jwt` received when logging in or registering.
+- `token` 变量是在登录或注册时从响应中 `data.jwt` 获取。
 
 ```js
 import axios from 'axios';
@@ -77,16 +74,15 @@ axios
   });
 ```
 
-### JWT configuration
+### JWT 配置
 
-You can configure the JWT generation by using the [plugins configuration file](/developer-docs/latest/setup-deployment-guides/configurations/optional/plugins.md).
-We are using [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) to generate the JWT.
+你可以使用 [插件配置文件](/developer-docs/latest/setup-deployment-guides/configurations/optional/plugins.md) 来配置 JWT 生成。
+我们使用 [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) 来生成 JWT。
 
-Available options:
+可用选项:
 
-- `jwtSecret`: random string used to create new JWTs, typically set using the `JWT_SECRET` [environment variable](/developer-docs/latest/setup-deployment-guides/configurations/optional/environment.md#strapi-s-environment-variables).
-- `jwt.expiresIn`: expressed in seconds or a string describing a time span zeit/ms.<br>
-  Eg: 60, "45m", "10h", "2 days", "7d", "2y". A numeric value is interpreted as a seconds count. If you use a string be sure you provide the time units (minutes, hours, days, years, etc), otherwise milliseconds unit is used by default ("120" is equal to "120ms").
+- `jwtSecret`: 随机字符串生成 JWT 签名。通常使用 `JWT_SECRET` [环境变量](/developer-docs/latest/setup-deployment-guides/configurations/optional/environment.md#strapi-s-environment-variables) 设置。
+- `jwt.expiresIn`: 以秒或描述时间跨度/毫秒的字符串表示。<br>例如: 60, "45m", "10h", "2 days", "7d", "2y". 数值被解释为秒计数。如果使用字符串，请确保提供正确时间单位 (minutes, hours, days, years, etc)，否则默认使用毫秒单位（ "120" 等于 "120ms"）。
 
 <code-group>
 
@@ -133,14 +129,15 @@ export default ({ env }) => ({
 </code-group>
 
 :::warning
+由于大量的安全问题，`绝对不建议`将JWT到期时间设置为30天以上。
 Setting JWT expiry for more than 30 days is **absolutely not recommended** due to massive security concerns.
 :::
 
-### Registration
+### 注册
 
-Creates a new user in the database with a default role as 'registered'.
+在数据库中创建一个默认角色为“已注册”的新用户。
 
-#### Usage
+#### 用法
 
 ```js
 import axios from 'axios';
@@ -165,13 +162,13 @@ axios
   });
 ```
 
-### Login
+### 登录
 
-Submit the user's identifier and password credentials for authentication. When the authentication is successful, the response data returned will have the user's information along with a jwt authentication token.
+提交用户的标识符和密码凭据进行身份验证。身份验证成功后，返回的响应数据将包含用户的信息以及 jwt 身份验证令牌。
 
-#### Local
+#### 本地
 
-- The `identifier` param can either be an **email** or a **username**.
+- `identifier` 参数可以是 **email** 或 **username**。
 
 ```js
 import axios from 'axios';
@@ -194,31 +191,31 @@ axios
   });
 ```
 
-### Providers
+### 提供者
 
-Thanks to [Grant](https://github.com/simov/grant) and [Purest](https://github.com/simov/purest), you can easily use OAuth and OAuth2 providers to enable authentication in your application.
+借助 [Grant](https://github.com/simov/grant) 和 [Purest](https://github.com/simov/purest)， 您可以轻松地使用 OAuth 和 OAuth2 提供程序在应用程序中启用身份验证。
 
-For better understanding, you may find as follows the description of the login flow. To simplify the explanation, we used `github` as the provider but it works the same for the other providers.
+为了更好地理解，您可能会发现登录流程的说明如下。为了简化解释，我们使用 `github` 作为提供者，但它对其他提供者的工作方式相同。
 
-#### Understanding the login flow
+#### 了解登录流程
 
-Let's say that strapi's backend is located at: strapi.website.com.
-Let's say that your app frontend is located at: website.com.
+假设 strapi 的后端位于：strapi.website.com。
+假设 strapi 的前端端位于：website.com。
 
-1. The user goes on your frontend app (`https://website.com`) and click on your button `connect with Github`.
-2. The frontend redirect the tab to the backend URL: `https://strapi.website.com/api/connect/github`.
-3. The backend redirects the tab to the GitHub login page where the user logs in.
-4. Once done, Github redirects the tab to the backend URL:`https://strapi.website.com/api/connect/github/callback?code=abcdef`.
-5. The backend uses the given `code` to get from Github an `access_token` that can be used for a period of time to make authorized requests to Github to get the user info (the email of the user of example).
-6. Then, the backend redirects the tab to the url of your choice with the param `access_token` (example: `http://website.com/connect/github/redirect?access_token=eyfvg`)
-7. The frontend (`http://website.com/connect/github/redirect`) calls the backend with `https://strapi.website.com/api/auth/github/callback?access_token=eyfvg` that returns the strapi user profile with its `jwt`. <br> (Under the hood, the backend asks Github for the user's profile and a match is done on Github user's email address and Strapi user's email address)
-8. The frontend now possesses the user's `jwt`, which means the user is connected and the frontend can make authenticated requests to the backend!
+1. 用户进入您的前端应用程序 (`https://website.com`) 然后单击 `connect with Github` 按钮。
+2. 前端将标签页重定向到后端 URL: `https://strapi.website.com/api/connect/github`.
+3. 后端将标签页重定向到用户登录的 GitHub 登录页面。
+4. 完成后，Github会将标签页重定向到后端 URL:`https://strapi.website.com/api/connect/github/callback?code=abcdef`.
+5. 后端使用给定的 `code` 从 Github 获取 `access_token`，该 `access_token` 可以在一段时间内用于向 Github 发出授权请求以获取用户信息（例如用户的电子邮件）。
+6. 然后，后端将选项卡重定向到您选择的URL，参数为 `access_token` (例如: `http://website.com/connect/github/redirect?access_token=eyfvg`)
+7. 前端 使用 (`http://website.com/connect/github/redirect`) 调用后端的  `https://strapi.website.com/api/auth/github/callback?access_token=eyfvg` 返回带有 `jwt` 的 strapi 用户配置文件。<br> （在后台，后端要求Github提供用户的个人资料，并在 Github 用户的电子邮件地址和 Strapi 用户的电子邮件地址上进行匹配）
+8. 前端现在拥有用户的 `jwt`，这意味着用户已连接，前端可以向后端发出经过身份验证的请求！
 
-An example of a frontend app that handles this flow can be found here: [react login example app](https://github.com/strapi/strapi-examples/tree/master/login-react).
+可在此处找到处理此流的前端应用的示例: [react login example app](https://github.com/strapi/strapi-examples/tree/master/login-react).
 
-#### Setting up the server url
+#### 设置服务器网址
 
-Before setting up a provider, you need to specify the absolute url of your backend in `server.js`.
+在设置提供程序之前，您需要在 `server.js` 中指定后端的绝对 URL。
 
 **example -** `config/server.js`
 
@@ -254,17 +251,17 @@ export default ({ env }) => ({
 
 </code-group>
 
-:::tip
-Later on you will give this url to your provider. <br> For development, some providers accept the use of localhost urls but many don't. In this case we recommand to use [ngrok](https://ngrok.com/docs) (`ngrok http 1337`) that will make a proxy tunnel from a url it created to your localhost url (ex: `url: env('', 'https://5299e8514242.ngrok.io'),`).
+:::tip 提示
+稍后，您将此 URL 提供给您的提供商。<br> 对于开发，一些提供商接受使用本地主机网址，但许多提供商不接受。 在这种情况下，我们建议使用 [ngrok](https://ngrok.com/docs) (`ngrok http 1337`) 这将使代理隧道从它创建的 URL 到您的本地主机 URL（例: `url: env('', 'https://5299e8514242.ngrok.io'),`）。
 :::
 
-#### Setting up the provider - examples
+#### 设置提供程序 - 示例
 
-Instead of a generic explanation, for better understanding, we decided to show an example for each provider.
+为了更好地理解，我们决定为每个提供者展示一个示例，而不是一般的解释。
 
-In the following examples, the frontend app will be the [react login example app](https://github.com/strapi/strapi-examples/tree/master/login-react). <br>
-It (the frontend app) will be running on `http://localhost:3000`. <br>
-Strapi (the backend) will be running on `http://localhost:1337`.
+在以下示例中，前端应用程序将是 [react login example app](https://github.com/strapi/strapi-examples/tree/master/login-react)。 <br>
+前端应用程序将在 `http://localhost:3000` 上运行。 <br>
+Strapi 后端将在 `http://localhost:1337` 上运行。
 
 :::: tabs card
 
@@ -774,36 +771,36 @@ Now you can make authenticated requests 🎉 More info here: [token usage](#toke
 - **You can't access your admin panel**: It's most likely because you built it with the backend url set with a ngrok url and you stopped/restarted ngrok. You need to replace the backend url with the new ngrok url and run `yarn build` or `npm run build` again.
   :::
 
-### Reset password
+### 重置密码
 
-**Can only be used for users registered using the email provider.**
+**只能用于使用电子邮件提供商注册的用户。**
 
 :::: tabs card
 
-::: tab Forgot & Reset flow
+::: tab 忘记和重置流程
 
-The flow was thought this way:
+流程是以这样方式:
 
-1. The user goes to your **forgotten password page**
-2. The user enters his/her email address
-3. Your forgotten password page sends a request to the backend to send an email with the reset password link to the user
-4. The user receives the email, and clicks on the special link
-5. The link redirects the user to your **reset password page**
-6. The user enters his/her new password
-7. The **reset password page** sends a request to the backend with the new password
-8. If the request contains the code contained in the link at step 3., the password is updated
-9. The user can log in with the new password
+1. 用户跳转到**忘记密码页面**
+2. 用户输入他/她的电子邮件地址
+3. 忘记密码页面向后端发送请求，要求向用户发送带有重置密码链接的电子邮件
+4. 用户收到电子邮件，点击特殊链接
+5. 该链接将用户重定向到您的**重置密码页面**
+6. 用户输入新密码
+7. **重置密码页面**使用新密码向后端发送请求
+8. 如果请求包含步骤 3 中的链接中包含的代码，则更新密码
+9. 用户可以使用新密码登录
 
-In the following section we will detail steps 3. and 7..
+在下一节中，我们将详细介绍步骤 3 和 7..
 
-#### Forgotten password: ask for the reset password link
+#### 忘记密码：重置密码链接
 
-This action sends an email to a user with the link to your own reset password page.
-The link will be enriched with the url param `code` that is needed for the [reset password](#reset-password) at step 7..
+此操作会向用户发送一封电子邮件，其中包含指向您自己的重置密码页面的链接。
+该链接将使用步骤 7 中的 [重置密码](#reset-password) 所需的 url 参数 `code` 进行填充。
 
-First, you must specify the url to your reset password page in the admin panel: **Settings > USERS & PERMISSIONS PLUGIN > Advanced Settings > Reset Password Page**.
+首先，您必须在管理面板中指定重置密码页面的 URL: **Settings > USERS & PERMISSIONS PLUGIN > Advanced Settings > Reset Password Page**。
 
-Then, your **forgotten password page** has to make the following request to your backend.
+然后，在**忘记密码页面**必须向后端发出以下请求。
 
 ```js
 import axios from 'axios';
@@ -821,12 +818,12 @@ axios
   });
 ```
 
-#### Reset Password: send the new password
+#### 忘记密码：发送新密码
 
-This action will update the user password.
-Also works with the [GraphQL Plugin](./graphql.md), with the `resetPassword` mutation.
+此操作将更新用户密码。 
+也适用于 [GraphQL Plugin](./graphql.md)，以及 `resetPassword` 变化。
 
-Your **reset password page** has to make the following request to your backend.
+**重置密码页面**必须向后端发出以下请求。
 
 ```js
 import axios from 'axios';
@@ -846,12 +843,12 @@ axios
   });
 ```
 
-Congrats, you're done!
+恭喜，你做到了！
 :::
 
-::: tab Change password flow
+::: tab 修改密码流程
 
-You can also update an authenticated user password through the `/change-password` API endpoint:
+您还可以通过 `/change-password` API 终端节点更新经过身份验证的用户密码：
 
 ```js
 import axios from 'axios';
@@ -876,17 +873,17 @@ axios.post(
 
 ::::
 
-### Email validation
+### 邮件验证
 
 :::note
-In production, make sure the `url` config property is set. Otherwise the validation link will redirect to `localhost`. More info on the config [here](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md).
+在生产环境中，请确保设置了 `url` 配置属性。否则，验证链接将重定向到 `localhost`。有关配置的更多信息点 [这里](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md)。
 :::
 
-After having registered, if you have set **Enable email confirmation** to **ON**, the user will receive a confirmation link by email. The user has to click on it to validate his/her registration.
+注册后，如果将 **启用电子邮件确认** 设置为 **ON**，则用户将通过电子邮件收到确认链接。用户必须单击它以验证他/她的注册。
 
-_Example of the confirmation link:_ `https://yourwebsite.com/api/auth/email-confirmation?confirmation=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTk0OTgxMTE3LCJleHAiOjE1OTc1NzMxMTd9.0WeB-mvuguMyr4eY8CypTZDkunR--vZYzZH6h6sChFg`
+_确认链接的示例:_ `https://yourwebsite.com/api/auth/email-confirmation?confirmation=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNTk0OTgxMTE3LCJleHAiOjE1OTc1NzMxMTd9.0WeB-mvuguMyr4eY8CypTZDkunR--vZYzZH6h6sChFg`
 
-If needed, you can re-send the confirmation email by making the following request.
+如果需要，您可以通过提出以下请求来重新发送确认电子邮件。
 
 ```js
 import axios from 'axios';

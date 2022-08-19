@@ -76,7 +76,7 @@ const user = [
   },
   {
     collapsable: false,
-    title: 'Users, Roles & Permissions',
+    title: '用户、角色、权限',
     children: [
       [
         '/user-docs/latest/users-roles-permissions/introduction-to-users-roles-permissions',

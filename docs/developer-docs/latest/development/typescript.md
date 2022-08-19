@@ -100,7 +100,7 @@ New plugins can be generated following the [plugins development documentation](/
 It is not necessary to repeat the `yarn` or `npm install` command after the initial installation. The `yarn build` or `npm run build` command is necessary to implement any plugin development that affects the admin panel.
 :::
 
-## Start Strapi programmatically
+## 以编程方式启动 Strapi
 
 To start Strapi programmatically in a TypeScript project the Strapi instance requires the compiled code location. This section describes how to set and indicate the compiled code directory.
 
