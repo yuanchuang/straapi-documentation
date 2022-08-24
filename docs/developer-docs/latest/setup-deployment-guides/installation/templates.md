@@ -1,34 +1,34 @@
 ---
-title: Templates - Strapi Developer Docs
-description: Quickly create a pre-made Strapi application designed for a specific use case. It allows you to quickly bootstrap a custom Strapi app.
+title: 模板 - Strapi 开发人员文档
+description: 快速创建专为特定用例设计的预制 Strapi 应用程序。它允许你快速启动自定义 Strapi 应用程序。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/installation/templates.html
 ---
 
-# Templates
+# 模板
 
 ::: callout 🚧 
-This documentation is currently being reworked and updated to Strapi v4. You can follow the work-in-progress pull request on [GitHub](https://github.com/strapi/documentation/pull/665).
+本文档目前正在重做并更新到 Strapi v4。你可以按照 [GitHub](https://github.com/strapi/documentation/pull/665) 上的正在进行的拉取请求进行操作。
 :::
 
-A template is a pre-made Strapi configuration designed for a specific use case. It allows you to quickly bootstrap a custom Strapi app.
+模板是为特定用例设计的预制 Strapi 配置。它允许你快速启动自定义 Strapi 应用程序。
 
-Here are some things a template may configure for you:
+以下是模板可以为你配置的一些内容:
 
-- Collection types and single types
-- Components and dynamic zones
-- Plugins to install, or custom plugins
+- 集合类型和单个类型
+- 组件和动态区域
+- 要安装的插件或自定义插件
 
 :::note
-Templates and starters are not the same thing:
+模板（Templates）和启动器（Starters）不是一个东西:
 
-- A _template_ is a pre-made Strapi configuration. Note that it's only a configuration, not a configured application. That's because it cannot be run on its own, since it lacks many files, like database configs or the `package.json`. A template is only useful once applied on top of a default Strapi app via the CLI.
-- A _starter_ is a pre-made frontend application that consumes a Strapi API
+- 一个 _template_ 是预制的 Strapi 配置。它只是一个配置，而不是一个配置好的应用程序。它不能单独运行，因为它缺少许多文件，例如数据库配置或 `package.json`。模板只有在通过 CLI 应用于默认 Strapi 应用后才有用。
+- 一个 _starter_ 是一个预制的前端应用程序，使用 Strapi API
 
 :::
 
-## Using a template
+## 使用模板
 
-You can use a template when creating a project with `create-strapi-app`.
+在创建带有 `create-strapi-app` 的项目时，您可以使用模板。
 
 :::: tabs
 
@@ -50,15 +50,15 @@ npx create-strapi-app@latest my-project --template <template-github-name>
 
 ::::
 
-In these examples, the `template-github-name` argument can have different forms:
+在这些示例中，`template-github-name` 参数可以有不同的形式：
 
-- A shorthand. If a Github user named `paul` has a repository called `strapi-template-restaurant`, then the shorthand would be `paul/restaurant`. It only works if the repository's name starts with `strapi-template-`.
-- A URL. Just paste the URL of your GitHub repository. It works even if the repository is not prefixed by `strapi-template-`.
+- A shorthand。如果一个名为 `paul` 的 Github 用户有一个名为 `strapi-template-restaurant` 的存储库，那么速记将是 `paul/restaurant`。仅当存储库的名称以 `strapi-template-` 开头时，它才有效。
+- A URL. 只需粘贴 GitHub 存储库的 URL 即可。即使存储库没有以 `strapi-template-` 为前缀，它也可以工作。
 
 ::: tip
-When using a shorthand, if the username is omitted, the CLI assumes it's `strapi`.
+使用速记时，如果省略用户名，CLI 将假定它是 `strapi`。
 
-So the following commands are equivalent:
+所以以下命令是等效的:
 
 ```bash
 # Shorthand
@@ -73,17 +73,17 @@ yarn create strapi-app my-project --template https://github.com/strapi/strapi-te
 
 :::
 
-You can use the `--template` option in combination with all other `create-strapi-app` options, like `--quickstart` or `--no-run`.
+你可以将 `--template` 选项与所有其他 `create-strapi-app` 项结合使用，如 `--quickstart` 或 `--no-run`。
 
-## Creating a template
+## 创建模板
 
-To create a Strapi template, you need to publish a public GitHub repository that follows some rules.
+要创建 Strapi 模板，您需要发布遵循某些规则的公共 GitHub 存储库。
 
-First, a template's only concern should be to adapt Strapi to a use case. It should not deal with environment-specific configs, like databases, or upload and email providers. This is to make sure that templates stay maintainable, and to avoid conflicts with other CLI options like `--quickstart`.
+首先，模板唯一涉及到的问题应该是使 Strapi 兼容性。它不应处理特定于环境的配置，如数据库或上传和电子邮件服务。这是为了确保模板保持可维护性，并避免与其他 CLI 选项（如 `--quickstart`）发生冲突。
 
-Second, a template must follow the file structure detailed below.
+其次，模板必须遵循下面详述的文件结构。
 
-You can create this file structure by hand or generate it via the [CLI](/developer-docs/latest/developer-resources/cli/CLI.md#strapi-templates-generate).
+您可以手动创建此文件结构，也可以通过 [CLI](/developer-docs/latest/developer-resources/cli/CLI.md#strapi-templates-generate) 生成它。
 
 :::: tabs
 
@@ -105,11 +105,11 @@ npx strapi generate:template <path>
 
 ::::
 
-### File structure
+### 文件结构
 
-You can add as many files as you want to the root of your template repository. But it must at least have `template` directory, and either a `template.json` or a `template.js` file.
+您可以将任意数量的文件添加到模板存储库的根目录。但它必须至少具有 `template` 目录，以及 `template.json` 或 `template.js` 文件。
 
-The `template.json` is used to extend the Strapi app's default `package.json`. You can put all the properties that should overwrite the default `package.json` in a root `package` property. For example, a `template.json` might look like this:
+`template.json` 用于扩展 Strapi 应用程序的默认 `package.json`。您可以将应覆盖默认 `package.json` 的所有属性放在根 `package.json` 属性中。例如，`template.json` 可能如下所示：
 
 ```json
 {
@@ -124,7 +124,7 @@ The `template.json` is used to extend the Strapi app's default `package.json`. Y
 }
 ```
 
-You can also use a `template.js` file instead of the `template.json` file. It should export a function that returns an object with the same properties. It's useful when our properties need to have dynamic values. For example, we can use it to make sure that a template requires the latest version of a Strapi plugin:
+您还可以使用 `template.js` 文件来替代 `template.json` 文件。它应该导出一个返回具有相同属性的对象的函数。当我们的属性需要具有动态值时，它非常有用。例如，我们可以使用它来确保模板需要最新版本的 Strapi 插件：
 
 ```js
 module.exports = function(scope) {
@@ -138,29 +138,29 @@ module.exports = function(scope) {
 };
 ```
 
-The `template` directory is where you can extend the file contents of a Strapi project. All the children are optional, you should only include the files that will overwrite the default Strapi app.
+在 `template` 目录中，您可以扩展 Strapi 项目的文件内容。所有子级都是可选的，您应该只包含将覆盖默认 Strapi 应用程序的文件。
 
-Only the following contents are allowed inside the `template` directory:
+`template` 目录中只允许包含以下内容：
 
-- `README.md`: the readme of an app made with this template
-- `.env.example`: to specify required environment variables
-- `api/`: for collections and single types
-- `components/` for components
-- `config/` can only include the `functions` directory (things like `bootstrap.js` or `404.js`), because other config files are environment-specific.
-- `data/` to store the data imported by a seed script
-- `plugins/` for custom Strapi plugins
-- `public/` to serve files
-- `scripts/` for custom scripts
+- `README.md`: 使用此模板制作的应用的自述文件
+- `.env.example`: 指定所需的环境变量
+- `api/`: 对于集合和单一类型
+- `components/` 对于组件
+- `config/` 只能包含 `functions` 目录（如 `bootstrap.js` 或  `404.js`），因为其他配置文件是特定于环境。
+- `data/` 用于存储脚本导入的数据
+- `plugins/` 用于自定义插件
+- `public/` 服务端文件
+- `scripts/` 用于自定义脚本
 
-If any unexpected file or directory is found, the installation will crash.
+如果发现任何预期外的文件或目录，安装将会导致崩溃。
 
-### Step by step
+### 循序渐进
 
-After reading the above rules, follow these steps to create your template:
+阅读上述规则后，请按照以下步骤创建模板：
 
-1. Create a standard Strapi app with `create-strapi-app`, using the `--quickstart` option.
-2. Customize your app to match the needs of your use case.
-3. Generate your template using the [CLI](/developer-docs/latest/developer-resources/cli/CLI.md#strapi-templates-generate) by running `strapi templates:generate <path>`
-4. Navigate to this path to see your generated template
-5. If you have modified your app's `package.json`, include these changes (and _only_ these changes) in `template.json` in a `package` property. Otherwise, leave it as an empty object.
-6. Publish the root template project on GitHub. Make sure that the repository is public, and that the code is on the `master` branch.
+1. 使用 `--quickstart` 选项，使用 `create-strapi-app` 创建标准 Strapi 应用。
+2. 自定义应用以满足用例的需求。
+3. 使用 [CLI](/developer-docs/latest/developer-resources/cli/CLI.md#strapi-templates-generate) 生成模板，运行 `strapi templates:generate <path>` 命令。
+4. 导航到此路径以查看生成的模板
+5. 如果您修改了应用的 `package.json`，请将这些更改（以及 _only_ 这些更改）包含在 `package` 属性的 `template.json` 中。否则，请将其保留为空对象。
+6. 在 GitHub 上发布根模板项目。确保存储库是公共的，并且代码位于 `master` 分支上。
