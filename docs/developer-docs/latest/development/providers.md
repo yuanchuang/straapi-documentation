@@ -1,26 +1,26 @@
 ---
-title: Providers - Strapi Developer Docs
-description: Install and use providers to extend the functionality of available plugins.
+title: Providers - Strapi 开发人员文档
+description: 安装和使用提供程序来扩展可用插件的功能。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/development/providers.html
 ---
 
-# Providers
+# 提供者
 
-Certain [plugins](../../../user-docs/latest/plugins/introduction-to-plugins.md) can be extended via the installation and configuration of additional [providers](../../../user-docs/latest/plugins/introduction-to-plugins.md#providers).
+确保 [plugins](../../../user-docs/latest/plugins/introduction-to-plugins.md) 可通过安装进行扩展和配置额外 [providers](../../../user-docs/latest/plugins/introduction-to-plugins.md#providers).
 
-Providers add an extension to the core capabilities of the plugin, for example to upload media files to AWS S3 instead of the local server, or using Amazon SES for emails instead of Sendmail.
+提供程序向插件的核心功能添加扩展，例如上传媒体文件到 AWS S3 而不是本地服务器， 或者使用 Amazon SES 发送电子邮件而不是 Sendmail。
 
 ::: note
-Only the [Upload](../plugins/upload.md) and [Email](../plugins/email.md) plugins are currently designed to work with providers. 
+只有 [Upload](../plugins/upload.md) 和 [Email](../plugins/email.md) 插件目前设计用于与 providers 工作。
 :::
 
-For the relevant plugins, there are both official providers maintained by Strapi — discoverable via the [Marketplace](../../../user-docs/latest/plugins/installing-plugins-via-marketplace.md) — and many community maintained providers available via [npm](https://www.npmjs.com/).
+对于相关插件，有两个由 Strapi 维护的官方提供者 — 可通过 [Marketplace](../../../user-docs/latest/plugins/installing-plugins-via-marketplace.md)  或通过许多社区维护的提供者 [npm](https://www.npmjs.com/) 方式发现
 
-## Installing providers
+## 安装提供程序
 
-New providers can be installed using `npm` or `yarn` using the following format `@strapi/provider-<plugin>-<provider> --save`.
+可以使用 `npm` 或 `yarn` 使用以下格式 `@strapi/provider-<plugin>-<provider> --save` 来安装新的提供程序。
 
-For example:
+例如:
 
 <code-group>
 
@@ -46,13 +46,13 @@ yarn add @strapi/provider-email-sendgrid --save
 
 </code-group>
 
-## Configuring providers
+## 配置提供程序
 
-Newly installed providers are enabled and configured in the `./config/plugins.js` file. If this file does not exist you must create it.
+新安装的提供程序在 `./config/plugins.js` 文件中启用和配置。如果此文件不存在，则必须创建它。
 
-Each provider will have different configuration settings available. Review the respective entry for that provider in the [Marketplace](../../../user-docs/latest/plugins/installing-plugins-via-marketplace.md) or [npm](https://www.npmjs.com/) to learn more.
+每个提供程序将具有不同的可用配置设置。在 [Marketplace](../../../user-docs/latest/plugins/installing-plugins-via-marketplace.md) 或 [npm](https://www.npmjs.com/) 查看该提供程序的相应条目，以了解更多信息。
 
-Below are example configurations for the Upload and Email plugins.
+以下是上传和电子邮件插件的示例配置。
 
 :::: tabs card
 
@@ -81,7 +81,7 @@ module.exports = ({ env }) => ({
 ```
 
 ::: note
-Strapi has a default [`security` middleware](/developer-docs/latest/setup-deployment-guides/configurations/required/middlewares.md#security) that has a very strict `contentSecurityPolicy` that limits loading images and media to `"'self'"` only, see the example configuration on the [provider page](https://www.npmjs.com/package/@strapi/provider-upload-aws-s3) or the [middleware documentation](/developer-docs/latest/setup-deployment-guides/configurations/required/middlewares.md#security) for more information.
+Strapi 有个默认 [`security` middleware](/developer-docs/latest/setup-deployment-guides/configurations/required/middlewares.md#security) ，有一个非常严格的 `contentSecurityPolicy` 将映像和媒体的加载限制为 `"'self'"`，请参阅 [provider page](https://www.npmjs.com/package/@strapi/provider-upload-aws-s3) 或 [middleware documentation](/developer-docs/latest/setup-deployment-guides/configurations/required/middlewares.md#security) 上的示例配置以了解更多信息。
 :::
 
 ::: tab Email
@@ -108,27 +108,27 @@ module.exports = ({ env }) => ({
 });
 ```
 
-Keep in mind that:
+请记住：
 
-* When using a different provider per environment, specify the correct configuration in `./config/env/${yourEnvironment}/plugins.js` (See [Environments](/developer-docs/latest/setup-deployment-guides/configurations/optional/environment.md)).
-* Only one email provider will be active at a time. If the email provider setting isn't picked up by Strapi, verify the `plugins.js` file is in the correct folder.
-* When testing the new email provider with those two email templates created during strapi setup, the _shipper email_ on the template defaults to `no-reply@strapi.io` and needs to be updated according to your email provider, otherwise it will fail the test (See [Configure templates locally](/user-docs/latest/settings/configuring-users-permissions-plugin-settings.md#configuring-email-templates)).
+* 当每个环境使用不同的提供程序时，请在 `./config/env/${yourEnvironment}/plugins.js` 中指定正确的配置（参见 [Environments](/developer-docs/latest/setup-deployment-guides/configurations/optional/environment.md)）。
+* 一次只能有一个电子邮件提供商处于活动状态。如果 Strapi 未选择电子邮件提供商设置，请验证 `plugins.js` 文件是否位于正确的文件夹中。
+* 使用在 strapi 设置期间创建的这两个电子邮件模板测试新的电子邮件提供商时，模板上的 _shipper email_ 默认为`no-reply@strapi.io`，需要根据您的电子邮件提供商进行更新，否则将无法通过测试（参见 [Configure templates locally](/user-docs/latest/settings/configuring-users-permissions-plugin-settings.md#configuring-email-templates)）。
 
 :::
 
 ::::
 
-### Configuration per environment
+### 配置每个环境
 
-When configuring your provider you might want to change the configuration based on the `NODE_ENV` environment variable or use environment specific credentials.
+配置提供程序时，您可能希望根据 `NODE_ENV`  环境变量更改配置或使用特定于环境的凭据。
 
-You can set a specific configuration in the `./config/env/{env}/plugins.js` configuration file and it will be used to overwrite the default configuration.
+您可以在 `./config/env/{env}/plugins.js` 配置文件中设置特定配置，它将用于覆盖默认配置。
 
-## Creating providers
+## 创建提供程序
 
-To implement your own custom provider you must [create a Node.js module](https://docs.npmjs.com/creating-node-js-modules).
+要实现您自己的自定义提供程序，您必须 [创建一个Node.js模块](https://docs.npmjs.com/creating-node-js-modules)。
 
-The interface that must be exported depends on the plugin you are developing the provider for. Below are templates for the Upload and Email plugins:
+必须导出的接口取决于您为其开发提供程序的插件。以下是上传和电子邮件插件的模板：
 
 :::: tabs card
 
@@ -168,27 +168,27 @@ module.exports = {
 };
 ```
 
-In the send function you will have access to:
+在发送功能中，您将可以访问：
 
-* `providerOptions` that contains configurations written in `plugins.js`
-* `settings` that contains configurations written in `plugins.js`
-* `options` that contains options you send when you call the send function from the email plugin service
+* `providerOptions` 在 `plugins.js` 包含写入的配置
+* `settings` 在 `plugins.js` 包含写入的配置
+* `options` 包含您在从电子邮件插件服务调用发送函数时发送的选项
 
 :::
 
 ::::
 
-You can review the [Strapi maintained providers](https://github.com/strapi/strapi/tree/master/packages/providers) for example implementations.
+例如，您可以查看 [Strapi maintained providers](https://github.com/strapi/strapi/tree/master/packages/providers) 的实现。
 
-After creating your new provider you can [publish it to npm](https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages) to share with the community or [use it locally](#local-providers) for your project only.
+创建新提供程序后，您可以[发布到 npm](https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages) 与社区共享或[本地使用](#local-providers) 仅用于您的项目。
 
-### Local providers
+### 本地提供程序
 
-If you want to create your own provider without publishing it on npm you can follow these steps:
+如果要创建自己的提供程序而不将其发布到 npm 上，可以按照以下步骤操作：
 
-1. Create a `providers` folder in your application.
-2. Create your provider (e.g. `./providers/strapi-provider-<plugin>-<provider>`)
-3. Then update your `package.json` to link your `strapi-provider-<plugin>-<provider>` dependency to the [local path](https://docs.npmjs.com/files/package.json#local-paths) of your new provider.
+1. 在应用程序中创建 `providers` 文件夹。
+2. 创建你的 provider (例 `./providers/strapi-provider-<plugin>-<provider>`)
+3. 然后更新你的 `package.json` 以将您的 `strapi-provider-<plugin>-<provider>` 依赖项链接到新提供商的 [本地路径](https://docs.npmjs.com/files/package.json#local-paths)。
 
 ```json
 {
@@ -201,5 +201,5 @@ If you want to create your own provider without publishing it on npm you can fol
 }
 ```
 
-4. Update your `./config/plugins.js` file to [configure the provider](#configuring-providers).
-5. Finally, run `yarn install` or `npm install` to install your new custom provider.
+4. 更新 `./config/plugins.js` 文件来 [配置提供者](#configuring-providers).
+5. 最后，运行 `yarn install` 或 `npm install` 来安装自定义提供者。
