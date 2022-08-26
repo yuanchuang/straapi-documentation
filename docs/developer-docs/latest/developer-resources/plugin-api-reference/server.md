@@ -1,34 +1,34 @@
 ---
-title: Server API - Strapi Developer Docs
-description: Strapi's Server API for plugins allows a Strapi plugin to customize the back end part (i.e. the server) of your application.
+title: Server API - Strapi 开发人员文档
+description: Strapi 的插件服务器 API 允许 Strapi 插件自定义应用程序的后端部分（即服务器）。
 sidebarDepth: 3
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/plugin-api-reference/server.html
 ---
 
-# Server API for plugins
+# 用于插件的服务 API
 
-A Strapi [plugin](/developer-docs/latest/plugins/plugins-intro.md) can interact with the back end or the [front end](/developer-docs/latest/developer-resources/plugin-api-reference/admin-panel.md) of the Strapi application. The Server API is about the back end part.
+一个 Strapi [插件](/developer-docs/latest/plugins/plugins-intro.md) 可以与后端交互或 Strapi 应用程序的 [前端]。服务器 API 是关于后端部分的。
 
-Creating and using a plugin interacting with the Server API consists of 2 steps:
+创建和使用与服务器 API 交互的插件包括 2 个步骤:
 
-1. Declare and export the plugin interface within the [`strapi-server.js` entry file](#entry-file)
-2. [Use the exported interface](#usage)
+1. 在 [`strapi-server.js` 入口文件](#入口文件) 中声明并导出插件接口
+2. [使用导出的界面](#用法)
 
-## Entry file
+## 入口文件
 
-To tap into the Server API, create a `strapi-server.js` file at the root of the plugin package folder. This file exports the required interface, with the following parameters available:
+利用服务器 API, 在插件包文件夹的根目录下创建 `strapi-server.js` 文件。此文件导出所需的接口中有提供以下参数：
 
-| Parameter type         | Available parameters                                                                                                                                                                                           |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Lifecycle functions    | <ul><li> [register](#register)</li><li>[bootstrap](#bootstrap)</li><li>[destroy](#destroy)</li></ul>                                                                                                           |
-| Configuration          | [config](#configuration) object                                                                                                                                                                                |
-| Backend customizations | <ul><li>[contentTypes](#content-types)</li><li>[routes](#routes)</li><li>[controllers](#controllers)</li><li>[services](#services)</li><li>[policies](#policies)</li><li>[middlewares](#middlewares)</li></ul> |
+| 参数类型        | 可用参数                                                                                                                                                                                           |
+| -------------  | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 生命周期函数    | <ul><li> [register](#register)</li><li>[bootstrap](#bootstrap)</li><li>[destroy](#destroy)</li></ul>                                                                                                           |
+| 配置           | [配置](#配置) 对象                                                                                                                                                                                |
+| 自定义后台      | <ul><li>[contentTypes](#content-types)</li><li>[routes](#routes)</li><li>[controllers](#controllers)</li><li>[services](#services)</li><li>[policies](#policies)</li><li>[middlewares](#middlewares)</li></ul> |
 
-## Lifecycle functions
+## 生命周期函数
 
 ### register()
 
-This function is called to load the plugin, even before the application is actually [bootstrapped](#bootstrap), in order to register [permissions](/developer-docs/latest/plugins/users-permissions.md) or database migrations.
+调用此函数来加载插件，在应用程序 [bootstrapped](#bootstrap) 之前，为了注册 [权限](/developer-docs/latest/plugins/users-permissions.md) 或数据库迁移。
 
 **Type**: `Function`
 
@@ -46,7 +46,7 @@ module.exports = () => ({
 
 ### bootstrap()
 
-The [bootstrap](/developer-docs/latest/setup-deployment-guides/configurations/optional/functions.md#bootstrap) function is called right after the plugin has [registered](#register).
+[bootstrap](/developer-docs/latest/setup-deployment-guides/configurations/optional/functions.md#bootstrap) 函数在插件 [registered](#register) 之后立即调用。
 
 **Type**: `Function`
 
@@ -64,7 +64,7 @@ module.exports = () => ({
 
 ### destroy()
 
-The [destroy](/developer-docs/latest/setup-deployment-guides/configurations/optional/functions.md#destroy) lifecycle function is called to cleanup the plugin (close connections, remove listeners…) when the Strapi instance is destroyed.
+当 Strapi 实例被销毁时，调用 [destroy](/developer-docs/latest/setup-deployment-guides/configurations/optional/functions.md#destroy) 生命周期函数来清理插件（关闭连接、删除侦听器...）。
 
 **Type**: `Function`
 
@@ -80,16 +80,16 @@ module.exports = () => ({
 });
 ```
 
-## Configuration
+## 配置
 
-`config` stores the default plugin configuration.
+`config` 存储默认插件配置。
 
 **Type**: `Object`
 
-| Parameter   | Type                                           | Description                                                                                                                                              |
-| ----------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `default`   | Object, or Function that returns an Object | Default plugin configuration, merged with the user configuration                                                                                         |
-| `validator` | Function                                       | <ul><li>Checks if the results of merging the default plugin configuration with the user configuration is valid</li><li>Throws errors when the resulting configuration is invalid</li></ul> |
+| 参数         | 类型                                           | 描述                                                                                         |
+| ----------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `default`   | Object, or Function that returns an Object     | 默认插件配置，与用户配置合并                                                                    |
+| `validator` | Function                                       | <ul><li>检查将默认插件配置与用户配置合并的结果是否有效</li><li>当生成的配置无效时引发错误</li></ul> |
 
 **Example:**
 
@@ -110,21 +110,21 @@ module.exports = () => ({
 });
 ```
 
-Once defined, the configuration can be accessed:
+定义后，可以访问配置：
 
-* with `strapi.plugin('plugin-name').config('some-key')` for a specific configuration property,
-* or with `strapi.config.get('plugin.plugin-name')` for the whole configuration object.
+* 通过 `strapi.plugin('plugin-name').config('some-key')` 访问特定的配置属性,
+* 或通过 `strapi.config.get('plugin.plugin-name')` 访问整个配置对象.
 
-## Backend customization
+## 自定义后端
 
 ### Content-types
 
-An object with the [content-types](/developer-docs/latest/development/backend-customization/models.md) the plugin provides.
+插件提供的具有 [content-types](/developer-docs/latest/development/backend-customization/models.md) 的对象。
 
 **Type**: `Object`
 
 :::note
-Content-Types keys in the `contentTypes` object should re-use the `singularName` defined in the [`info`](/developer-docs/latest/development/backend-customization/models.md#model-information) key of the schema.
+`contentTypes` 对象的 Content-Types keys 应复用架构 [`info`](/developer-docs/latest/development/backend-customization/models.md#model-information) key 中定义的 `singularName`。
 :::
 
 **Example:**
@@ -195,7 +195,7 @@ module.exports = {
 
 ### Routes
 
-An array of [routes](/developer-docs/latest/development/backend-customization/routes.md) configuration.
+一组 [Routes](/developer-docs/latest/development/backend-customization/routes.md) 配置。
 
 **Type**: `Object[]`
 
@@ -237,7 +237,7 @@ module.exports = [
 
 ### Controllers
 
-An object with the [controllers](/developer-docs/latest/development/backend-customization/controllers.md) the plugin provides.
+带有插件提供的 [controllers](/developer-docs/latest/development/backend-customization/controllers.md) 对象。
 
 **Type**: `Object`
 
@@ -286,9 +286,9 @@ module.exports = ({ strapi }) => ({
 
 ### Services
 
-An object with the [services](/developer-docs/latest/development/backend-customization/services.md) the plugin provides.
+带有插件提供的 [services](/developer-docs/latest/development/backend-customization/services.md) 对象。
 
-Services should be functions taking `strapi` as a parameter.
+服务应该是以 `strapi` 为参数的函数。
 
 **Type**: `Object`
 
@@ -336,7 +336,7 @@ module.exports = ({ strapi }) => ({
 
 ### Policies
 
-An object with the [policies](/developer-docs/latest/development/backend-customization/policies.md) the plugin provides.
+带有插件提供的 [policies](/developer-docs/latest/development/backend-customization/policies.md) 对象。
 
 **Type**: `Object`
 
@@ -387,7 +387,7 @@ module.exports = (policyContext, config, { strapi }) => {
 
 ### Middlewares
 
-An object with the [middlewares](/developer-docs/latest/setup-deployment-guides/configurations/required/middlewares.md) the plugin provides.
+带有插件提供的 [middlewares](/developer-docs/latest/setup-deployment-guides/configurations/required/middlewares.md) 对象。
 
 **Type**: `Object`
 
@@ -436,11 +436,11 @@ module.exports = (options, { strapi }) => {
 };
 ```
 
-## Usage
+## 用法
 
-Once a plugin is exported and loaded into Strapi, its features are accessible in the code through getters. The Strapi instance (`strapi`) exposes top-level getters and global getters.
+一旦插件被导出并加载到 Strapi 中，它的功能就可以通过 getters 在代码中访问。Strapi 实例 （`strapi`） 公开了顶级 getter 和全局 getter。
 
-While top-level getters imply chaining functions, global getters are syntactic sugar that allows direct access using a feature's uid:
+虽然顶级 getter 意味着链接函数，但全局 getter 是语法糖，允许使用功能的 uid 直接访问：
 
 ```js
 // Access an API or a plugin controller using a top-level getter 
@@ -452,7 +452,7 @@ strapi.controller('api::api-name.controller-name')
 strapi.controller('plugin::plugin-name.controller-name')
 ```
 
-:::details Top-level getter syntax examples
+:::details 顶级 getter 语法示例
 
 ```js
 strapi.plugin('plugin-name').config
@@ -466,7 +466,7 @@ strapi.plugin('plugin-name').middleware('middleware-name')
 
 :::
 
-:::details Global getter syntax examples
+:::details 全局 getter 语法示例
 
 ```js
 strapi.controller('plugin::plugin-name.controller-name');
@@ -478,6 +478,6 @@ strapi.middleware('plugin::plugin-name.middleware-name');
 
 :::
 
-::: strapi Entity Service API
-To interact with the content-types, use the [Entity Service API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md).
+::: strapi 实体服务接口
+使用 [Entity Service API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) 与 content-types 交互
 :::
