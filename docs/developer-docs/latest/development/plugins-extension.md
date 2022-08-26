@@ -1,17 +1,17 @@
 ---
-title: Plugins extension - Strapi Developer Docs
-description: Strapi plugins can be extended by extending the content-types or the plugin's interface.
+title: 插件扩展 - Strapi 开发人员文档 
+description: Strapi 插件可以通过扩展内容类型或插件的接口来扩展。
 sidebarDepth: 2
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/development/plugins-extension.html
 ---
 
-# Plugins extension
+# 插件扩展
 
-Strapi comes with [plugins](/developer-docs/latest/plugins/plugins-intro.md) that can be installed from the [Marketplace](/user-docs/latest/plugins/installing-plugins-via-marketplace.md#installing-marketplace-plugins-and-providers) or as npm packages. You can also create your own plugins (see [plugins development](/developer-docs/latest/development/plugins-development.md)) or extend the existing ones.
+Strapi 附带插件，可以从 [Marketplace](/user-docs/latest/plugins/installing-plugins-via-marketplace.md#installing-marketplace-plugins-and-providers) 安装或作为 npm 软件包安装。您还可以创建自己的插件（参见 [插件开发](/developer-docs/latest/development/plugins-development.md)）或者扩展已有插件。
 
-Plugin extensions code is located in the `./src/extensions` folder (see [project structure](/developer-docs/latest/setup-deployment-guides/file-structure.md)). Some plugins automatically create files there, ready to be modified.
+插件扩展代码位于 `./src/extensions` 文件夹中（参见[项目结构](/developer-docs/latest/setup-deployment-guides/file-structure.md)）。一些插件会自动在那里创建文件，并且可以随时修改。
 
-:::details Example of extensions folder structure:
+:::details 扩展文件夹结构示例
 
 ```bash
 /extensions
@@ -28,59 +28,59 @@ Plugin extensions code is located in the `./src/extensions` folder (see [project
 
 :::
 
-Plugins can be extended in 2 ways:
+插件可以通过 2 种方式进行扩展:
 
-- [extending the plugin's content-types](#extending-a-plugin-s-content-types)
-- [extending the plugin's interface](#extending-a-plugin-s-interface) (e.g. to add controllers, services, policies, middlewares and more)
+- [扩展插件的内容类型](#扩展插件的内容类型)
+- [扩展插件的接口](#扩展插件的接口) (例如：添加 controllers, services, policies, middlewares 等等)
 
 ::: note
-Currently it's not possible to extend the admin panel part of a plugin. Consider using [patch-package](https://www.npmjs.com/package/patch-package) if admin panel customizations are required.
+目前无法扩展插件的管理面板部分。如果需要自定义管理员面板，请考虑使用[补丁包](https://www.npmjs.com/package/patch-package)。
 :::
 
 :::warning
-New versions of Strapi are released with [migration guides](/developer-docs/latest/update-migration-guides/migration-guides.md), but these guides might not cover unexpected breaking changes in your plugin extensions. Consider forking a plugin if extensive customizations are required.
+新版本的 Strapi 随 [迁移指南](/developer-docs/latest/update-migration-guides/migration-guides.md) 一起发布，但这些指南可能不会涵盖插件扩展中的意外重大更改。如果需要大量自定义，请考虑 fork 插件。
 :::
 
-## Extending a plugin's content-types
+## 扩展插件的内容类型
 
-A plugin's Content-Types can be extended in 2 ways: using the programmatic interface within `strapi-server.js` and by overriding the content-types schemas.
+插件的 content-types 可以通过两种方式进行扩展：使用 `strapi-server.js` 中的编程接口，并通过覆盖 content-types 架构。
 
-The final schema of the content-types depends on the following loading order:
+content-types 的最终架构取决于以下加载顺序：
 
-1. the content-types of the original plugin,
-2. the content-types overriden by the declarations in the [schema](/developer-docs/latest/development/backend-customization/models.md#model-schema) defined in `./src/extensions/plugin-name/content-types/content-type-name/schema.json`
-3. the content-types declarations in the [`content-types` key exported from `strapi-server.js`](/developer-docs/latest/developer-resources/plugin-api-reference/server.md#content-types)
-4. the content-types declarations in the [`register()` function](/developer-docs/latest/setup-deployment-guides/configurations/optional/functions.md#register) of the Strapi application
+1. 原始插件的 content-types
+2. 由 `./src/extensions/plugin-name/content-types/content-type-name/schema.json` 中定义的 [schema](/developer-docs/latest/development/backend-customization/models.md#model-schema) 中的声明覆盖的 content-types
+3. 从 [`strapi-server.js` 导出 `content-types` key](/developer-docs/latest/developer-resources/plugin-api-reference/server.md#content-types) 中的 content-types 声明
+4. Strapi 应用程序的 [`register()` 函数](/developer-docs/latest/setup-deployment-guides/configurations/optional/functions.md#register) 中的 content-types 声明
 
-To overwrite a plugin's [content-types](/developer-docs/latest/development/backend-customization/models.md):
+覆盖插件的 [content-types](/developer-docs/latest/development/backend-customization/models.md):
 
-1. _(optional)_ Create the `./src/extensions` folder at the root of the app, if the folder does not already exist.
-2. Create a subfolder with the same name as the plugin to be extended.
-3. Create a `content-types` subfolder.
-4. Inside the `content-types` subfolder, create another subfolder with the same [singularName](/developer-docs/latest/development/backend-customization/models.md#model-information) as the content-type to overwrite.
-5. Inside this `content-types/name-of-content-type` subfolder, define the new schema for the content-type in a `schema.json` file (see [schema](/developer-docs/latest/development/backend-customization/models.md#model-schema) documentation).
-6. _(optional)_ Repeat steps 4 and 5 for each content-type to overwrite.
+1. _(可选)_ 在应用的根目录下创建 `./src/extensions` 文件夹（如果该文件夹尚不存在）。
+2. 创建与要扩展的插件同名的子文件夹。
+3. 创建 `content-types` 子文件夹。
+4. 在 `content-types` 子文件夹中，创建另一个子文件夹，该子文件夹与要覆盖的 content-type 具有相同的 [singularName](/developer-docs/latest/development/backend-customization/models.md#model-information)。
+5. 在此 `content-types/name-of-content-type` 子文件夹中，在 `schema.json` 文件中定义 content-type 的新架构（请参阅 [schema](/developer-docs/latest/development/backend-customization/models.md#model-schema) 文档。
+6. _(可选)_ 对要覆盖的每个 content-type 重复步骤 4 和 5。
 
-## Extending a plugin's interface
+## 扩展插件的接口
 
-When a Strapi application is initializing, plugins, extensions and global lifecycle functions events happen in the following order:
+当 Strapi 应用程序初始化时，插件、扩展和全局生命周期函数事件按以下顺序发生：
 
-1. Plugins are loaded and their interfaces are exposed.
-2. Files in `./src/extensions` are loaded.
-3. The `register()` and `bootstrap()` functions in `./src/index.js` are called.
+1. 加载插件并公开其接口。
+2. 加载 `./src/extensions` 中的文件。
+3. 调用 `./src/index.js` 中的 `register()` 和 `bootstrap()` 函数。
 
-A plugin's interface can be extended at step 2 (i.e. within `./src/extensions`) or step 3 (i.e. inside `./src/index.js`).
+插件的接口可以在步骤 2（即在 `./src/extensions` 中）或步骤3（即 `./src/index.js` 内）进行扩展。
 
-### Within the extensions folder
+### 在扩展文件夹中
 
-To extend a plugin's server interface using the `./src/extensions` folder:
+使用 `./src/extensions` 文件夹扩展插件的服务器接口：
 
-1. _(optional)_ Create the `./src/extensions` folder at the root of the app, if the folder does not already exist.
-2. Create a subfolder with the same name as the plugin to be extended.
-3. Create a `strapi-server.js` file to extend a plugin's back end using the [Server API](/developer-docs/latest/developer-resources/plugin-api-reference/server.md).
-4. Within this file, define and export a function.  The function receives the `plugin` interface as an argument so it can be extended.
+1. _(可选)_ 在应用的根目录下创建  `./src/extensions` 文件夹（如果该文件夹尚不存在）。
+2. 创建与要扩展的插件同名的子文件夹。
+3. 创建一个 `strapi-server.js` 文件，以使用 [Server API](/developer-docs/latest/developer-resources/plugin-api-reference/server.md) 扩展插件的后端服务。
+4. 在此文件中，定义并导出一个函数。 该函数接收 `plugin` 接口作为参数，以便可以对其进行扩展。
 
-::: details Example of backend extension
+::: details 后端扩展示例
 
 ```js
 // path: ./src/extensions/some-plugin-to-extend/strapi-server.js
@@ -102,11 +102,11 @@ module.exports = (plugin) => {
 
 :::
 
-### Within the register and bootstrap functions
+### 在 register 和 bootstrap 函数中
 
-To extend a plugin's interface within `./src/index.js`, use the `bootstrap()` and `register()` [functions](/developer-docs/latest/setup-deployment-guides/configurations/optional/functions.md) of the whole project, and access the interface programmatically with [getters](/developer-docs/latest/developer-resources/plugin-api-reference/server.md#usage).
+要在 `./src/index.js` 中扩展插件的接口，请使用整个项目的 `bootstrap()` 和 `register()` [函数](/developer-docs/latest/setup-deployment-guides/configurations/optional/functions.md)，并使用 [getters](/developer-docs/latest/developer-resources/plugin-api-reference/server.md#usage) 以编程方式访问接口。
 
-::: details Example of extending a plugin's content-type within ./src/index.js
+::: details 在 ./src/index.js 中扩展插件内容类型的示例
 
 ```js
 // path: ./src/index.js
