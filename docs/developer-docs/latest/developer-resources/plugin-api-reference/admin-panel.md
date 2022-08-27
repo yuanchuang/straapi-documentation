@@ -1,21 +1,21 @@
 ---
-title: Admin Panel API - Strapi Developer Docs
-description: Strapi's Admin Panel API for plugins allows a Strapi plugin to customize the front end part (i.e. the admin panel) of your application.
+title: Admin Panel API - Strapi 开发人员文档
+description: Strapi 的插件管理面板 API 允许 strapi插件自定义应用程序的前端部分（即管理面板）。
 sidebarDepth: 3
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/plugin-api-reference/admin-panel.html
 ---
 
-# Admin Panel API for plugins
+# 插件的管理面板 API
 
-A Strapi [plugin](/developer-docs/latest/plugins/plugins-intro.md) can interact with both the [back end](/developer-docs/latest/developer-resources/plugin-api-reference/server.md) or the front end of the Strapi app. The Admin Panel API is about the front end part, i.e. it allows a plugin to customize Strapi's [admin panel](/developer-docs/latest/development/admin-customization.md).
+一个 Strapi [插件](/developer-docs/latest/plugins/plugins-intro.md) 可以与 strapi有应用的[后端](/developer-docs/latest/developer-resources/plugin-api-reference/server.md)或前端交互。管理面板 API 是关于前端部分的，即它允许插件自定义 Strapi 的[管理面板](/developer-docs/latest/development/admin-customization.md)。
 
-The admin panel is a [React](https://reactjs.org/) application that can embed other React applications. These other React applications are the admin parts of each Strapi plugin.
+管理面板是一个 [React](https://reactjs.org/) 应用程序，可以嵌入其他 React 应用程序。这些其他 React 应用程序是每个 Strapi 插件的管理部分。
 
-To create a plugin that interacts with the Admin Panel API:
+创建与管理面板 API 交互的插件：
 
-1. Create an [entry file](#entry-file).
-2. Within this file, declare and export a plugin interface that uses the [available actions](#available-actions).
-3. Require this plugin interface in a `strapi-admin.js` file at the root of the plugin package folder:
+1. 创建 [入口文件](#入口文件).
+2. 在此文件中，声明并导出一个插件接口，该接口使用 [可用操作](#可用操作).
+3. 在插件包文件夹根目录下的 `strapi-admin.js` 文件中需要此插件接口：
 
   ```js
   // path: [plugin-name]/strapi-admin.js
@@ -25,50 +25,50 @@ To create a plugin that interacts with the Admin Panel API:
   module.exports = require('./admin/src').default;
   ```
 
-## Entry file
+## 入口文件
 
-The entry file for the Admin Panel API is `[plugin-name]/admin/src/index.js`. This file exports the required interface, with the following functions available:
+管理面板 API 的文件是 `[plugin-name]/admin/src/index.js`。此文件导出所需的接口，并具有以下可用功能：
 
-| Function type      | Available functions                                                     |
+| 函数类型     | 可用函数                                                     |
 | ------------------- | ------------------------------------------------------------------------ |
-| Lifecycle functions | <ul><li> [register](#register)</li><li>[bootstrap](#bootstrap)</li></ul> |
-| Async function      | [registerTrads](#registertrads)                                          |
+| 生命周期函数 | <ul><li> [register](#register)</li><li>[bootstrap](#bootstrap)</li></ul> |
+| 异步函数      | [registerTrads](#registertrads)                                          |
 
-## Lifecycle functions
+## 生命周期函数
 
 ### register()
 
 **Type:** `Function`
 
-This function is called to load the plugin, even before the app is actually [bootstrapped](#bootstrap). It takes the running Strapi application as an argument (`app`).
+调用此函数以加载插件，甚至在应用程序实际 [引导](#bootstrap) 之前。它将正在运行的 Strapi 应用程序作为参数（`app`）。
 
-Within the register function, a plugin can:
+在 register 函数中，插件可以:
 
-* [register itself](#registerplugin) so it's available to the admin panel
-* add a new link to the main navigation (see [Menu API](#menu-api))
-* [create a new settings section](#createsettingsection)
-* define [injection zones](#injection-zones-api)
-* [add reducers](#reducers-api)
+* [注册自身](#registerplugin) 因此，它可用于管理面板
+* 向主导航添加新链接 (参见 [Menu API](#menu-api))
+* [创建新的设置部分](#createsettingsection)
+* 定义 [injection zones](#injection-zones-api)
+* [添加 reducers](#reducers-api)
 
 #### registerPlugin()
 
 **Type:** `Function`
 
-Registers the plugin to make it available in the admin panel.
+注册插件以使其在管理面板中可用。
 
-This function returns an object with the following parameters:
+此函数返回具有以下参数的对象:
 
-| Parameter        | Type                     | Description                                                                                        |
+| 参数        | 类型                     | 描述                                                                                        |
 | ---------------- | ------------------------ | -------------------------------------------------------------------------------------------------- |
-| `id`             | String                   | Plugin id                                                                                          |
-| `name`           | String                   | Plugin name                                                                                        |
-| `injectionZones` | Object                   | Declaration of available [injection zones](#injection-zones-api)                                       |
+| `id`             | String                   | 插件 ID                                                                                         |
+| `name`           | String                   | 插件名                                                                                       |
+| `injectionZones` | Object                   | 声明可用 [injection zones](#injection-zones-api)                                       |
 
 ::: note
-Some parameters can be imported from the `package.json` file.
+某些参数可以从 `package.json` 文件导入。
 :::
 
-**Example:**
+**例子:**
 
 ```js
 // path: my-plugin/admin/src/index.js
@@ -105,15 +105,15 @@ export default {
 
 **Type**: `Function`
 
-Exposes the bootstrap function, executed after all the plugins are [registered](#register).
+暴露 bootstrap 函数，在所有插件都 [registered](#register) 后执行。
 
-Within the bootstrap function, a plugin can:
+在 bootstrap 函数中，插件可以:
 
-* extend another plugin, using `getPlugin('plugin-name')`,
-* register hooks (see [Hooks API](#hooks-api))
-* [add links to a settings section](#settings-api)
+* 扩展另一个插件，使用 `getPlugin('plugin-name')`,
+* 注册 hooks (参见 [Hooks API](#hooks-api))
+* [添加指向设置部分的链接](#settings-api)
 
-**Example:**
+**例子:**
 
 ```js
 module.exports = () => {
@@ -127,17 +127,17 @@ module.exports = () => {
 };
 ```
 
-## Async function
+## 异步函数
 
-While [`register()`](#register) and [`bootstrap()`](#bootstrap) are lifecycle functions, `registerTrads()` is an async function.
+虽然 [`register()`](#register) 和 [`bootstrap()`](#bootstrap) 是生命周期函数，但 `registerTrads()` 是一个异步函数。
 
 ### registerTrads()
 
 **Type**: `Function`
 
-To reduce the build size, the admin panel is only shipped with 2 locales by default (`en` and `fr`). The `registerTrads()` function is used to register a plugin's translations files and to create separate chunks for the application translations. It does not need to be modified.
+为了减小构建大小，默认情况下，管理面板仅附带 2 个地区设置 (`en` 和 `fr`)，`registerTrads()` 函数用于注册插件的翻译文件，并为应用程序翻译创建单独的块。大多数情况下不需要修改。
 
-::: details Example: Register a plugin's translation files
+::: details 示例：注册插件的翻译文件
 
 ```jsx
 export default {
@@ -169,49 +169,49 @@ export default {
 
 :::
 
-## Available actions
+## 可用操作
 
-The Admin Panel API allows a plugin to take advantage of several small APIs to perform actions. Use this table as a reference:
+管理面板 API 允许插件利用多个小 API 来执行操作。使用此表作为参考；
 
-| Action                                   | API to use                              | Function to use                                   | Related lifecycle function  |
+| 功能                                   | 要使用的 API                              | 要使用的函数                                   | 相关生命周期函数 |
 | ---------------------------------------- | --------------------------------------- | ------------------------------------------------- | --------------------------- |
-| Add a new link to the main navigation    | [Menu API](#menu-api)                   | [`addMenuLink()`](#menu-api)                      | [`register()`](#register)   |
-| Create a new settings section            | [Settings API](#settings-api)           | [`createSettingSection()`](#createsettingsection) | [`register()`](#register)   |
-| Declare an injection zone                | [Injection Zones API](#injection-zones-api) | [`registerPlugin()`](#registerplugin)             | [`register()`](#register)   |
-| Add a reducer                            | [Reducers API](#reducers-api)                                       | [`addReducers()`](#reducers-api)                      | [`register()`](#register)   |
-| Create a hook                          | [Hooks API](#hooks-api)                 | [`createHook()`](#hooks-api)                    | [`register()`](#register)   |
-| Add a single link to a settings section  | [Settings API](#settings-api)           | [`addSettingsLink()`](#addsettingslink)             | [`bootstrap()`](#bootstrap) |
-| Add multiple links to a settings section | [Settings API](#settings-api)           | [`addSettingsLinks()`](#addsettingslinks)           | [`bootstrap()`](#bootstrap) |
-| Inject a Component in an injection zone  | [Injection Zones API](#injection-zones-api) | [`injectComponent()`](#injection-zones-api)           | [`bootstrap()`](#register)  |
-| Register a hook                          | [Hooks API](#hooks-api)                 | [`registerHook()`](#hooks-api)                    | [`bootstrap()`](#bootstrap)   |
+| 向主导航添加新链接                     | [Menu API](#menu-api)                   | [`addMenuLink()`](#menu-api)                      | [`register()`](#register)   |
+| 创建新的设置部分                       | [Settings API](#settings-api)           | [`createSettingSection()`](#createsettingsection) | [`register()`](#register)   |
+| 声明 injection zone                   | [Injection Zones API](#injection-zones-api) | [`registerPlugin()`](#registerplugin)             | [`register()`](#register)   |
+| 添加 reducer                          | [Reducers API](#reducers-api)                                       | [`addReducers()`](#reducers-api)                      | [`register()`](#register)   |
+| 创建 hook                             | [Hooks API](#hooks-api)                 | [`createHook()`](#hooks-api)                    | [`register()`](#register)   |
+| 向设置部分添加单个链接                  | [Settings API](#settings-api)           | [`addSettingsLink()`](#addsettingslink)             | [`bootstrap()`](#bootstrap) |
+| 向设置部分添加多个链接                  | [Settings API](#settings-api)           | [`addSettingsLinks()`](#addsettingslinks)           | [`bootstrap()`](#bootstrap) |
+| 在 injection zone 注入组件             | [Injection Zones API](#injection-zones-api) | [`injectComponent()`](#injection-zones-api)           | [`bootstrap()`](#register)  |
+| 注册 hook                             | [Hooks API](#hooks-api)                 | [`registerHook()`](#hooks-api)                    | [`bootstrap()`](#bootstrap)   |
 
-::: strapi Replacing the WYSIWYG
-The WYSIWYG editor can be replaced by taking advantage of the [register lifecycle](#register) (see [new WYSIWYG field in the admin panel](/developer-docs/latest/guides/registering-a-field-in-admin.md) guide).
+::: strapi 所见即所得
+所见即所得编辑器可以通过利用 [注册生命周期](#register) 来替换（参见 [new WYSIWYG field in the admin panel](/developer-docs/latest/guides/registering-a-field-in-admin.md) 指南）。
 :::
 
 ::: tip
-The admin panel supports dotenv variables.
+管理面板支持 dotenv 变量.
 
-All variables defined in a `.env` file and prefixed by `STRAPI_ADMIN_` are available while customizing the admin panel through `process.env`.
+在 `.env` 文件中定义并以 `STRAPI_ADMIN_` 为前缀的所有变量都可以在通过 `process.env` 自定义管理面板时使用。
 :::
 
 ### Menu API
 
-The Menu API allows a plugin to add a new link to the main navigation through the `addMenuLink()` function with the following parameters:
+Menu API允许插件通过 `addMenuLink()` 函数使用以下参数将新链接添加到主导航中：
 
-| Parameter     | Type             | Description                                                                                                                                                                                                              |
+| 参数          | 类型             | 描述                                                                                                                                                                                                              |
 | ------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `to`          | String           | Path the link should point to                                                                                                                                                                                            |
-| `icon`        | React Component       | Icon to display in the main navigation                                                                                                                                                                                   |
-| `intlLabel`   | Object           | Label for the link, following the [React Int'l](https://formatjs.io/docs/react-intl) convention, with:<ul><li>`id`: id used to insert the localized label</li><li>`defaultMessage`: default label for the link</li></ul> |
-| `Component`   | Async function   | Returns a dynamic import of the plugin entry point                                                                                                                                                                      |
-| `permissions` | Array of Objects |  Permissions declared in the `permissions.js` file of the plugin                                                                                                                                                                                                                         |
+| `to`          | String           | 链接应指向的路径                                                                                                                                                                                          |
+| `icon`        | React Component  | 要在主导航中显示的图标                                                                                                                                                                                |
+| `intlLabel`   | Object           | 链接的标签，遵循 [React Int'l](https://formatjs.io/docs/react-intl) 约定, 其中:<ul><li>`id`: 用于插入本地化标签的 id</li><li>`defaultMessage`: 链接的默认标签</li></ul> |
+| `Component`   | Async function   | 返回插件入口点的动态导入                                                                                                                                                                      |
+| `permissions` | Array of Objects | 插件的 `permissions.js` 文件中声明的权限`                                                                                                                                                                                                                        |
 
 :::note
-`intlLabel.id` are ids used in translation files (`[plugin-name]/admin/src/translations/[language].json`)
+`intlLabel.id` 是翻译文件（`[plugin-name]/admin/src/translations/[language].json`）中使用的 ID 
 :::
 
-**Example:**
+**例子:**
 
 ```jsx
 // path: my-plugin/admin/src/index.js
@@ -237,43 +237,43 @@ export default {
 
 ### Settings API
 
-The Settings API allows:
+Settings API 允许:
 
-* [creating a new setting section](#createsettingsection)
-* adding [a single link](#addsettingslink) or [multiple links at once](#addsettingslinks) to existing settings sections
+* [创建新的设置部分](#createsettingsection)
+* 添加 [单个链接](#addsettingslink) 或 [多个链接](#addsettingslinks) 到现有设置部分
 
 ::: note
-Adding a new section happens in the [register](#register) lifecycle while adding links happens during the [bootstrap](#bootstrap) lifecycle.
+添加新的设置部分发生在 [register](#register) 生命周期中，而添加链接发生在 [bootstrap](#bootstrap) 生命周期中。
 :::
 
-All functions accept links as objects with the following parameters:
+所有函数都接受链接作为具有以下参数的对象：
 
-| Parameter     | Type             | Description                                                                                                                                                                                                              |
+| 参数          | 类型             | 描述                                                                                                                                                                                                              |
 | ------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `id`          | String           | React id                                                                                                                                                                                                                 |
-| `to`          | String           | Path the link should point to                                                                                                                                                                                            |
-| `intlLabel`   | Object           | Label for the link, following the [React Int'l](https://formatjs.io/docs/react-intl) convention, with:<ul><li>`id`: id used to insert the localized label</li><li>`defaultMessage`: default label for the link</li></ul> |
-| `Component`   | Async function   | Returns a dynamic import of the plugin entry point                                                                                                                                                                       |
-| `permissions` | Array of Objects | Permissions declared in the `permissions.js` file of the plugin                                                                                                                                                          |
+| `to`          | String           | 链接应指向的路径                                                                                                                                                                                           |
+| `intlLabel`   | Object           | 链接的标签，遵循 [React Int'l](https://formatjs.io/docs/react-intl) 约定, 其中:<ul><li>`id`: 用于插入本地化标签的 id</li><li>`defaultMessage`: 链接的默认标签</li></ul> |
+| `Component`   | Async function   | 返回插件入口点的动态导入组件                                                                                                                                                               |
+| `permissions` | Array of Objects | 插件的 `permissions.js` 文件中声明的权限`                                                                                                                                                             |
 
 #### createSettingSection()
 
 **Type**: `Function`
 
-Create a new settings section.
+创建新的设置部分。
 
-The function takes 2 arguments:
+该函数采用 2 个参数：
 
-| Argument        | Type             | Description                                                                                                                                                                                                                                                                                                                   |
+| 参数            | 类型             | 描述                                                                                                                                                                                                                                                                                                                   |
 | --------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| first argument  | Object           | Section label:<ul><li>`id` (String): section id</li><li>`intlLabel` (Object): localized label for the section, following the [React Int'l](https://formatjs.io/docs/react-intl) convention, with:<ul><li>`id`: id used to insert the localized label</li><li>`defaultMessage`: default label for the section</li></ul></li></ul> |
-| second argument | Array of Objects | Links included in the section                                                                                                                                                                                                                                                                                                 |
+| first argument  | Object           | 部分标签:<ul><li>`id` (String): section id</li><li>`intlLabel` (Object): 部分的本地化标签，遵循 [React Int'l](https://formatjs.io/docs/react-intl) 约定, 其中:<ul><li>`id`: 用于插入本地化标签的 id</li><li>`defaultMessage`: 该部分的默认标签</li></ul></li></ul> |
+| second argument | Array of Objects | 该部分中包含的链接                                                                                                                                                                                                                                                                                                |
 
 :::note
-`intlLabel.id` are ids used in translation files (`[plugin-name]/admin/src/translations/[language].json`)
+`intlLabel.id` 是翻译文件 (`[plugin-name]/admin/src/translations/[language].json`) 中使用的 ID
 :::
 
-**Example:**
+**例子:**
 
 ```jsx
 // path: my-plugin/admin/src/index.js
@@ -309,9 +309,9 @@ export default {
 
 **Type**: `Function`
 
-Add a unique link to an existing settings section.
+添加指向现有设置部分的唯一链接。
 
-**Example:**
+**例子:**
 
 ```jsx
 // path: my-plugin/admin/src/index.js
@@ -345,9 +345,9 @@ export default {
 
 **Type**: `Function`
 
-Add multiple links to an existing settings section.
+向现有设置部分添加多个链接。
 
-**Example:**
+**例子:**
 
 ```jsx
 // path: my-plugin/admin/src/index.js
@@ -379,20 +379,21 @@ export default {
 
 ### Injection Zones API
 
-Injection zones refer to areas of a view's layout where a plugin allows another to inject a custom React component (e.g. a UI element like a button).
+注入区域是指视图布局的区域，其中插件允许另一个插件注入自定义 React 组件（例如，像按钮一样的 UI 元素）。
 
-Plugins can use:
+插件可以使用：
 
-* Strapi's [predefined injection zones](#using-predefined-injection-zones) for the Content Manager,
-* or custom injection zones, created by a plugin
+
+* Strapi 的[预定义注入区域](#using-predefined-injection-zones) 用于内容管理器，
+* 或自定义注入区域，由插件创建
 
 ::: note
-Injection zones are defined in the [register()](#register) lifecycle but components are injected in the [bootstrap()](#bootstrap) lifecycle.
+注入区域在 [register()](#register) 生命周期中定义，但组件在 [bootstrap()](#bootstrap) 生命周期中注入。
 :::
 
-#### Using predefined injection zones
+#### 使用预定义的注入区域
 
-Strapi admin panel comes with predefined injection zones so components can be added to the UI of the [Content Manager](/user-docs/latest/content-manager/introduction-to-content-manager.md):
+Strapi 管理面板带有预定义的注入区域，因此可以将组件添加到[内容管理器](/user-docs/latest/content-manager/introduction-to-content-manager.md)的UI中：
 
 <!-- TODO: maybe add screenshots once the design system is ready? -->
 
@@ -401,26 +402,26 @@ Strapi admin panel comes with predefined injection zones so components can be ad
 | List view | <ul><li>`actions`: sits between Filters and the cogs icon</li><li>`deleteModalAdditionalInfos()`: sits at the bottom of the modal displayed when deleting items</li></ul> |
 | Edit view | <ul><li>`informations`: sits at the top right of the edit view</li><li>`right-links`: sits between "Configure the view" and "Edit" buttons</li></ul>                       |
 
-#### Creating a custom injection zone
+#### 创建自定义注入区域
 
-To create a custom injection zone, declare it as a `<InjectionZone />` React component with an `area` prop that takes a string with the following naming convention: `plugin-name.viewName.injectionZoneName`.
+要创建自定义注入区域，请将其声明为 `<InjectionZone />` React组件，其中包含一个 `area` 属性，该属性采用具有以下命名约定的字符串：`plugin-name.viewName.injectionZoneName`。
 
-#### Injecting components
+#### 注入组件
 
-A plugin has 2 different ways of injecting a component:
+插件有 2 种不同的组件注入方式：
 
-* to inject a component from a plugin into another plugin's injection zones, use the `injectComponent()` function
-* to specifically inject a component into one of the Content Manager's [predefined injection zones](#using-predefined-injection-zones), use the `injectContentManagerComponent()` function instead
+* 要将一个插件中的组件注入到另一个插件的注入区域，请使用 `injectComponent()` 函数
+* 要专门将组件注入到内容管理器的[预定义注入区域](#using-predefined-injection-zones)，请使用  `injectContentManagerComponent()` 函数
 
-Both the `injectComponent()` and `injectContentManagerComponent()` methods accept the following arguments:
+`injectComponent()` 和 `injectContentManagerComponent()` 方法都接受以下参数：
 
-| Argument        | Type   | Description                                                                                                                                                                   |
+| 参数            | 类型   | 描述                                                                                                                                                                   |
 | --------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| first argument  | String | The view where the component is injected
-| second argument | String | The zone where the component is injected
-| third argument  | Object | An object with the following keys:<ul><li>`name` (string): the name of the component</li><li>`Component` (function or class): the React component to be injected</li></ul> |
+| first argument  | String | 注入组件的视图
+| second argument | String | 注入组件的区域
+| third argument  | Object | 具有以下键的对象：<ul><li>`name` (string): 组件名</li><li>`Component` (function or class): 要注入的 React 组件</li></ul> |
 
-::: details Example: Inject a component in the informations box of the Edit View of the Content Manager:
+::: details 示例：在内容管理器的“编辑视图”的信息框中注入组件：
 
 ```jsx
 // path: my-plugin/admin/src/index.js
@@ -437,7 +438,7 @@ export default {
 
 :::
 
-::: details Example: Creating a new injection zone and injecting it from a plugin to another one:
+::: details 示例：创建一个新的注入区域并将其从插件注入到另一个插件：
 
 ```jsx
 // Use the injection zone in a view
@@ -488,11 +489,11 @@ export default {
 
 :::
 
-#### Accessing data with the `useCMEditViewDataManager` React hook
+#### 使用 `useCMEditViewDataManager` React hook 访问数据 
 
-Once an injection zone is defined, the component to be injected in the Content Manager can have access to all the data of the Edit View through the `useCMEditViewDataManager` React hook.
+一旦定义了注入区域，要在内容管理器中注入的组件就可以通过 `useCMEditViewDataManager` React hook 访问编辑视图的所有数据。
 
-::: details Example of a basic component using the 'useCMEditViewDataManager' hook
+::: details 使用 'useCMEditViewDataManager' 钩子的基本组件示例
 
 ```js
 import { useCMEditViewDataManager } from '@strapi/helper-plugin';
@@ -540,17 +541,17 @@ const MyCompo = () => {
 
 ### Reducers API
 
-Reducers are [Redux](https://redux.js.org/) reducers that can be used to share state between components. Reducers can be useful when:
+Reducers 是 [Redux](https://redux.js.org/) 化简器，可用于在组件之间共享状态。Reducers 在以下情况下非常有用：
 
-* Large amounts of application state are needed in many places in the application.
-* The application state is updated frequently.
-* The logic to update that state may be complex.
+* 应用程序中的许多位置都需要大量的应用程序状态。
+* 应用程序状态频繁更新。
+* 更新该状态的逻辑可能很复杂。
 
-Reducers can be added to a plugin interface with the `addReducers()` function during the [`register`](#register) lifecycle.
+在 [`register`](#register) 生命周期中，可以使用 `addReducers()` 函数将 Reducers 添加到插件接口中。
 
-A reducer is declared as an object with this syntax:
+Reducers 使用以下语法声明为对象：
 
-**Example:**
+**例子:**
 
 ```js
 // path: my-plugin/admin/src/index.js
@@ -573,17 +574,17 @@ export default {
 
 ### Hooks API
 
-The Hooks API allows a plugin to create and register hooks, i.e. places in the application where plugins can add personalized behavior.
+Hooks API 允许插件创建和注册 Hooks，即插件可以添加个性化行为的应用程序。
 
-Hooks should be registered during the [bootstrap](#bootstrap) lifecycle of a plugin.
+Hooks 应该在插件的[引导](#bootstrap)生命周期内注册。
 
-Hooks can then be run in series, in waterfall or in parallel:
+Hooks 可以连续或并行运行：
 
-* `runHookSeries` returns an array corresponding to the result of each function executed, ordered
-* `runHookParallel` returns an array corresponding to the result of the promise resolved by the function executed, ordered
-* `runHookWaterfall` returns a single value corresponding to all the transformations applied by the different functions starting with the initial value `args`.
+* `runHookSeries` 返回一个数组，对应于执行的每个函数的结果，有序
+* `runHookParallel` 返回一个数组，对应于由执行的函数解析的承诺的结果，有序
+* `runHookWaterfall` 返回一个值，该值对应于从初始值 `args` 开始的不同函数应用的所有转换。
 
-:::details Example: Create a hook in a plugin and use it in another plugin
+:::details 示例：在插件中创建钩子并在另一个插件中使用它
 
 ```jsx
 // path: my-plugin/admin/src/index.js
@@ -613,11 +614,11 @@ export default {
 
 :::
 
-#### Predefined hook
+#### 预定义 hook
 
-Strapi includes a predefined `Admin/CM/pages/ListView/inject-column-in-table` hook that can be used to add or mutate a column of the List View of the [Content Manager](/user-docs/latest/content-manager/introduction-to-content-manager.md).
+Strapi 包括一个预定义的 `Admin/CM/pages/ListView/inject-column-in-table` hook，可用于添加或改变 [Content Manager](/user-docs/latest/content-manager/introduction-to-content-manager.md) 的列表视图的一列
 
-::: details Example: 'Admin/CM/pages/ListView/inject-column-in-table' hook, as used by the Internationalization plugin to add the 'Content available in' column
+::: details 示例: 'Admin/CM/pages/ListView/inject-column-in-table' hook，由国际化插件用于添加 'Content available in' 列
 
 ```jsx
 // ./plugins/my-plugin/admin/src/index.js

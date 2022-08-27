@@ -32,7 +32,7 @@ const themeConfig = {
               link: '/developer-docs/latest/update-migration-guides/update-version.html',
             },
             {
-              text: 'Developer Resources',
+              text: '开发人员资源',
               link: '/developer-docs/latest/developer-resources/database-apis-reference/rest-api.html',
             },
           ],

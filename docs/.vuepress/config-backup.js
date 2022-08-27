@@ -229,7 +229,7 @@ const sidebar = {
       ],
     },
     {
-      title: '💻 Developer Resources',
+      title: '💻 开发人员资源',
       collapsable: false,
       initialOpenGroupIndex: -1, // make sure that no subgroup is expanded by default
       sidebarDepth: 2,
@@ -827,7 +827,7 @@ module.exports = {
                 link: '/developer-docs/latest/development/backend-customization.html',
               },
               {
-                text: 'Developer Resources',
+                text: '开发人员资源',
                 link: '/developer-docs/latest/developer-resources/database-apis-reference/rest-api.html',
               },
               {

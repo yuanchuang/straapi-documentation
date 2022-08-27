@@ -219,7 +219,7 @@ const developer = [
     ],
   },
   {
-    title: '💻 Developer Resources',
+    title: '💻 开发人员资源',
     collapsable: false,
     initialOpenGroupIndex: -1, // make sure that no subgroup is expanded by default
     sidebarDepth: 2,
@@ -322,16 +322,16 @@ const developer = [
           },
 
           {
-            title: 'Plugin APIs Reference',
+            title: '插件 API 参考',
             collapsable: true,
             children: [
               [
                 '/developer-docs/latest/developer-resources/plugin-api-reference/server.md',
-                'Server API for plugins',
+                '插件的服务 API',
               ],
               [
                 '/developer-docs/latest/developer-resources/plugin-api-reference/admin-panel.md',
-                'Admin Panel API for plugins',
+                '插件的管理面板 API',
               ],
             ],
           },
