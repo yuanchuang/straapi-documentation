@@ -1,33 +1,33 @@
 ---
-title: Back-end customization - Strapi Developer Docs
-description: All elements of Strapi's back end, like routes, policies, middlewares, controllers, services, models, requests, responses, and webhooks, can be customized.
+title: 后端定制 - Strapi 开发人员文档
+description: Strapi 后端的所有元素，例如 routes, policies, middlewares, controllers, services, models, requests, responses, webhooks 都能定制
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/development/backend-customization.html
 ---
 
-# Back-end customization
+# 后端定制
 
-Strapi runs an HTTP server based on [Koa](https://koajs.com/), a back end JavaScript framework.
+Strapi 运行在 [Koa](https://koajs.com/) 的 HTTP 服务器，这是一个后端 JavaScript 框架。
 
-:::strapi What is Koa?
-If you are not familiar with the Koa back end framework, we highly recommend you to read the [Koa's documentation introduction](http://koajs.com/#introduction).
+:::strapi 什么是 Koa?
+如果您不熟悉 Koa 后端框架，我们强烈建议您阅读 [Koa 的文档介绍](http://koajs.com/#introduction).
 :::
 
-Each part of Strapi's back end can be customized:
+Strapi 后端的每个部分都可以定制:
 
-- the [requests](/developer-docs/latest/development/backend-customization/requests-responses.md#requests) received by the Strapi server,
+- [requests](/developer-docs/latest/development/backend-customization/requests-responses.md#requests) 由 Strapi 服务器接收
 
-- the [routes](/developer-docs/latest/development/backend-customization/routes.md) that handle the requests and trigger the execution of their controller handlers,
+- [routes](/developer-docs/latest/development/backend-customization/routes.md) 处理请求并触发其控制器处理程序的执行
 
-- the [policies](/developer-docs/latest/development/backend-customization/policies.md) that can block access to a route,
+- [policies](/developer-docs/latest/development/backend-customization/policies.md) 可以阻止对路由的访问
 
-- the [middlewares](/developer-docs/latest/development/backend-customization/middlewares.md) that can control the request flow and the request before moving forward,
+- [middlewares](/developer-docs/latest/development/backend-customization/middlewares.md) 可以在继续之前控制请求流和请求
 
-- the [controllers](/developer-docs/latest/development/backend-customization/controllers.md) that execute code once a route has been reached,
+- [controllers](/developer-docs/latest/development/backend-customization/controllers.md) 一旦到达路由，就会执行代码
 
-- the [services](/developer-docs/latest/development/backend-customization/services.md) that are used to build custom logic reusable by controllers,
+- [services](/developer-docs/latest/development/backend-customization/services.md) 用于构建可由控制器重用的自定义逻辑
 
-- the [models](/developer-docs/latest/development/backend-customization/models.md) that are a representation of the content data structure,
+- [models](/developer-docs/latest/development/backend-customization/models.md) 是内容数据结构的表示形式
 
-- the [responses](/developer-docs/latest/development/backend-customization/requests-responses.md#responses) sent to the application that sent the request,
+- [responses](/developer-docs/latest/development/backend-customization/requests-responses.md#responses) 发送到发送请求的应用程序
 
-- and the [webhooks](/developer-docs/latest/development/backend-customization/webhooks.md) that are used to notify other applications of events that occured.
+- [webhooks](/developer-docs/latest/development/backend-customization/webhooks.md) 用于将发生的事件通知其他应用程序。

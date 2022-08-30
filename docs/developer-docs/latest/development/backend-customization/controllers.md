@@ -1,28 +1,30 @@
 ---
-title: Backend customization - Controllers - Strapi Developer Docs
-description: Strapi controllers are files that contain a set of methods reached by the client according to the requested route and can be customized according to your needs.
+title: 后端 - 控制器 - Strapi 开发人员文档
+description: Strapi 控制器是包含客户端根据请求的路线访问的一组方法的文件，可以根据您的需要进行自定义。
 sidebarDepth: 3
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/development/backend-customization/controllers.html
 ---
 
-# Controllers
+# 控制器
 
-Controllers are JavaScript files that contain a set of methods, called actions, reached by the client according to the requested [route](/developer-docs/latest/development/backend-customization/routes.md). Whenever a client requests the route, the action performs the business logic code and sends back the [response](/developer-docs/latest/development/backend-customization/requests-responses.md#responses). Controllers represent the C in the model-view-controller (MVC) pattern.
+控制器是JavaScript文件，其中包含一组称为操作的方法，由客户端根据请求的 [route](/developer-docs/latest/development/backend-customization/routes.md) 访问。 每当客户端请求路由时，该操作都会执行业务逻辑代码并返回 [response](/developer-docs/latest/development/backend-customization/requests-responses.md#responses). 控制器表示 model-view-controller （MVC） 模式中的 C。
 
-In most cases, the controllers will contain the bulk of a project's business logic. But as a controller's logic becomes more and more complicated, it's a good practice to use [services](/developer-docs/latest/development/backend-customization/services.md) to organize the code into re-usable parts.
+在大多数情况下，控制器将包含项目业务逻辑的大部分。但是随着控制器的逻辑变得越来越复杂，使用 [services](/developer-docs/latest/development/backend-customization/services.md) 将代码组织成可重用部分是一种很好的做法。
 
-## Implementation
+## 实现
 
-Controllers can be [generated or added manually](#adding-a-new-controller). Strapi provides a `createCoreController` factory function that automatically generates core controllers and allows building custom ones or [extend or replace the generated controllers](#extending-core-controllers).
 
-### Adding a new controller
+控制器可以 [generated or added manually](#添加新控制器)。Strapi提供了一个 `createCoreController` 工厂功能，可以自动生成核心控制器，并允许构建自定义控制器或[扩展或替换生成的控制器](#扩展核心控制器)。
 
-A new controller can be implemented:
 
-- with the [interactive CLI command `strapi generate`](/developer-docs/latest/developer-resources/cli/CLI.md#strapi-generate)
-- or manually by creating a JavaScript file:
-  - in `./src/api/[api-name]/controllers/` for API controllers (this location matters as controllers are auto-loaded by Strapi from there)
-  - or in a folder like `./src/plugins/[plugin-name]/server/controllers/` for plugin controllers, though they can be created elsewhere as long as the plugin interface is properly exported in the `strapi-server.js` file (see [Server API for Plugins documentation](/developer-docs/latest/developer-resources/plugin-api-reference/server.md))
+### 添加新控制器
+
+以下方式可以实现新的控制器：
+
+- 使用 [交互式命令 CLI 命令 `strapi generate`](/developer-docs/latest/developer-resources/cli/CLI.md#strapi-generate)
+- 或通过创建 JavaScript 文件手动：
+  - 在 API 控制器的 `./src/api/[api-name]/controllers/` 中（这个位置很重要，因为 Strapi 从那里自动加载控制器）
+  - 或者在插件控制器的 `./src/plugins/[plugin-name]/server/controllers/` 这样的文件夹中，只要插件接口正确导出到 `strapi-server.js` 文件中，就可以在其他地方创建它们 (参见 [Server API for Plugins 文档](/developer-docs/latest/developer-resources/plugin-api-reference/server.md))
 
 <code-group>
 <code-block title=JAVASCRIPT>
@@ -121,13 +123,11 @@ export default factories.createCoreController('api::restaurant.restaurant', ({ s
 
 
 
+每个控制器操作都可以是 `async` 或 `sync` 功能。每个操作都会接收一个上下文对象 （`ctx`） 作为参数。`ctx` 包含 [request context](/developer-docs/latest/development/backend-customization/requests-responses.md#requests) 和 [response context](/developer-docs/latest/development/backend-customization/requests-responses.md#responses).
 
-Each controller action can be an `async` or `sync` function.
-Every action receives a context object (`ctx`) as a parameter. `ctx` contains the [request context](/developer-docs/latest/development/backend-customization/requests-responses.md#requests) and the [response context](/developer-docs/latest/development/backend-customization/requests-responses.md#responses).
+::: details 实例：GET /hello 路由调用基本控制器
 
-::: details Example: GET /hello route calling a basic controller
-
-A specific `GET /hello` [route](/developer-docs/latest/development/backend-customization/routes.md) is defined, the name of the router file (i.e. `index`) is used to call the controller handler (i.e. `index`). Every time a `GET /hello` request is sent to the server, Strapi calls the `index` action in the `hello.js` controller, which returns `Hello World!`:
+定义了一个特定的 `GET /hello` [route](/developer-docs/latest/development/backend-customization/routes.md)，路由器文件的名称 (即 `index`) 用于调用控制器处理程序(即 `index`)。每次向服务器发送 `GET /hello` 请求时, Strapi 都会在 `hello.js` 控制器中调用 `index` 操作并返回 `Hello World!`：
 
 <code-group>
 <code-block title=JAVASCRIPT>
@@ -190,18 +190,18 @@ export default {
 :::
 
 ::: note
-When a new [content-type](/developer-docs/latest/development/backend-customization/models.md#content-types) is created, Strapi builds a generic controller with placeholder code, ready to be customized.
+当创建新的 [content-type](/developer-docs/latest/development/backend-customization/models.md#content-types) 时, Strapi 会使用占位符代码构建一个通用控制器，该控制器可供自定义。
 :::
 
-### Extending core controllers
+### 扩展核心控制器
 
-Default controllers and actions are created for each content-type. These default controllers are used to return responses to API requests (e.g. when `GET /api/articles/3` is accessed, the `findOne` action of the default controller for the "Article" content-type is called). Default controllers can be customized to implement your own logic. The following code examples should help you get started.
+将为每个内容类型创建默认控制器和操作。这些默认控制器用于返回对 API 请求的响应（例如，当访问 `GET /api/articles/3` 时，将调用 "Article" 内容类型的默认控制器的 `findOne` 操作）。可以自定义默认控制器以实现您自己的逻辑。下面的代码示例应该可以帮助您入门。
 
 :::tip
-An action from a core controller can be replaced entirely by [creating a custom action](#adding-a-new-controller) and naming the action the same as the original action (e.g. `find`, `findOne`, `create`, `update`, or `delete`).
+来自核心控制器的操作可以完全替换为 [创建自定义操作](#添加新控制器) 并将操作命名为与原始操作相同的操作（例如 `find`, `findOne`, `create`, `update`, 或 `delete`）。
 :::
 
-::::: details Collection type examples
+::::: details 集合类型示例
 
 :::: tabs card
 
@@ -324,9 +324,9 @@ async delete(ctx) {
 ::::
 :::::
 
-## Usage
+## 用途
 
-Controllers are declared and attached to a route. Controllers are automatically called when the route is called, so controllers usually do not need to be called explicitly. However, [services](/developer-docs/latest/development/backend-customization/services.md) can call controllers, and in this case the following syntax should be used:
+控制器已声明并附加到路由。调用路由时会自动调用控制器，因此通常不需要显式调用控制器。但是 [services](/developer-docs/latest/development/backend-customization/services.md) 可以调用控制器，在这种情况下，应使用以下语法：
 
 ```js
 // access an API controller
@@ -336,5 +336,5 @@ strapi.controller('plugin::plugin-name.controller-name');
 ```
 
 ::: tip
-To list all the available controllers, run `yarn strapi controllers:list`.
+要列出所有可用的控制器，请运行 `yarn strapi controllers:list`.
 :::

@@ -1,28 +1,28 @@
 ---
-title: Backend customization - Services - Strapi Developer Docs
-description: Strapi services are a set of reusable functions, useful to simplify controllers logic.
+title: 后端 - 服务 - Strapi 开发人员文档
+description: Strapi 服务是一组可重用的功能，可用于简化控制器逻辑。
 sidebarDepth: 3
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/development/backend-customization/services.html
 ---
 
-# Services
+# 服务
 
-Services are a set of reusable functions. They are particularly useful to respect the "don’t repeat yourself" (DRY) programming concept and to simplify [controllers](/developer-docs/latest/development/backend-customization/controllers.md) logic.
+服务是一组可重用的函数。它们对于尊重 "don’t repeat yourself" (DRY) 编程概念和简化[控制器](/developer-docs/latest/development/backend-customization/controllers.md) 逻辑特别有用。
 
-## Implementation
+## 实现
 
-Services can be [generated or added manually](#adding-a-new-service). Strapi provides a `createCoreService` factory function that automatically generates core services and allows building custom ones or [extend or replace the generated services](#extending-core-services).
+服务可以[手动生成或添加](#添加新服务)。Strapi提供了一个“createCoreService”工厂功能，该函数自动生成核心服务，并允许构建自定义服务或[扩展或替换生成的服务](#扩展核心服务)。
 
-### Adding a new service
+### 添加新服务
 
-A new service can be implemented:
+以下方式可以实现新服务：
 
-- with the [interactive CLI command `strapi generate`](/developer-docs/latest/developer-resources/cli/CLI.md#strapi-generate)
-- or manually by creating a JavaScript file in the appropriate folder (see [project structure](/developer-docs/latest/setup-deployment-guides/file-structure.md)):
-  - `./src/api/[api-name]/services/` for API services
-  - or `./src/plugins/[plugin-name]/services/` for [plugin services](/developer-docs/latest/developer-resources/plugin-api-reference/server.md#services).
+- 使用 [交互式 CLI 命令 `strapi generate`](/developer-docs/latest/developer-resources/cli/CLI.md#strapi-generate)
+- 或通过在相应的文件夹中创建 JavaScript 文件来手动操作 (参见 [project structure](/developer-docs/latest/setup-deployment-guides/file-structure.md)):
+  - `./src/api/[api-name]/services/` 用于 API 服务
+  - 或 `./src/plugins/[plugin-name]/services/` 用于[插件服务](/developer-docs/latest/developer-resources/plugin-api-reference/server.md#services)
 
-To manually create a service, export a factory function that returns the service implementation (i.e. an object with methods). This factory function receives the `strapi` instance:
+要手动创建服务，请导出返回服务实现的工厂函数（即带有方法的对象）。此工厂函数接收 `strapi` 实例：
 
 <code-group>
 <code-block title="JAVASCRIPT">
@@ -109,12 +109,12 @@ export default factories.createCoreService('api::restaurant.restaurant', ({ stra
 </code-group>
 
 ::: strapi Entity Service API
-To get started creating your own services, see Strapi's built-in functions in the [Entity Service API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) documentation.
+要开始创建自己的服务，请参阅 [Entity Service API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) 文档中的 Strapi 内置函数。
 :::
 
-:::: details Example of an email service
+:::: details 电子邮件服务示例
 
-The goal of a service is to store reusable functions. An `email` service could be useful to send emails from different functions in our codebase:
+服务的目标是存储可重用的函数。`email` 服务可用于从我们的代码库中的不同函数发送电子邮件：
 
 <code-group>
 <code-block title=JAVASCRIPT>
@@ -189,7 +189,7 @@ export default factories.createCoreService('api::restaurant.restaurant', ({ stra
 </code-block>
 </code-group>
 
-The service is now available through the `strapi.service('api::email.email').send(...args)` global variable. It can be used in another part of the codebase, like in the following controller:
+该服务现在可以通过 `strapi.service('api::email.email').send(...args)` 的全局变量。它可以在代码库的另一部分中使用，如在以下控制器中：
 
 <code-group>
 <code-block title=JAVASCRIPT>
@@ -248,18 +248,18 @@ export default factories.createCoreController('api::restaurant.restaurant', ({ s
 ::::
 
 ::: note
-When a new [content-type](/developer-docs/latest/development/backend-customization/models.md#content-types) is created, Strapi builds a generic service with placeholder code, ready to be customized.
+当创建新的 [content-type](/developer-docs/latest/development/backend-customization/models.md#content-types) 时，Strapi 会使用占位符代码构建一个通用服务，该代码随时可以自定义。
 :::
 
-### Extending core services
+### 扩展核心服务
 
-Core services are created for each content-type and could be used by [controllers](/developer-docs/latest/development/backend-customization/controllers.md) to execute reusable logic through a Strapi project. Core services can be customized to implement your own logic. The following code examples should help you get started.
+核心服务是为每个内容类型创建的，可以由 [controllers](/developer-docs/latest/development/backend-customization/controllers.md) 使用，通过 Strapi 项目执行可重用的逻辑。可以自定义核心服务以实现您自己的逻辑。下面的代码示例应该可以帮助您入门。
 
 :::tip
-A core service can be replaced entirely by [creating a custom service](#adding-a-new-service) and naming it the same as the core service (e.g. `find`, `findOne`, `create`, `update`, or `delete`).
+核心服务可以完全替换为[创建自定义服务](#添加新服务)，并将其命名为与核心服务相同的名称（例如，`find`, `findOne`, `create`, `update`, 或 `delete`）。
 :::
 
-::::: details Collection type examples
+::::: details 集合类型示例
 
 :::: tabs card
 
@@ -335,7 +335,7 @@ async delete(entityId, params) {
 ::::
 :::::
 
-::::: details Single type examples
+::::: details 单一类型示例
 :::: tabs card
 
 ::: tab find()
@@ -382,9 +382,9 @@ async delete(params) {
 ::::
 :::::
 
-## Usage
+## 用法
 
-Once a service is created, it's accessible from [controllers](/developer-docs/latest/development/backend-customization/controllers.md) or from other services:
+创建服务后，可以从 [controllers](/developer-docs/latest/development/backend-customization/controllers.md) 或其他服务访问它：
 
 ```js
 // access an API service
@@ -394,7 +394,7 @@ strapi.service('plugin::pluginName.serviceName');
 ```
 
 ::: tip
-To list all the available services, run `yarn strapi services:list`.
+要列出所有可用的服务，请运行 `yarn strapi services:list`.
 :::
 
 :::

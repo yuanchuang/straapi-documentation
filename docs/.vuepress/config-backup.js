@@ -200,7 +200,7 @@ const sidebar = {
       initialOpenGroupIndex: -1, // make sure that no subgroup is expanded by default
       children: [
         {
-          title: 'Back-end customization',
+          title: '后端',
           collapsable: true,
           path: '/developer-docs/latest/development/backend-customization.html',
           children: [

@@ -1,21 +1,21 @@
 ---
-title: Requests and Responses - Strapi Developer Docs 
-description: Learn more about requests and responses for Strapi, the most popular headless CMS.
+title: 请求和响应 - Strapi 开发人员文档
+description: 详细了解 Strapi（最流行的无头 CMS）的请求和响应。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/development/backend-customization/requests-responses.html
 ---
 
-# Requests & Responses
+# 请求 & 响应
 
-## Requests
+## 请求
 
-The context object (`ctx`) contains all the requests related information. They are accessible through `ctx.request`, from [controllers](/developer-docs/latest/development/backend-customization/controllers.md) and [policies](/developer-docs/latest/development/backend-customization/policies.md).
+上下文对象 (`ctx`) 包含所有与请求相关的信息。它们可以通过 `ctx.request` 从 [controllers](/developer-docs/latest/development/backend-customization/controllers.md) 和 [policies](/developer-docs/latest/development/backend-customization/policies.md) 访问
 
-Strapi passes the `body` on `ctx.request.body` and `files` through `ctx.request.files`
+Strapi 在 `ctx.request.body` 传递 `body` 和在 `files` 通过 `ctx.request.files` 传递。
 
-For more information, please refer to the [Koa request documentation](http://koajs.com/#request).
+有关更多信息，请参阅 [Koa request 文档](http://koajs.com/#request).
 
-## Responses
+## 响应
 
-The context object (`ctx`) contains a list of values and functions useful to manage server responses. They are accessible through `ctx.response`, from [controllers](/developer-docs/latest/development/backend-customization/controllers.md) and [policies](/developer-docs/latest/development/backend-customization/policies.md).
+上下文对象 (`ctx`) 包含用于管理服务器响应的值和函数的列表。它们可以通过 `ctx.response` 访问，从 [controllers](/developer-docs/latest/development/backend-customization/controllers.md) 和 [policies](/developer-docs/latest/development/backend-customization/policies.md)。
 
-For more information, please refer to the [Koa response documentation](http://koajs.com/#response).
+有关更多信息，请参阅 [Koa response 文档](http://koajs.com/#response).
