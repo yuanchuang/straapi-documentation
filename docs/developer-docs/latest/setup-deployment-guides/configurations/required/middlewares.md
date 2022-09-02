@@ -1,30 +1,30 @@
 ---
-title: Middlewares configuration - Strapi Developer Docs
+title: 中间件配置- Strapi 开发人员文档
 description: Strapi offers a single entry point file for its middlewares configurations.
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations/required/middlewares.html
 ---
 
-# Middlewares configuration
+# 中间件配置
 
 ::: strapi Different types of middlewares
 
-In Strapi, 2 middleware concepts coexist:
+在 Strapi 中，2 个中间件概念共存：
 
-- **Strapi middlewares** are configured and enabled as global middlewares for the entire Strapi server application. The present documentation describes how to configure Strapi middlewares.<br/>Strapi also offers the ability to implement your own custom middlewares (see [middlewares customization documentation](/developer-docs/latest/development/backend-customization/middlewares.md)).
+- **Strapi 中间件** 被配置并启用为整个 Strapi 服务器应用程序的全局中间件。本文档介绍如何配置 Strapi 中间件。<br/>Strapi 还提供了实现您自己的自定义中间件的功能 (参见 [中间件定制文档](/developer-docs/latest/development/backend-customization/middlewares.md))
 
-- **Route middlewares** have a more limited scope and are configured and used as middlewares at the route level. They are described in the [route middlewares documentation](/developer-docs/latest/development/backend-customization/routes.md#middlewares).
+- **路由中间件** 的范围更有限，在路由级别被配置并用作中间件。在[路由中间件文档](/developer-docs/latest/development/backend-customization/routes.md#middlewares) 中进行了描述。
 
 :::
 
-The `./config/middlewares.js` file is used to define all the Strapi middlewares that should be applied by the Strapi server.
+`./config/middlewares.js` 文件用于定义 Strapi 服务器应应用的所有 Strapi 中间件。
 
-Only the middlewares present in `./config/middlewares.js` are applied. Loading middlewares happens in a specific [loading order](#loading-order), with some [naming conventions](#naming-conventions) and an [optional configuration](#optional-configuration) for each middleware.
+仅应用 `./config/middlewares.js` 中存在的中间件。加载中间件以特定的[加载顺序](#加载顺序)进行，每个中间件都有一些[命名约定](#命名约定)和[可选配置](#可选配置)。
 
-Strapi pre-populates the `./config/middlewares.js` file with built-in, internal middlewares that all have their own [configuration options](#internal-middlewares-configuration-reference).
+Strapi 使用内置的内部中间件预填充 `./config/middlewares.js` 文件，这些中间件都有自己的 [配置选项](#internal-middlewares-configuration-reference).
 
-## Loading order
+## 加载顺序
 
-The `./config/middlewares.js` file exports an array, where order matters and controls the execution order of the middleware stack:
+`./config/middlewares.js` 文件导出一个数组，其中顺序很重要并控制中间件堆栈的执行顺序：
 
 <code-group>
 <code-block title="JAVASCRIPT">
@@ -111,35 +111,35 @@ export default [
 
 
 :::tip
-If you aren't sure where to place a middleware in the stack, add it to the end of the list.
+如果您不确定中间件在堆栈中的什么位置放置，请将其添加到列表的末尾。
 :::
 
-## Naming conventions
+## 命名约定
 
-Strapi middlewares can be classified into different types depending on their origin, which defines the following naming conventions:
+Strapi中间件可以根据其来源分为不同的类型，这定义了以下命名约定：
 
-| Middleware type   | Origin                                                                                                                                                                                                                                  | Naming convention                                                                                                    |
+| 中间件类型   | 来源                                                                                                                                                                                                                                  | 命名约定                                                                                                    |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| Internal          | Built-in middlewares (i.e. included with Strapi), automatically loaded                                                                                                                                                                  | `strapi::middleware-name`                                                                                            |
-| Application-level | Loaded from the `./src/middlewares` folder                                                                                                                                                                                              | `global::middleware-name`                                                                                            |
-| API-level         | Loaded from the `./src/api/[api-name]/middlewares` folder                                                                                                                                                                               | `api::api-name.middleware-name`                                                                                      |
-| Plugin            | Exported from `strapi-server.js` in the [`middlewares` property of the plugin interface](/developer-docs/latest/developer-resources/plugin-api-reference/server.md#middlewares)                                                         | `plugin::plugin-name.middleware-name`                                                                                |
-| External          | Can be:<ul><li>either node modules installed with [npm](https://www.npmjs.com/search?q=strapi-middleware)</li><li>or local middlewares (i.e. custom middlewares created locally and configured in `./config/middlewares.js`.)</li></ul> | -<br/><br/>As they are directly configured and resolved from the configuration file, they have no naming convention. |
+| Internal          | 内置中间件（即 Strapi 附带），自动加载                                                                                                                                                                 | `strapi::middleware-name`                                                                                            |
+| Application-level | 从 `./src/middlewares` 文件夹加载                                                                                                                                                                                              | `global::middleware-name`                                                                                            |
+| API-level         | 从 `./src/api/[api-name]/middlewares` 文件夹加载                                                                                                                                                                               | `api::api-name.middleware-name`                                                                                      |
+| Plugin            | 从 [插件接口的 `middlewares` 属性](/developer-docs/latest/developer-resources/plugin-api-reference/server.md#middlewares) 导出 `strapi-server.js`                                                          | `plugin::plugin-name.middleware-name`                                                                                |
+| External          | 可以：<ul><li>任一节点模块安装有[npm](https://www.npmjs.com/search?q=strapi-middleware)</li><li>或本地中间件 （即在本地创建并在 `./config/middlewares.js` 中配置的自定义中间件。</li></ul> | -<br/><br/>由于它们是直接从配置文件配置和解析的，因此它们没有命名约定。 |
 
-## Optional configuration
+## 可选配置
 
-Middlewares can have an optional configuration with the following parameters:
+中间件可以具有以下参数的可选配置：
 
-| Parameter | Description                                                       | Type     |
+| 参数 | 描述                                                       | 类型     |
 |-----------|-------------------------------------------------------------------|----------|
-| `config`  | Used to define or override the middleware configuration           | `Object` |
-| `resolve` | Path to the middleware's folder (useful for external middlewares) | `String` |
+| `config`  | 用于定义或覆盖中间件配置           | `Object` |
+| `resolve` | 中间件文件夹的路径（对外部中间件有用） | `String` |
 
-## Internal middlewares configuration reference
+## 内部中间件配置参考
 
-Strapi's core includes the following internal middlewares, mostly used for performances, security and error handling:
+Strapi的核心包括以下内部中间件，主要用于性能，安全性和错误处理：
 
-| Middleware                                                                                  | Added by Default | Required |
+| 中间件                                                                                  | 默认添加 | 必填 |
 | ------------------------------------------------------------------------------------------- | ---------------- | -------- |
 | [body](#body)                                                                               | Yes              | Yes      |
 | [compression](#compression)                                                                 | No               | No       |
@@ -158,21 +158,21 @@ Strapi's core includes the following internal middlewares, mostly used for perfo
 
 ### `body`
 
-The `body` middleware is based on [koa-body](https://github.com/koajs/koa-body). It accepts the following options:
+`body` 中间件基于 [koa-body](https://github.com/koajs/koa-body)。它接受以下选项：
 
-| Option       | Description                                                                                                                             | Type                  | Default     |
+| 选项       | 描述                                                                                                                             | 类型                  | 默认值     |
 |--------------|-----------------------------------------------------------------------------------------------------------------------------------------|-----------------------|-------------|
-| `multipart`  | Parse multipart bodies                                                                                                                  | `Boolean`             | `true`      |
-| `patchKoa`   | Patch request body to Koa's `ctx.request`                                                                                               | `Boolean`             | `true`      |
-| `jsonLimit`  | The byte (if integer) limit of the JSON body                                                                                            | `String` or `Integer` | `1mb`       |
-| `formLimit`  | The byte (if integer) limit of the form body                                                                                            | `String` or `Integer` | `56kb`      |
-| `textLimit`  | The byte (if integer) limit of the text body                                                                                            | `String` or `Integer` | `56kb`      |
-| `encoding`   | Sets encoding for incoming form fields                                                                                                  | `String`              | `utf-8`     |
-| `formidable` | Options to pass to the `formidable` multipart parser (see [node-formidable documentation](https://github.com/felixge/node-formidable)). | `Object`              | `undefined` |
+| `multipart`  | 解析多部分主体                                                                                                                 | `Boolean`             | `true`      |
+| `patchKoa`   | 将请求正文添加到 Koa 的 `ctx.request`                                                                                                | `Boolean`             | `true`      |
+| `jsonLimit`  | JSON 正文的字节（如果为整数）限制                                                                                           | `String` or `Integer` | `1mb`       |
+| `formLimit`  | 表单正文的字节（如果为整数）限制                                                                                       | `String` or `Integer` | `56kb`      |
+| `textLimit`  | 文本正文的字节（如果为整数）限制                                                                                        | `String` or `Integer` | `56kb`      |
+| `encoding`   | 设置传入表单域的编码                                                                                                 | `String`              | `utf-8`     |
+| `formidable` | 传递给 `formidable` 多部分解析器的选项 (参见 [node-formidable 文档](https://github.com/felixge/node-formidable)). | `Object`              | `undefined` |
 
-For a full list of available options for `koa-body`, check the [koa-body documentation](https://github.com/koajs/koa-body#options).
+有关 `koa-body` 的可用选项的完整列表，请查看 [koa-body 文档](https://github.com/koajs/koa-body#options).
 
-::: details Example: Custom configuration for the body middleware
+::: details 示例：主体中间件的自定义配置
 
 ```js
 // path: ./config/middlewares.js
@@ -196,9 +196,9 @@ module.exports = {
 
 ### `compression`
 
-The `compression` middleware is based on [koa-compress](https://github.com/koajs/compress). It accepts the following options:
+`compression` 中间件基于 [koa-compress](https://github.com/koajs/compress)。它接受以下选项：
 
-| Option            | Description                                                                | Type                  | Default    |
+| 选项            | 描述                                                                | 类型                  | Default    |
 |-------------------|----------------------------------------------------------------------------|-----------------------|------------|
 | `threshold`       | Minimum response size in bytes to compress                                 | `String` or `Integer` | `1kb`      |
 | `br`              | Toggle Brotli compression                                                  | `Boolean`             | `true`     |
@@ -227,18 +227,18 @@ module.exports = {
 
 ### `cors`
 
-This security middleware is about cross-origin resource sharing (CORS) and is based on [@koa/cors](https://github.com/koajs/cors). It accepts the following options:
+此安全中间件是关于跨域资源共享 （CORS） 的，并且基于 [@koa/cors](https://github.com/koajs/cors)。它接受以下选项：
 
-| Option              | Type                                                      | Description          | Default value                                              |
+| 选项              | 类型                                                      | 描述          | 默认值                                              |
 |---------------------|-----------------------------------------------------------|----------------------|------------------------------------------------------------|
-| `origin`            | Configure the `Access-Control-Allow-Origin` header        | `String` or `Array`  | `'*'`                                                      |
-| `maxAge`            | Configure the `Access-Control-Max-Age` header, in seconds | `String` or `Number` | `31536000`                                                 |
-| `credentials`       | Configure the `Access-Control-Allow-Credentials` header   | `Boolean`            | `true`                                                     |
-| `methods`           | Configure the `Access-Control-Allow-Methods` header       | `Array` or `String`  | `['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS']`      |
-| `headers`           | Configure the `Access-Control-Allow-Headers` header       | `Array` or `String`  | Request headers passed in `Access-Control-Request-Headers` |
-| `keepHeaderOnError` | Add set headers to `err.header` if an error is thrown     | `Boolean`            | `false`                                                    |
+| `origin`            | 配置 `Access-Control-Allow-Origin` 协议头        | `String` 或 `Array`  | `'*'`                                                      |
+| `maxAge`            | 配置 `Access-Control-Max-Age` 协议头, in seconds | `String` 或 `Number` | `31536000`                                                 |
+| `credentials`       | 配置 `Access-Control-Allow-Credentials` 协议头   | `Boolean`            | `true`                                                     |
+| `methods`           | 配置 `Access-Control-Allow-Methods` 协议头       | `Array` 或 `String`  | `['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS']`      |
+| `headers`           | 配置 `Access-Control-Allow-Headers` 协议头       | `Array` 或 `String`  | 传入的请求协议头 `Access-Control-Request-Headers` |
+| `keepHeaderOnError` | 如果引发错误，将设置协议头添加到 `err.header`    | `Boolean`            | `false`                                                    |
 
-::: details Example: Custom configuration for the cors middleware
+::: details 示例：中间件的自定义配置
 
 ```js
 // path: ./config/middlewares.js
@@ -262,20 +262,20 @@ module.exports = {
 
 ### `errors`
 
-The errors middleware handles [errors](/developer-docs/latest/developer-resources/error-handling.md) thrown by the code. Based on the type of error it sets the appropriate HTTP status to the response. By default, any error not supposed to be exposed to the end user will result in a 500 HTTP response.
+中间件处理代码引发的错误 [errors](/developer-docs/latest/developer-resources/error-handling.md)。根据错误类型，它将适当的 HTTP 状态设置为响应。默认情况下，任何不应向最终用户公开的错误都将导致 500 HTTP 响应。
 
-The middleware doesn't have any configuration options.
+中间件没有任何配置选项。
 
 ### `favicon`
 
-The `favicon` middleware serves the favicon and is based on [koa-favicon](https://github.com/koajs/favicon). It accepts the following options:
+`favicon` 中间件是基于 [koa-favicon](https://github.com/koajs/favicon) 的 favicon 服务。它接受以下选项：
 
-| Option   | Description                                      | Type      | Default value   |
+| 选项   | 描述                                      | 类型      | 默认值   |
 |----------|--------------------------------------------------|-----------|-----------------|
-| `path`   | Path to the favicon file                         | `String`  | `'favicon.ico'` |
-| `maxAge` | Cache-control max-age directive, in milliseconds | `Integer` | `86400000`      |
+| `path`   | 网站图标文件的路径                         | `String`  | `'favicon.ico'` |
+| `maxAge` | 缓存控制最大期限指令，以毫秒为单位 | `Integer` | `86400000`      |
 
-::: details Example: Custom configuration for the favicon middleware
+::: details 示例：网站图标中间件的自定义配置
 
 ```js
 // path: ./config/middlewares.js
@@ -296,18 +296,18 @@ module.exports = {
 
 #### `ip`
 
-The `ip` middleware is an IP filter middleware based on [koa-ip](https://github.com/nswbmw/koa-ip). It accepts the following options:
+`ip` 中间件是基于 [koa-ip](https://github.com/nswbmw/koa-ip) 的 IP 筛选器中间件。它接受以下选项。它接受以下选项：
 
-| Option      | Description     | Type    | Default value |
+| 选项      | 描述     | 类型    | 默认值 |
 |-------------|-----------------|---------|---------------|
-| `whitelist` | Whitelisted IPs | `Array` | `[]`          |
-| `blacklist` | Blacklisted IPs | `Array` | `[]`          |
+| `whitelist` | 白名单 IPs | `Array` | `[]`          |
+| `blacklist` | 黑名单 IPs | `Array` | `[]`          |
 
 :::tip
-The `whitelist` and `blacklist` options support wildcards (e.g. `whitelist: ['192.168.0.*', '127.0.0.*']`) and spreads (e.g. `whitelist: ['192.168.*.[3-10]']`).
+`whitelist` 和 `blacklist` 选项支持通配符（例如，`whitelist: ['192.168.0.*', '127.0.0.*']`) 和 (例如， `whitelist: ['192.168.*.[3-10]']`)。
 :::
 
-::: details Example: Custom configuration for the ip middleware
+::: details 示例：IP 中间件的自定义配置
 
 ```js
 // path: ./config/middlewares.js
@@ -329,11 +329,11 @@ module.exports = {
 
 ### `logger`
 
-The `logger` middleware is used to log requests.
+`logger` 中间件用于记录请求。
 
-To define a custom configuration for the `logger` middleware, create a dedicated configuration file (`./config/logger.js`). It should export an object that must be a complete or partial [winstonjs](https://github.com/winstonjs/winston) logger configuration. The object will be merged with Strapi's default logger configuration on server start.
+要为 `logger` 中间件定义自定义配置，请创建专用配置文件 (`./config/logger.js`)。它应该导出一个对象，该对象必须是完整或部分 [winstonjs](https://github.com/winstonjs/winston) 记录器配置。该对象将在服务器启动时与 Strapi 的默认记录器配置合并。
 
-::: details Example: Custom configuration for the logger middleware
+::: details 示例：记录器中间件的自定义配置
 
 ```js
 // path: ./config/logger.js
@@ -362,13 +362,13 @@ module.exports = {
 
 ### `poweredBy`
 
-The `poweredBy` middleware adds a `X-Powered-By` parameter to the response header. It accepts the following options:
+`poweredBy` 中间件添加 `X-Powered-By` 参数到响应协议头。它接受以下选项：
 
-| Option      | Description                        | Type     | Default value          |
+| 选项      | 描述                        | 类型     | 默认值          |
 |-------------|------------------------------------|----------|------------------------|
-| `poweredBy` | Value of the `X-Powered-By` header | `String` | `'Strapi <strapi.io>'` |
+| `poweredBy` | `X-Powered-By` 协议头的值 | `String` | `'Strapi <strapi.io>'` |
 
-::: details Example: Custom configuration for the poweredBy middleware
+::: details 示例：PoweredBy 中间件的自定义配置
 
 ```js
 // path: ./config/middlewares.js
@@ -389,15 +389,15 @@ module.exports = {
 
 ### `query`
 
-The `query` middleware is a query parser based on [qs](https://github.com/ljharb/qs). It accepts the following options:
+`query` 中间件是基于 [qs](https://github.com/ljharb/qs)。它接受以下选项：
 
-| Option               | Description                                                                                                                      | Type      | Default value |
+| 选项               | 描述                                                                                                                      | 类型      | 默认值 |
 |----------------------|----------------------------------------------------------------------------------------------------------------------------------|-----------|---------------|
-| `strictNullHandling` | Distinguish between null values and empty strings (see [qs documentation](https://github.com/ljharb/qs#handling-of-null-values)) | `Boolean` | `true`        |
-| `arrayLimit`         | Maximum index limit when parsing arrays (see [qs documentation](https://github.com/ljharb/qs#parsing-arrays))                    | `Number`  | `100`         |
-| `depth`              | Maximum depth of nested objects when parsing objects (see [qs documentation](https://github.com/ljharb/qs#parsing-objects))      | `Number`  | `20`          |
+| `strictNullHandling` | 区分 null 和空字符串 (参见 [qs 文档](https://github.com/ljharb/qs#handling-of-null-values)) | `Boolean` | `true`        |
+| `arrayLimit`         | 解析数组时的最大索引限制 (参见 [qs 文档](https://github.com/ljharb/qs#parsing-arrays))                    | `Number`  | `100`         |
+| `depth`              | 解析对象时嵌套对象的最大深度 (参见 [qs documentation](https://github.com/ljharb/qs#parsing-objects))      | `Number`  | `20`          |
 
-::: details Example: Custom configuration for the query middleware
+::: details 示例：查询中间件的自定义配置
 
 ```js
 // path: ./config/middlewares.js
@@ -419,27 +419,27 @@ module.exports = {
 
 ### `response-time`
 
-The `response-time` middleware enables the `X-Response-Time` (in milliseconds) for the response header.
+`response-time` 中间件为响应协议头启用 `X-Response-Time`（以毫秒为单位）。
 
-The middleware doesn't have any configuration options.
+中间件没有任何配置选项。
 
 ### `public`
 
-The `public` middleware is a static file serving middleware, based on [koa-static](https://github.com/koajs/static). It accepts the following options:
+`public` 中间件是一个提供中间件的静态文件，基于 [koa-static](https://github.com/koajs/static)。它接受以下选项：
 
-| Option         | Description                                                                                  | Type      | Default value |
+| 选项         | 描述                                                                                  | 类型      | 默认值 |
 |----------------|----------------------------------------------------------------------------------------------|-----------|---------------|
-| `maxAge`       | Cache-control max-age directive, in milliseconds                                             | `Integer` | `60000`       |
-| `hidden`       | Allow transfer of hidden files                                                               | `Boolean` | `false`       |
-| `defer`        | If `true`, serves after `return next()`, allowing any downstream middleware to respond first | `Boolean` | `false`       |
-| `index`        | Default file name                                                                            | `String`  | `index.html`  |
-| `defaultIndex` | Display default index page at `/` and `/index.html`                                          | `Boolean` | `true`        |
+| `maxAge`       | 缓存控制最大期限指令，以毫秒为单位                                             | `Integer` | `60000`       |
+| `hidden`       | 允许传输隐藏文件                                                               | `Boolean` | `false`       |
+| `defer`        | 如果为 `true`，则在 `return next()` 之后提供服务，允许任何下游中间件首先响应| `Boolean` | `false`       |
+| `index`        | 默认文件名                                                                            | `String`  | `index.html`  |
+| `defaultIndex` | 在 `/` 和 `/index.html` 处显示默认索引页                                          | `Boolean` | `true`        |
 
 :::tip
-You can customize the path of the public folder by editing the [server configuration file](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md#available-options).
+可以通过编辑 [服务器配置文件](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md#available-options) 来自定义公用文件夹的路径。
 :::
 
-::: details Example: Custom configuration for the public middleware
+::: details 示例：公共中间件的自定义配置
 
 ```js
 // path: ./config/middlewares.js
@@ -461,31 +461,31 @@ module.exports = {
 
 ### `security`
 
-The security middleware is based on [koa-helmet](https://helmetjs.github.io/). It accepts the following options:
+安全中间件基于 [koa-helmet](https://helmetjs.github.io/)。它接受以下选项：
 
-| Option                      | Description                                                                                   | Type                  | Default value |
+| 选项                      | 描述                                                                                   | 类型                  | 默认值 |
 |-----------------------------|-----------------------------------------------------------------------------------------------|-----------------------|---------------|
-| `crossOriginEmbedderPolicy` | Set the `Cross-Origin-Embedder-Policy` header to `require-corp`                               | `Boolean`             | `false`       |
-| `crossOriginOpenerPolicy`   | Set the `Cross-Origin-Opener-Policy` header                                                   | `Boolean`             | `false`       |
-| `crossOriginOpenerPolicy`   | Set the `Cross-Origin-Resource-Policy` header                                                 | `Boolean`             | `false`       |
-| `originAgentCluster`        | Set the `Origin-Agent-Cluster` header                                                         | `Boolean`             | `false`       |
-| `contentSecurityPolicy`     | Set the `Content-Security-Policy` header                                                      | `Boolean`             | `false`       |
-| `xssFilter`                 | Disable browsers' cross-site scripting filter by setting the `X-XSS-Protection` header to `0` | `Boolean`             | `false`       |
-| `hsts`                      | Set options for the HTTP Strict Transport Security (HSTS) policy.                             | `Object`              | -             |
-| `hsts.maxAge`               | Number of seconds HSTS is in effect                                                           | `Integer`             | `31536000`    |
-| `hsts.includeSubDomains`    | Applies HSTS to all subdomains of the host                                                    | `Boolean`             | `true`        |
-| `frameguard`                | Set `X-Frame-Options` header to help mitigate clickjacking attacks, set to `false` to disable | `Boolean` or `Object` | -             |
-| `frameguard.action`         | Value must be either `deny` or `sameorigin`                                                   | `String`              | `sameorigin`  |
+| `crossOriginEmbedderPolicy` | 将 `Cross-Origin-Embedder-Policy` 协议头设置为 `require-corp`                               | `Boolean`             | `false`       |
+| `crossOriginOpenerPolicy`   | 设置 `Cross-Origin-Opener-Policy` 协议头                                                   | `Boolean`             | `false`       |
+| `crossOriginOpenerPolicy`   | 设置 `Cross-Origin-Resource-Policy` 协议头                                                 | `Boolean`             | `false`       |
+| `originAgentCluster`        | 设置 `Origin-Agent-Cluster` 协议头                                                         | `Boolean`             | `false`       |
+| `contentSecurityPolicy`     | 设置 `Content-Security-Policy` 协议头                                                      | `Boolean`             | `false`       |
+| `xssFilter`                 | 通过将 `X-XSS-Protection` 协议头设置为 `0` 来禁用浏览器的跨站点脚本筛选器 | `Boolean`             | `false`       |
+| `hsts`                      | 设置 HTTP 严格传输安全 （HSTS） 策略的选项。                            | `Object`              | -             |
+| `hsts.maxAge`               | HSTS 生效的秒数                                                         | `Integer`             | `31536000`    |
+| `hsts.includeSubDomains`    | 将 HSTS 应用于主机的所有子域                                                   | `Boolean`             | `true`        |
+| `frameguard`                | 设置 `X-Frame-Options` 协议头以帮助缓解点击劫持攻击，设置为 `false` 以禁用 | `Boolean` or `Object` | -             |
+| `frameguard.action`         | 值必须为 `deny` 或 `sameorigin`                                                   | `String`              | `sameorigin`  |
 
 ::: tip
-When using any 3rd party upload provider, generally it's required to set a custom configuration here. Please see the provider documentation for which configuration options are required.
+使用任何第三方上传提供程序时，通常需要在此处设置自定义配置。请参阅提供程序文档，了解需要哪些配置选项。
 :::
 
 ::: note
-The default directives include a `dl.airtable.com` value. This value is set for the [in-app market](/user-docs/latest/plugins/installing-plugins-via-marketplace.md) and is safe to keep.
+默认指令包括 `dl.airtable.com` 值。此值是为 [应用内市场](/user-docs/latest/plugins/installing-plugins-via-marketplace.md) 设置的，可以安全保存。
 :::
 
-::: details Example: Custom configuration for the security middleware for using the AWS-S3 provider
+::: details 示例：用于使用 AWS-S3 提供程序的安全中间件的自定义配置
 
 ```js
 // path: ./config/middlewares.js
@@ -526,22 +526,22 @@ module.exports = {
 
 ### `session`
 
-The `session` middleware allows the use of cookie-based sessions, based on [koa-session](https://github.com/koajs/session). It accepts the following options:
+The `session` 中间件允许使用基于 [koa-session](https://github.com/koajs/session) 的 session。它接受以下选项：
 
-| Option       | Description                                                                                                            | Type                     | Default value                           |
+| 选项       | 描述                                                                                                            | 类型                     | 默认值                           |
 |--------------|------------------------------------------------------------------------------------------------------------------------|--------------------------|-----------------------------------------|
 | `key`        | Cookie key                                                                                                             | `String`                 | `'koa.sess'`                            |
-| `maxAge`     | Maximum lifetime of the cookies, in milliseconds. Using `'session'` will expire the cookie when the session is closed. | `Integer` or `'session'` | `86400000`                              |
-| `autoCommit` | Automatically commit headers                                                                                           | `Boolean`                | `true`                                  |
-| `overwrite`  | Can overwrite or not                                                                                                   | `Boolean`                | `true`                                  |
-| `httpOnly`   | Is httpOnly or not. Using `httpOnly` helps mitigate cross-site scripting (XSS) attacks.                                | `Boolean`                | `true`                                  |
-| `signed`     | Sign the cookies                                                                                                       | `Boolean`                | `true`                                  |
-| `rolling`    | Force a session identifier cookie to be set on every response.                                                         | `Boolean`                | `false`                                 |
-| `renew`      | Renew the session when the session is nearly expired, so the user keeps being logged in.                               | `Boolean`                | `false`                                 |
-| `secure`     | Force the use of HTTPS                                                                                                 | `Boolean`                | `true` in production, `false` otherwise |
-| `sameSite`   | Restrict the cookies to a first-party or same-site context                                                             | `String`                 | `null`                                  |
+| `maxAge`     | Cookie 的最大生存期（以毫秒为单位）。使用 `'session'` 将在会话关闭时使 Cookie 过期。 | `Integer` 或 `'session'` | `86400000`                              |
+| `autoCommit` | 自动提交协议头                                                                                           | `Boolean`                | `true`                                  |
+| `overwrite`  | 可以覆盖或不覆盖                                                                                                   | `Boolean`                | `true`                                  |
+| `httpOnly`   | 是否为 httponly 或不是。使用 `httpOnly` 有助于缓解跨站点脚本 （XSS） 攻击。                                                      | `Boolean`                | `true`                                  |
+| `signed`     | 对 cookies 进行签名                                                                                             | `Boolean`                | `true`                                  |
+| `rolling`    | 强制在每个响应上设置会话标识符 Cookie                                                         | `Boolean`                | `false`                                 |
+| `renew`      | 在会话即将过期时续订会话，以便用户继续登录。                              | `Boolean`                | `false`                                 |
+| `secure`     | 强制使用 HTTPS                                                                                     | `Boolean`                | `true` in production, `false` otherwise |
+| `sameSite`   | 将 Cookie 限制在第一方或同一站点上下文中                                                            | `String`                 | `null`                                  |
 
-::: details Example: Custom configuration for the session middleware
+::: details 示例：会话中间件的自定义配置
 
 ```js
 // path: ./config/middlewares.js

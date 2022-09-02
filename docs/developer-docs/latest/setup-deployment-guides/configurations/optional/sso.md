@@ -1,13 +1,13 @@
 ---
-title: Single Sign-On (SSO) - Strapi Developer Docs
-description: Strapi's SSO allows you to configure additional sign-in and sign-up methods for your administration panel. It requires an Entreprise Edition with a Gold plan.
+title: 单点登录 (SSO) - Strapi 开发人员文档
+description: Strapi 的 SSO 允许您为管理面板配置其他登录和注册方法。它需要一个带有黄金计划的 Entreprise 版本。
 sidebarDepth: 3
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations/optional/sso.html
 ---
 
-# Single Sign-On <GoldBadge link="https://strapi.io/pricing-self-hosted/" withLinkIcon />
+# 单点登录 <GoldBadge link="https://strapi.io/pricing-self-hosted/" withLinkIcon />
 
-Single Sign-On on Strapi allows you to configure additional sign-in and sign-up methods for your administration panel.
+单点登录 on Strapi allows you to configure additional sign-in and sign-up methods for your administration panel.
 
 ::: prerequisites
 

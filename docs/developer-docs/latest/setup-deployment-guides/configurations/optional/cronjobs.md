@@ -1,20 +1,20 @@
 ---
-title: Cron jobs - Strapi Developer Docs
-description: Strapi allows you to configure cron jobs for execution at specific dates and times, with optional reccurence rules.
+title: Cron 作业 - Strapi 开发人员文档
+description: Strapi 允许您使用可选的重新设置规则，以在特定日期和时间执行 cron 作业。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations/optional/cronjobs.html
 ---
 
-# Cron jobs
+# Cron 作业
 
 :::prerequisites
-The `cron.enabled` configuration option should be set to `true` in the `./config/server.js` (or `./config/server.ts` for TypeScript projects)  [file](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md).
+在 `./config/server.js` 中，`cron.enabled` 配置选项应设置为 `true`（对于 TypeScript 项目，则设置为 `./config/server.ts` ） [file](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md)。
 :::
 
-`cron` allows scheduling arbitrary functions for execution at specific dates, with optional recurrence rules. These functions are named cron jobs. `cron` only uses a single timer at any given time, rather than reevaluating upcoming jobs every second/minute.
+`cron` 允许使用可选的重复规则来调度任意函数以在特定日期执行。这些函数被命名为 cron 作业。`cron` 在任何给定时间仅使用单个计时器，而不是每秒/每分钟重新评估一次即将到来的作业。
 
-This feature is powered by the [`node-schedule`](https://www.npmjs.com/package/node-schedule) package.
+此功能由 ['node-schedule'](https://www.npmjs.com/package/node-schedule) 包提供支持。
 
-The `cron` format consists of:
+`cron` 格式包括：
 
 ```
 
@@ -30,18 +30,18 @@ The `cron` format consists of:
 
 ```
 
-To define cron jobs and have them run at the required times:
+要定义 cron 作业并使其在所需的时间运行，请执行以下操作：
 
-1. [Create](#creating-a-cron-job) the appropriate file.
-2. [Enable](#enabling-cron-jobs) the cron jobs in the server configuration file.
+1. [创建](#创建一个-cron-作业)合适的文件。
+2. [启用](#启用-cron-作业) 服务器配置文件中的 cron 作业。
 
 ::: tip
 Optionally, cron jobs can be directly created in the `cron.tasks` key of the [server configuration file](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md).
 :::
 
-## Creating a cron job
+## 创建一个 cron 作业
 
-To define a cron job, create a file with the following structure:
+要定义 cron 作业，请创建具有以下结构的文件：
 
 <code-group>
 <code-block title="JAVASCRIPT">
@@ -84,7 +84,7 @@ export default {
 </code-group>
 
 
-If the cron job requires running on a specific timezone:
+如果 cron 作业需要在特定时区上运行：
 
 
 <code-group>
@@ -139,9 +139,9 @@ myJob: {
 </code-block>
 </code-group>
 
-## Enabling cron jobs
+## 启用 cron 作业
 
-To enable cron jobs, set `cron.enabled` to `true` in the [server configuration file](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md) and declare the jobs:
+要启用 cron 作业，请在 [服务器配置文件](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md) 中将 `cron.enabled` 设置为 `true`，然后声明作业：
 
 <code-group>
 <code-block title="JAVASCRIPT">

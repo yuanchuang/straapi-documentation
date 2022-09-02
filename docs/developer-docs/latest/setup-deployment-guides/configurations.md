@@ -1,15 +1,15 @@
 ---
-title: Configurations - Strapi Developer Docs
-description: Learn how you can manage and customize the configuration of your Strapi application.
+title: 配置 - Strapi 开发人员文档
+description: 了解如何管理和自定义 Strapi 应用程序的配置。
 sidebarDepth: auto
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations.html
 ---
 
-# Configurations
+# 配置
 
-The application configuration lives in the `./config` folder (see [project structure](/developer-docs/latest/setup-deployment-guides/file-structure.md)). All the configuration files are loaded on startup and can be accessed through the configuration provider.
+应用程序配置位于 `./config` 文件夹中 (参见 [项目结构](/developer-docs/latest/setup-deployment-guides/file-structure.md))。所有配置文件都在启动时加载，并且可以通过配置提供程序进行访问。
 
-If the `./config/server.js` file has the following config:
+`./config/server.js` 具有以下配置：
 
 ```js
 module.exports = {
@@ -17,23 +17,23 @@ module.exports = {
 };
 ```
 
-The `server.host` key can be accessed as:
+`server.host` key 可以按如下方式访问：
 
 ```js
 strapi.config.get('server.host', 'defaultValueIfUndefined');
 ```
 
-Nested keys are accessible with the [dot notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors#dot_notation).
+嵌套键可通过 [dot notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors#dot_notation) 访问。
 
 :::note
-The filename is used as a prefix to access the configurations.
+文件名用作访问配置的前缀。
 :::
 
-Configuration files can either be `.js` or `.json` files.
+配置文件可以是 `.js` 或 `.json` 文件。
 
-When using a `.js` file, the configuration can be exported:
+使用 `.js` 文件时，可以导出配置：
 
-- either as an object:
+- 作为对象:
 
   ```js
   module.exports = {
@@ -41,7 +41,7 @@ When using a `.js` file, the configuration can be exported:
   };
   ```
 
-- or as a function returning a configuration object (recommended usage). The function will get access to the [`env` utility](#casting-environment-variables):
+- 或作为返回配置对象的函数（推荐用法）。该函数将访问 [`env` utility](#casting-environment-variables)。
 
   ```js
   module.exports = ({ env }) => {
@@ -51,18 +51,18 @@ When using a `.js` file, the configuration can be exported:
   };
   ```
 
-## Required configurations
+## 必需配置
 
-Some parts of Strapi must be configured for the Strapi application to work properly:
+必须配置 Strapi 的某些部分，才能使 Strapi 应用程序正常工作：
 
-- the [database](/developer-docs/latest/setup-deployment-guides/configurations/required/databases.md),
-- the [server](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md),
-- the [admin panel](/developer-docs/latest/setup-deployment-guides/configurations/required/admin-panel.md),
-- and the [middlewares](/developer-docs/latest/setup-deployment-guides/configurations/required/middlewares.md).
+- [database](/developer-docs/latest/setup-deployment-guides/configurations/required/databases.md)
+- [server](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md)
+- [admin panel](/developer-docs/latest/setup-deployment-guides/configurations/required/admin-panel.md)
+- [middlewares](/developer-docs/latest/setup-deployment-guides/configurations/required/middlewares.md)
 
-## Optional configurations
+## 可选配置
 
-Strapi also offers the following optional configuration options for specific features:
+Strapi 还为特定功能提供以下可选配置选项：
 
 - [API tokens](/developer-docs/latest/setup-deployment-guides/configurations/optional/api-tokens.md)
 - [functions](/developer-docs/latest/setup-deployment-guides/configurations/optional/functions.md)

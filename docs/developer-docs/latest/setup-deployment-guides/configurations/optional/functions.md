@@ -1,33 +1,33 @@
 ---
-title: Functions - Strapi Developer Docs
-description: Strapi includes lifecycle functions (e.g. register, bootstrap and destroy) that control the flow of your application.
+title: 函数 - Strapi 开发人员文档
+description: Strapi 包括生命周期函数（例如寄存器、引导和销毁），这些函数控制应用程序的流程。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations/optional/functions.html
 ---
 
-# Functions
+# 函数
 
-The `./src/index.js` file (or `./src/index.ts` file in a [TypeScript-based](/developer-docs/latest/development/typescript.md) project) includes global [register](#register), [bootstrap](#bootstrap) and [destroy](#destroy) functions that can be used to add dynamic and logic-based configurations.
+`./src/index.js` 文件 (或 [TypeScript-based](/developer-docs/latest/development/typescript.md) 项目中的 `./src/index.ts` 文件) 包括全局 [register](#register), [bootstrap](#bootstrap) 和 [destroy](#destroy) 函数，可用于添加动态和基于逻辑的配置。
 
 ## Register
 
-The `register` lifecycle function, found in `./src/index.js` (or in `./src/index.ts`), is an asynchronous function that runs before the application is initialized.
-It can be used to:
+`register` 生命周期函数位于 `./src/index.js`（或 `./src/index.ts`）中，它是一个在应用程序初始化之前运行的异步函数。
+它可用于：
 
-- [extend plugins](/developer-docs/latest/development/plugins-extension.md#extending-a-plugin-s-interface)
-- extend [content-types](/developer-docs/latest/development/backend-customization/models.md) programmatically
-- load some [environment variables](/developer-docs/latest/setup-deployment-guides/configurations/optional/environment.md).
+- [扩展插件](/developer-docs/latest/development/plugins-extension.md#extending-a-plugin-s-interface)
+- 扩展 [content-types](/developer-docs/latest/development/backend-customization/models.md) programmatically
+- 加载一些 [环境变量](/developer-docs/latest/setup-deployment-guides/configurations/optional/environment.md).
 
 ## Bootstrap
 
-The `bootstrap` lifecycle function, found in `./src/index.js` (or in `./src/index.ts`), is called at every server start.
+在`./src/index.js`（或 `./src/index.ts`）中找到的 `bootstrap` 生命周期函数在每次服务器启动时调用。
 
-It can be used to:
+它可用于：
 
-- create an admin user if there isn't one
-- fill the database with some necessary data
-- declare custom conditions for the [Role-Based Access Control (RBAC)](/developer-docs/latest/setup-deployment-guides/configurations/optional/rbac.md) feature
+- 如果没有管理员用户，请创建一个管理员用户
+- 用一些必要的数据填充数据库
+- 为 [基于角色的访问控制  (RBAC)](/developer-docs/latest/setup-deployment-guides/configurations/optional/rbac.md) 功能声明自定义条件
 
-The bootstrap function can be synchronous, asynchronous, or return a promise:
+引导函数可以是同步的、异步的，也可以返回一个 promise：
 
 **Synchronous function**
 
@@ -103,9 +103,9 @@ export default () => {
 
 ## Destroy
 
-The `destroy` function, found in `./src/index.js` (or in `./src/index.ts`), is an asynchronous function that runs before the application gets shut down.
+在 `./src/index.js`（或 `./src/index.ts`）中找到的 `destroy` 函数是在应用程序关闭之前运行的异步函数。
 
-It can be used to gracefully:
+它可用于：
 
-- stop [services](/developer-docs/latest/development/backend-customization/services.md) that are running
-- [clean up plugin actions](/developer-docs/latest/developer-resources/plugin-api-reference/server.md#destroy) (e.g. close connections, remove listeners, etc.).
+- 停止正在运行的 [服务](/developer-docs/latest/development/backend-customization/services.md) 
+- [清理插件操作](/developer-docs/latest/developer-resources/plugin-api-reference/server.md#destroy)（例如，关闭连接，删除侦听器等）。

@@ -45,34 +45,34 @@ const sidebar = {
         },
         ['/developer-docs/latest/setup-deployment-guides/file-structure.md', '项目结构'],
         {
-          title: 'Configurations',
+          title: '配置',
           path: '/developer-docs/latest/setup-deployment-guides/configurations.html',
           collapsable: true,
           children: [
             {
-              title: 'Required configurations',
+              title: '必需配置',
               collapsable: true,
               children: [
                 [
                   '/developer-docs/latest/setup-deployment-guides/configurations/required/databases.md',
-                  'Database',
+                  '数据库',
                 ],
                 [
                   '/developer-docs/latest/setup-deployment-guides/configurations/required/server.md',
-                  'Server',
+                  '服务',
                 ],
                 [
                   '/developer-docs/latest/setup-deployment-guides/configurations/required/admin-panel.md',
-                  'Admin panel',
+                  '管理面板',
                 ],
                 [
                   '/developer-docs/latest/setup-deployment-guides/configurations/required/middlewares.md',
-                  'Middlewares',
+                  '中间件',
                 ],
               ],
             },
             {
-              title: 'Optional configurations',
+              title: '可选配置',
               collapsable: true,
               children: [
                 [
@@ -81,11 +81,11 @@ const sidebar = {
                 ],
                 [
                   '/developer-docs/latest/setup-deployment-guides/configurations/optional/functions.md',
-                  'Functions',
+                  '函数',
                 ],
                 [
                   '/developer-docs/latest/setup-deployment-guides/configurations/optional/cronjobs.md',
-                  'Cron jobs',
+                  'Cron 作业',
                 ],
                 [
                   '/developer-docs/latest/setup-deployment-guides/configurations/optional/api.md',
@@ -93,23 +93,23 @@ const sidebar = {
                 ],
                 [
                   '/developer-docs/latest/setup-deployment-guides/configurations/optional/plugins.md',
-                  'Plugins',
+                  '插件',
                 ],
                 [
                   '/developer-docs/latest/setup-deployment-guides/configurations/optional/environment.md',
-                  'Environment',
+                  '环境',
                 ],
                 [
                   '/developer-docs/latest/setup-deployment-guides/configurations/optional/public-assets.md',
-                  'Public Assets',
+                  '公共资源',
                 ],
                 [
                   '/developer-docs/latest/setup-deployment-guides/configurations/optional/sso.md',
-                  'Single Sign On (SSO)',
+                  '单点登录 (SSO)',
                 ],
                 [
                   '/developer-docs/latest/setup-deployment-guides/configurations/optional/rbac.md',
-                  'Role-Based Access Control (RBAC)',
+                  '基于角色的访问控制 (RBAC)',
                 ],
               ],
             },

@@ -1,18 +1,18 @@
 ---
-title: Plugins configuration - Strapi Developer Docs
-description: Strapi plugins have a single entry point file to define their configurations.
+title: 插件配置- Strapi 开发人员文档
+description: Strapi 插件具有单个入口点文件来定义其配置。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations/optional/plugins.html
 ---
 
-# Plugins configuration
+# 插件配置
 
-The configurations for all plugins are stored in `./config/plugins.js` (see [project structure](/developer-docs/latest/setup-deployment-guides/file-structure.md)). Each plugin can be configured with the following available parameters:
+所有插件的配置都存储在 `./config/plugins.js` 中（参见[项目结构](/developer-docs/latest/setup-deployment-guides/file-structure.md)）。每个插件都可以使用以下可用参数进行配置：
 
-| Parameter                  | Description                                                                                                                                                            | Type    |
+| 参数                  | 描述                                                                                                                                                            | 类型    |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `enabled`                  | Enable (`true`) or disable (`false`) an installed plugin                                                                                                               | Boolean |
-| `config`<br><br>_Optional_ | Used to override default plugin configuration ([defined in strapi-server.js](/developer-docs/latest/developer-resources/plugin-api-reference/server.md#configuration)) | Object  |
-| `resolve`<br> _Optional, only required for local plugins_             | Path to the plugin's folder                                                                                                                                            | String  |
+| `enabled`                  | 启用 (`true`) 或禁用 (`false`) 已安装的插件                                                                                                               | Boolean |
+| `config`<br><br>_Optional_ | 用于覆盖默认插件配置 ([在 strapi-server.js 定义](/developer-docs/latest/developer-resources/plugin-api-reference/server.md#configuration)) | Object  |
+| `resolve`<br> _Optional, only required for local plugins_             | 插件文件夹的路径                                                                                                                                            | String  |
 
 <code-group>
 <code-block title="JAVASCRIPT">
@@ -76,24 +76,24 @@ export default ({ env }) => ({
 
 
 :::tip
-If no specific configuration is required, a plugin can also be declared with the shorthand syntax `'plugin-name': true`.
+如果不需要特定的配置，也可以使用速记语法 `'plugin-name': true` 来声明插件。
 :::
 
-## GraphQL configuration
+## GraphQL 配置
 
-The [GraphQL plugin](/developer-docs/latest/plugins/graphql.md) has the following specific configuration options that should be declared in a `graphql.config` object. All parameters are optional:
+[GraphQL plugin](/developer-docs/latest/plugins/graphql.md) 具有以下特定的配置选项，这些选项应该在 `graphql.config` 对象中声明。所有参数都是可选的：
 
-| Parameter          | Description                                                                                                                                                   | Type    | Default |
+| 参数          | 描述                                                                                                                                                   | 类型    | 默认值 |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------- |
-| `apolloServer`     | Additional configuration for [`ApolloServer`](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#apolloserver).                   | Object  | `{}`    |
-| `artifacts`        | Object containing filepaths, defining where to store generated articats. Can include the following properties: <ul><li>`schema`: path to the generated GraphQL schema file</li><li>`typegen`: path to generated TypeScript types</li></ul>Only works if `generateArtifacts` is set to `true`.  | Object  | <ul><li>`schema: false`</li><li>`typegen: false`</li></ul> |
-| `defaultLimit` | Default value for [the `pagination[limit]` parameter](/developer-docs/latest/developer-resources/database-apis-reference/graphql-api.md#pagination-by-offset) used in API calls | Integer | 100 |
-| `depthLimit`       | Limits the [complexity of GraphQL queries](https://www.npmjs.com/package/graphql-depth-limit).                                                                 | Integer  | `10`    |
-| `generateArtifacts`| Whether Strapi should automatically generate and output a GraphQL schema file and corresponding TypeScript definitions.<br/><br/>The file system location can be configured through `artifacts`.  | Boolean | `false` |
-| `maxLimit`         | Maximum value for [the `pagination[limit]` parameter](/developer-docs/latest/developer-resources/database-apis-reference/graphql-api.md#pagination-by-offset) used in API calls                                                                                                              | Integer  | `-1`    |
-| `playgroundAlways` | Whether the playground should be publicly exposed.<br/><br/>Enabled by default in if `NODE_ENV` is set to `development`.                                        | Boolean | `false`  |
-| `shadowCRUD`       | Whether type definitions for queries, mutations and resolvers based on models should be created automatically (see [Shadow CRUD documentation](/developer-docs/latest/plugins/graphql.md#shadow-crud)). | Boolean | `true` |
-| `subscriptions`    | Enable GraphQL subscriptions (experimental feature).                                                                                                                                 | Boolean | `false` |
+| `apolloServer`     | [`ApolloServer`](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#apolloserver) 的其他配置                  | Object  | `{}`    |
+| `artifacts`        | 包含文件路径的对象，定义存储生成的工件的位置。可以包含以下属性：<ul><li>`schema`:  生成的 GraphQL 模式文件的路径</li><li>`typegen`: 生成的 TypeScript 类型的路径</li></ul>仅当 `generateArtifacts` 设置为 `true` 时才有效。 | Object  | <ul><li>`schema: false`</li><li>`typegen: false`</li></ul> |
+| `defaultLimit`     | API 调用中使用的 [`pagination[limit]` 参数](/developer-docs/latest/developer-resources/database-apis-reference/graphql-api.md#pagination-by-offset) 的默认值 | Integer | 100 |
+| `depthLimit`       | 限制 [GraphQL 查询的复杂性](https://www.npmjs.com/package/graphql-depth-limit)                                                             | Integer  | `10`    |
+| `generateArtifacts`| Strapi 是否应该自动生成和输出一个 GraphQL 模式文件和相应的 TypeScript 定义。<br/><br/>可以通过 `artifacts` 配置文件系统位置。 | Boolean | `false` |
+| `maxLimit`         | 使用 [`pagination[limit]` 参数](/developer-docs/latest/developer-resources/database-apis-reference/graphql-api.md#pagination-by-offset) API 的最大值 calls                                                                                                              | Integer  | `-1`    |
+| `playgroundAlways` | playground 是否应该公开暴露。<br/><br/>如果 `NODE_ENV` 设置为`development`，则默认启用。                                        | Boolean | `false`  |
+| `shadowCRUD`       | 是否应自动创建基于模型的查询、突变和解析器的类型定义 (参见 [Shadow CRUD 文档](/developer-docs/latest/plugins/graphql.md#shadow-crud)) | Boolean | `true` |
+| `subscriptions`    | 启用 GraphQL 订阅（实验功能）。                                                                                                                                 | Boolean | `false` |
 
 <code-group>
 <code-block title="JAVASCRIPT">

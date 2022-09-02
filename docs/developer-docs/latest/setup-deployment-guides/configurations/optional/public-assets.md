@@ -1,19 +1,19 @@
 ---
-title: Public assets configuration - Strapi Developer Docs
+title: 公共资源配置- Strapi 开发人员文档
 description: The public folder of Strapi is used for static files that you want to make accesible to the outside world.
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations/optional/public-assets.html
 ---
 
-# Public assets configuration
+# 公共资源配置
 
-Public assets are static files (e.g. images, video, CSS files, etc.) that you want to make accessible to the outside world.
+公共资源是静态文件（例如图像，视频，CSS 文件等），您希望外部可以访问它们。
 
-Because an API may need to serve static assets, every new Strapi project includes by default a folder named `/public`. Any file located in this directory is accessible if the request's path doesn't match any other defined route and if it matches a public file name (e.g. an image named `company-logo.png` in `./public/` is accessible through `/company-logo.png` URL).
+由于 API 可能需要提供静态资产，因此默认情况下，每个新的 Strapi 项目都包含一个名为 `/public` 的文件夹。如果请求的路径与任何其他定义的路由不匹配，并且与公共文件名匹配，则可以访问位于此目录中的任何文件（例如，可以通过 `company-logo.png` URL访问 `./public/` 中名为 `/company-logo.png` 的图像。
 
 ::: tip
-`index.html` files are served if the request corresponds to a folder name (`/pictures` url will try to serve `public/pictures/index.html` file).
+如果请求对应于文件夹名称，则提供 `index.html` 文件（`/pictures` url将尝试提供 `public/pictures/index.html` 文件）。
 :::
 
 :::caution
-The dotfiles are not exposed. It means that every file name that starts with `.`, such as `.htaccess` or `.gitignore`, are not served.
+不会公开点文件。这意味着不会提供以 `.` 开头的每个文件名，例如 `.htaccess` 或 `.gitignore`。
 :::

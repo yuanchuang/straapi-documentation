@@ -1,51 +1,51 @@
 ---
-title: Server configuration - Strapi Developer Docs
-description: Strapi offers a single entry point file for its server configuration.
+title: 服务配置- Strapi 开发人员文档
+description: Strapi 为其服务器配置提供了一个入口点文件。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations/required/server.html
 ---
 
-# Server configuration
+# 服务配置
 
-The `./config/server.js` is used to define server configuration for the Strapi application.
+`./config/server.js`用于定义 Strapi 应用程序的服务器配置。
 
 ::: caution
-Changes to the `server.js` file require rebuilding the admin panel. After saving the modified file run either `yarn build` or `npm run build` in the terminal to implement the changes.
+对 `server.js` 文件进行更改需要重建管理面板。保存修改后的文件后，在终端中运行 `yarn build` 或 `npm run build` 来实现更改。
 :::
 
-## Available options
+## 可用选项
 
-The `./config/server.js` file can include the following parameters:
+`./config/server.js` 文件可以包含以下参数：
 
 <!-- TODO: add admin jwt config option -->
 
-| Parameter                           | Description                                                                                                                                                                                                                                                                                                                                                                 | Type              | Default             |
+| 参数                           | 描述                                                                                                                                                                                                                                                                                                                                                                 | 类型              | 默认值             |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------- |
-| `host`<br/><br/>❗️ _Mandatory_     | Host name                                                                                                                                                                                                                                                                                                                                                                   | string            | `localhost`         |
-| `port`<br/><br/>❗️ _Mandatory_     | Port on which the server should be running.                                                                                                                                                                                                                                                                                                                                 | integer           | `1337`              |
-| `app.keys`<br/><br/>❗️ _Mandatory_ | Declare session keys (based on [Koa session](https://github.com/koajs/session/blob/master/Readme.md)), which is used by the `session` middleware for the Users & Permissions plugin and the Documentation plugin.                                                                                                                                                           | string            | `undefined`         |
-| `socket`                            | Listens on a socket. Host and port are cosmetic when this option is provided and likewise use `url` to generate proper urls when using this option. This option is useful for running a server without exposing a port and using proxy servers on the same machine (e.g [Heroku nginx buildpack](https://github.com/heroku/heroku-buildpack-nginx#requirements-proxy-mode)) | string \| integer | `/tmp/nginx.socket` |
-| `emitErrors`                        | Enable errors to be emitted to `koa` when they happen in order to attach custom logic or use error reporting services.                                                                                                                                                                                                                                                      | boolean           | `false`             |
-| `url`                               | Public url of the server. Required for many different features (ex: reset password, third login providers etc.). Also enables proxy support such as Apache or Nginx, example: `https://mywebsite.com/api`. The url can be relative, if so, it is used with `http://${host}:${port}` as the base url. An absolute url is however recommended.                                | string            | `''`                |
-| `proxy`                             | Set the koa variable `app.proxy`. When `true`, proxy header fields will be trusted.                                                                                                                                                                                                                                                                                         | boolean           | `false`             |
-| `cron`                              | Cron configuration (powered by [`node-schedule`](https://github.com/node-schedule/node-schedule))                                                                                                                                                                                                                                                                           | object            |                     |
-| `cron.enabled`                      | Enable or disable [CRON jobs](/developer-docs/latest/setup-deployment-guides/configurations/optional/cronjobs.md) to schedule jobs at specific dates.                                                                                                                                                                                                                       | boolean           | `false`             |
-| `cron.tasks`                        | Declare [CRON jobs](/developer-docs/latest/setup-deployment-guides/configurations/optional/cronjobs.md) to be run at specific dates.                                                                                                                                                                                                                                        | object            |                     |
-| `dirs`                              | Path configuration of different directories Strapi uses.                                                                                                                                                                                                                                                                                                                    | object            |                     |
-| `dirs.public`                       | Customize the path of the public folder.                                                                                                                                                                                                                                                                                                                                    | string            | `./public`          |
+| `host`<br/><br/>❗️ _Mandatory_       | 主机名                                                                                                                                                                                                                                                                                                                                                                   | string            | `localhost`         |
+| `port`<br/><br/>❗️ _Mandatory_       | 服务器应在其上运行的端口                                                                                                                                                                                                                                                                                                                                 | integer           | `1337`              |
+| `app.keys`<br/><br/>❗️ _Mandatory_   | 声明会话密钥 (基于 [Koa session](https://github.com/koajs/session/blob/master/Readme.md)), 它由 `session` 中间件用于用户和权限插件以及文档                                                                                                                                                           | string            | `undefined`         |
+| `socket`                            | 侦听套接字。当提供此选项时，主机和端口是装饰性的，同样在使用此选项时使用 `url` 来生成正确的 URL。此选项对于在不公开端口和在同一台计算机上使用代理服务器的情况下运行服务器非常有用 (例如， [Heroku nginx buildpack](https://github.com/heroku/heroku-buildpack-nginx#requirements-proxy-mode)) | string \| integer | `/tmp/nginx.socket` |
+| `emitErrors`                        | 启用在发生错误时向 `koa` 发出错误，以便附加自定义逻辑或使用错误报告服务。                                                                                                                                                                                                                                                      | boolean           | `false`             |
+| `url`                               | 服务器的公共网址。许多不同功能（例如：重置密码，第三个登录提供程序等）是必需的。还启用了代理支持，例如 Apache 或 Nginx，例如：`https://mywebsite.com/api`。url 可以是相对的，如果是这样，则与 `http://${host}:${port}` 一起使用作为基本 url。但是，建议使用绝对 URL。                          | string            | `''`                |
+| `proxy`                             | 设置 koa 变量 `app.proxy`。当 `true` 时，代理标头字段将受信任。                                                                                                                                                                                                                                                                                          | boolean           | `false`             |
+| `cron`                              | Cron 配置 ([`node-schedule`](https://github.com/node-schedule/node-schedule) 提供)                                                                                                                                                                                                                                                                           | object            |                     |
+| `cron.enabled`                      | 启用或禁用 [CRON jobs](/developer-docs/latest/setup-deployment-guides/configurations/optional/cronjobs.md) 在特定位置安排作业 dates.                                                                                                                                                                                                                       | boolean           | `false`             |
+| `cron.tasks`                        | 声明 [CRON jobs](/developer-docs/latest/setup-deployment-guides/configurations/optional/cronjobs.md) 以特定方式运行 dates.                                                                                                                                                                                                                                        | object            |                     |
+| `dirs`                              | Strapi 使用的不同目录的路径配置。                                                                                                                                                                                                                                                                                                                  | object            |                     |
+| `dirs.public`                       | 自定义公用文件夹的路径。                                                                                                                                                                                                                                                                                                                                   | string            | `./public`          |
 
-## Configurations
+## 配置
 
-The `./config/server.js` file should at least include a minimal configuration with the `host` and `port` parameters. Additional parameters can be included for a full configuration.
+`./config/server.js` 文件至少应包含带有 `host` 和 `port` 参数的最小配置。对于完整配置，可以包含其他参数。
 
 :::note
-[Environmental configurations](/developer-docs/latest/setup-deployment-guides/configurations/optional/environment.md) (i.e. using the `env()` helper) do not need to contain all the values so long as they exist in the default `./config/server.js`.
+[环境配置](/developer-docs/latest/setup-deployment-guides/configurations/optional/environment.md) (即使用 `env()` 帮助程序) 不需要包含所有值，只要它们存在于默认的 `./config/server.js` 中。
 :::
 
 ::::: tabs card
 
 :::: tab Minimal configuration
 
-The default configuration created with any new project should at least include the following:
+使用任何新项目创建的默认配置至少应包括以下内容：
 
 <code-group>
 <code-block title="JAVASCRIPT">
@@ -85,7 +85,7 @@ export default ({ env }) => ({
 
 :::: tab Full configuration
 
-The following is an example of a full configuration file. Not all of these keys are required (see [available options](#available-options)).
+以下是完整配置文件的示例。并非所有这些键都是必需的（请参阅[可用选项](#可用选项)）。
 
 <code-group>
 <code-block title="JAVASCRIPT">

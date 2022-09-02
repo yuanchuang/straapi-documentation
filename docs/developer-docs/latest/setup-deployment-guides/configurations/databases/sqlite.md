@@ -1,16 +1,16 @@
 ---
-title: SQLite - Strapi Developer Docs
-description: Learn how you can use SQLite for your Strapi application.
+title: SQLite - Strapi 开发人员文档
+description: 了解如何将 SQLite 用于您的 Strapi 应用程序。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/configurations/databases/sqlite.html
 ---
 
-# SQLite Installation
+# SQLite 安装
 
-SQLite is the default ([Quick Start](/developer-docs/latest/getting-started/quick-start.md)) and recommended database to quickly create an app locally.
+SQLite是默认的([Quick Start](/developer-docs/latest/getting-started/quick-start.md))和推荐的数据库，用于在本地快速创建应用程序。
 
-## Install SQLite locally
+## 在本地安装 SQLite
 
-Simply use one of the following commands.
+只需使用以下命令之一。
 
 <code-group>
 
@@ -28,16 +28,16 @@ yarn create strapi-app my-project --quickstart
 
 </code-group>
 
-This will create a new project and launch it in the browser.
+这将创建一个新项目并在浏览器中启动它。
 
 ::: tip
-The [Quick Start Guide](/developer-docs/latest/getting-started/quick-start.md) is a complete step-by-step tutorial.
+[快速入门指南](/developer-docs/latest/getting-started/quick-start.md) 是一个完整的分步骤教程。
 :::
 
-## Other SQL Databases (PostgreSQL, MySQL)
+## 其他 SQL 数据库  (PostgreSQL, MySQL)
 
-Refer to the [configuration section](/developer-docs/latest/setup-deployment-guides/configurations/required/databases.md) for all supported options to setup Strapi with your SQL database.
+请参阅 [配置部分](/developer-docs/latest/setup-deployment-guides/configurations/required/databases.md) ，了解使用 SQL 数据库设置 Strapi 的所有受支持选项。
 
 ::: tip
-Most cloud service providers offer a managed SQL database service, which is a hassle-free way to get your database up and running. To get up and running locally, you might want to try using a Docker container.
+大多数云服务提供商都提供托管 SQL 数据库服务，这是启动和运行数据库的一种轻松方式。若要在本地启动和运行，可能需要尝试使用 Docker 容器。
 :::
