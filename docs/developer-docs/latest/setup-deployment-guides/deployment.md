@@ -1,46 +1,46 @@
 ---
-title: Deployment - Strapi Developer Docs
-description: Learn how to develop locally with Strapi and deploy Strapi with various hosting options.
+title: 部署 - Strapi 开发人员文档
+description: 了解如何使用 Strapi 进行本地开发，并使用各种托管选项部署 Strapi。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment.html
 ---
 
-# Deployment
+# 部署
 
-Strapi gives you many possible deployment options for your project or application. Strapi can be deployed on traditional hosting servers or services such as 21YunBox, Render, Heroku, AWS, Azure and others. The following documentation covers how to develop locally with Strapi and deploy Strapi with various hosting options.
+Strapi 为您的项目或应用程序提供了许多可能的部署选项。Strapi 可以部署在传统的托管服务器或服务上，如 21YunBox，Render，Heroku，AWS，Azure 等。以下文档介绍了如何使用 Strapi 进行本地开发，以及如何使用各种托管选项部署 Strapi。
 
-::: strapi Database deployment
-Deploying databases along with Strapi is covered in the [databases guide](/developer-docs/latest/setup-deployment-guides/configurations/required/databases.md#databases-installation-guides).
+::: strapi 数据库部署
+[数据库指南](/developer-docs/latest/setup-deployment-guides/configurations/required/databases.md#databases-installation-guides) 中介绍了与 Strapi 一起部署数据库
 :::
 
-## General guidelines
+## 指导方针
 
 ::: prerequisites
-To provide the best possible environment for Strapi there are a few requirements, these apply in both a development (local) as well as a staging and production workflow.
+为了给 Strapi 提供最佳环境，有一些要求，这些要求既适用于开发（本地）也适用于暂存和生产工作流。
 
-- Node LTS (v14 or v16) **Note that odd-number releases of Node will never be supported (e.g. v13, v15).**
-- NPM v6 or whatever ships with the LTS Node versions
-- Typical standard build tools for your OS (the `build-essentials` package on most Debian-based systems)
-- At least 1 CPU core (Highly recommended at least 2)
-- At least 2 GB of RAM (Moderately recommended 4)
-- Minimum required storage space recommended by your OS or 32 GB of **free** space
-- A supported database version
+- Node LTS (v14 or v16) **注意，永远不会支持 Node 的奇数版本 (例如 v13, v15)**
+- NPM v6 或任何与 LTS 节点版本一起提供的版本
+- 适用于您的操作系统的典型标准构建工具（大多数基于 Debian 的系统上的 `build-essentials` 软件包）
+- 至少 1 个 CPU 内核（强烈建议至少 2 个）
+- 至少 2 GB 内存（适度推荐 4）
+- 操作系统建议的最小所需存储空间或 32 GB 的**可用**空间
+- 支持的数据库版本
   - MySQL >= 5.7.8
   - MariaDB >= 10.2.7
   - PostgreSQL >= 10
   - SQLite >= 3
-- A supported operating system
-  - Ubuntu >= 18.04 (LTS-Only)
+- 支持的操作系统
+  - Ubuntu >= 18.04（仅限 LTS）
   - Debian >= 9.x
   - CentOS/RHEL >= 8
-  - macOS Mojave or newer (ARM not supported)
+  - macOS Mojave 或更高版本（不支持 ARM）
   - Windows 10
   - Docker - [docker repo](https://github.com/strapi/strapi-docker)
 :::
-### Application Configuration
+### 应用程序配置
 
-#### 1. Configure
+#### 1. 配置
 
-We always recommend you use environment variables to configure your application based on the environment. Here is an example:
+我们始终建议您使用环境变量来根据环境配置应用程序。下面是一个示例：
 
 **Path —** `./config/server.js`.
 
@@ -51,7 +51,7 @@ module.exports = ({ env }) => ({
 });
 ```
 
-Then you can create a `.env` file or directly use the deployment platform you use to set environment variables:
+然后，您可以创建一个 `.env` 文件或直接使用用于设置环境变量的部署平台：
 
 **Path —** `.env`.
 
@@ -61,12 +61,12 @@ NODE_PORT=1338
 ```
 
 ::: tip
-To learn more about configuration details, you can read the [configurations](/developer-docs/latest/setup-deployment-guides/configurations.md) documentation.
+要了解有关配置详细信息的更多信息，您可以阅读 [配置](/developer-docs/latest/setup-deployment-guides/configurations.md) 文档。
 :::
 
-#### 2. Launch the server
+#### 2. 启动服务器
 
-Before running your server in production you need to build your admin panel for production
+在生产环境中运行服务器之前，您需要构建用于生产的管理面板
 
 :::: tabs card
 
@@ -108,7 +108,7 @@ npm run build:win
 
 ::::
 
-Run the server with the `production` settings.
+使用 `production` 设置运行服务器。
 
 :::: tabs card
 
@@ -151,10 +151,10 @@ npm run start:win
 ::::
 
 ::: caution
-We highly recommend using [pm2](https://github.com/Unitech/pm2/) to manage your process.
+我们强烈建议使用 [pm2](https://github.com/Unitech/pm2/) 来管理您的流程。
 :::
 
-If you need a server.js file to be able to run `node server.js` instead of `npm run start` then create a `./server.js` file as follows:
+如果需要 server.js 文件才能运行 `node server.js` 而不是 `npm run start`，请创建一个 `./server.js` 文件，如下所示：
 
 ```js
 const strapi = require('@strapi/strapi');
@@ -162,13 +162,13 @@ const strapi = require('@strapi/strapi');
 strapi(/* {...} */).start();
 ```
 
-### Advanced configurations
+### 高级配置
 
-If you want to host the administration on another server than the API, [please take a look at this dedicated section](/developer-docs/latest/development/admin-customization.md#deployment).
+如果要在 API 以外的其他服务器上托管管理，[请查看此专用部分](/developer-docs/latest/development/admin-customization.md#deployment).
 
-## Hosting Provider Guides
+## 托管服务提供商指南
 
-Manual guides for deployment on various platforms, for One-click and docker please see the [installation](/developer-docs/latest/setup-deployment-guides/installation.md) guides.
+在各种平台上部署的手动指南，对于一键安装和 docker，请参阅[安装](/developer-docs/latest/setup-deployment-guides/installation.md) guides.
 
 <div>
     <InstallLink link="deployment/hosting-guides/21yunbox.html">
@@ -332,9 +332,9 @@ Manual guides for deployment on various platforms, for One-click and docker plea
 	</InstallLink>
 </div>
 
-## Optional Software Guides
+## 可选软件指南
 
-Additional guides for optional software additions that compliment or improve the deployment process when using Strapi in a production or production-like environment.
+有关可选软件添加的其他指南，这些附加内容补充或改进了在生产或类似生产的环境中使用 Strapi 时的部署过程。
 
 <div>
 	<InstallLink link="deployment/optional-software/caddy-proxy.html">

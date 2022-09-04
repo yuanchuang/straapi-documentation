@@ -1,5 +1,5 @@
 ---
-title: 21YunBox Deployment - Strapi Developer Docs
+title: 21YunBox 部署 - Strapi 开发人员文档
 description: Learn in this guide how to update an existing Strapi project so it can be deployed on 21YunBox.
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment/hosting-guides/21yunbox.html
 ---
@@ -8,63 +8,64 @@ canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guid
 
 !!!include(developer-docs/latest/setup-deployment-guides/deployment/snippets/deployment-guide-not-updated.md)!!!
 
-This guide explains how to update an existing Strapi project so it can be deployed on [21YunBox](https://www.21yunbox.com).
+本指南解释了如何更新现有的 Strapi 项目，以便它可以部署在 [21YunBox](https://www.21yunbox.com) 上。
 
-21YunBox provides a Chinese CDN, continuous deployment, one-click HTTPS and [other services such as managed databases and backend web services](https://www.21yunbox.com/docs/#/), allowing to launch web projects in China.
+21YunBox 提供中文 CDN，持续部署，一键式 HTTPS 和 [托管数据库和后端Web服务等其他服务](https://www.21yunbox.com/docs/#/)，允许在中国启动 Web 项目。
 
-With persistent disks and managed PostgreSQL databases, 21YunBox gives you multiple different ways to store your content. 21YunBox services come with fully managed SSL, so it's no longer necessary to set up a proxy server to secure your Strapi app. Since 21YunBox services are automatically restarted if they become unresponsive, you don't need to use a process manager like `pm2` either.
+借助永久磁盘和托管的 PostgreSQL 数据库，21YunBox 为您提供了多种不同的方法来存储内容。21YunBox 服务带有完全托管的 SSL，因此不再需要设置代理服务器来保护您的 Strapi 应用程序。由于 21YunBox 服务在没有响应时会自动重新启动，因此您也不需要使用像 `pm2` 这样的进程管理器。
+
 
 ::: tip
-For more information consult [21YunBox's Deploy Strapi guide](https://www.21yunbox.com/docs/#/deploy-strapi).
+有关更多信息，请参阅 [21YunBox的部署 Strapi 指南](https://www.21yunbox.com/docs/#/deploy-strapi).
 :::
 
 :::prerequisites
 
-This guide assumes you already have a Strapi project to deploy. If you need a project, use the [Quick Start](/developer-docs/latest/getting-started/quick-start.md) to get started or fork 21YunBox's Strapi Examples:
+本指南假定您已经有一个要部署的 Strapi 项目。如果你需要一个项目，使用[快速入门](/developer-docs/latest/getting-started/quick-start.md) 来开始或 fork 21YunBox's Strapi 示例：
 - [Strapi with SQLite Starter](https://gitee.com/eryiyunbox-examples/hello-strapi-sqlite)
 - [Strapi with Postgres Starter](https://gitee.com/eryiyunbox-examples/hello-strapi-postgres)
 
 :::
-## Setup
+## 安装
 
-Follow the procedure below to set up a Strapi CMS on 21YunBox:
+请按照以下步骤在21YunBox上设置 Strapi CMS：
 
-1. Create a 21YunBox account. If you don't already have one, visit [21YunBox dashboard](https://https://www.21yunbox.com/u/signup/).
-2. Create a new web service on 21YunBox, and give 21YunBox permission to access your GitHub or Gitee repo.
-3. Use the following values during creation:
+1. 创建一个 21YunBox 帐户。如果您还没有，请访问 [21YunBox dashboard](https://https://www.21yunbox.com/u/signup/).
+2. 在 21YunBox 上创建一个新的 Web 服务，并授予 21YunBox 访问 GitHub 或 Gitee 存储库的权限。
+3. 在创建过程中使用以下值：
 
-   | Setting               | Value                                                 |
+   | 设置               | 值                                                 |
    | --------------------- | ------------------------------------------------ |
    | **Environment**       | `Node 12.19`                                    |
-   | **Build Command**     | `yarn && yarn build` (or your own build command) |
-   | **Publish Directory** | `rsync -a public/ /data/public/ && yarn start` (or your own output directory)        |
+   | **Build Command**     | `yarn && yarn build` (或您自己的构建命令) |
+   | **Publish Directory** | `rsync -a public/ /data/public/ && yarn start` (或您自己的输出目录)        |
 
-4. Add the following environment variables:
+4. 添加以下环境变量：
 
-   | Setting               | Value                                                 |
+   | 设置               | 值                                                 |
    | --------------------- | ------------------------------------------------ |
    | **NODE_ENV**       | `production`                                    |
-   | **DATABASE_FILENAME**     | If you use SQLite database, use `/data/strapi.db`|
-   | **DATABASE_URL**     | If you use Postgres database, paste the database URL here (we have demo video below if you are unsure)|
+   | **DATABASE_FILENAME**     | 如果使用 SQLite 数据库，请使用 `/data/strapi.db`|
+   | **DATABASE_URL**     | 如果您使用 Postgres 数据库，请将数据库 URL 粘贴到此处（如果您不确定，我们在下面有演示视频）|
 
-5. Click the "Deploy" button.
+5. 单击 `部署` 按钮。
 
-That's it! Your site will be live on your 21YunBox URL (e.g. `yoursite.21yunbox.com`) as soon as the build is done.
+就是这样！一旦构建完成，您的网站将在您的 21YunBox URL（例如 `yoursite.21yunbox.com`）上生效。
 
 
 ::: tip TIP
-If you are unsure the steps above, 21YunBox has created a webcast for each of them:
+如果您不确定上述步骤，21YunBox 为每个步骤创建了一个网络广播：
 
-- Part 1: [Demo how to deploy Strapi with SQLite in production](https://www.bilibili.com/video/BV1fK4y1j7U8?zw)
-- Part 2: [Demo how to get in the development mode and create content on Strapi](https://www.bilibili.com/video/BV1Ta4y1W7bD?zw)
-- Part 3: [Demo how to deploy Strapi with database in production](https://www.bilibili.com/video/BV1Nf4y1k7ZP/)
+- 部分 1: [演示如何在生产环境中使用 SQLite 部署 Strapi](https://www.bilibili.com/video/BV1fK4y1j7U8?zw)
+- 部分 2: [演示如何进入开发模式并在 Strapi 上创建内容](https://www.bilibili.com/video/BV1Ta4y1W7bD?zw)
+- 部分 3: [演示如何在生产环境中使用数据库部署 Strapi](https://www.bilibili.com/video/BV1Nf4y1k7ZP/)
 
 :::
 
-## Continuous deploys
+## 持续部署
 
-Now that 21YunBox is connected to your repo, it will automatically build and publish your site any time you push to Gitee or GitHub.
+现在 21YunBox 已连接到您的存储库，它将在您推送到 Gitee 或 GitHub 时自动构建和发布您的网站。
 
-## Custom domains
+## 自定义 domains
 
-Add your own domains to your site easily using 21YunBox's [custom domains](https://www.21yunbox.com/docs/#/custom-domains) guide.
+使用 21YunBox 的 [自定义 domains](https://www.21yunbox.com/docs/#/custom-domains) 指南轻松将您自己的 domains 添加到您的网站。

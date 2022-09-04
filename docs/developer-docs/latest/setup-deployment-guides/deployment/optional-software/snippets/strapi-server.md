@@ -1,27 +1,27 @@
-### Strapi server
+### Strapi 服务
 
-In order to take full advantage of a proxied Strapi application, Strapi should be configured so it's aware of the upstream proxy. Like with the below configurations there are 3 matching examples. Additional information can be found in the [server configuration](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md) and [admin configuration](/developer-docs/latest/setup-deployment-guides/configurations/required/admin-panel.md) documentations.
+为了充分利用代理的 Strapi 应用程序，应该配置 Strapi，使其能够识别上游代理。与以下配置一样，有3个匹配的示例。其他信息可以在 [服务器配置](/developer-docs/latest/setup-deployment-guides/configurations/required/server.md)  和 [管理配置](/developer-docs/latest/setup-deployment-guides/configurations/required/admin-panel.md) 文档中找到。
 
 :::note
-These examples use the default API Prefix of `/api`. This can be changed without the need to directly modify the Nginx configuration (see the [API prefix](/developer-docs/latest/setup-deployment-guides/configurations/optional/api.md) documentation).
+这些示例使用默认的 API 前缀 `/api`. 这可以更改，而无需直接修改 Nginx 配置 (请参阅 [API prefix](/developer-docs/latest/setup-deployment-guides/configurations/optional/api.md) 文档).
 :::
 
 :::caution
-If the `url` key is changed in the `./config/admin.js` or `./config/server.js` files, the admin panel needs to be rebuilt with `yarn build` or `npm run build`.
+如果在 `./config/admin.js` 或 `./config/server.js` 文件中更改了 `url` 键，则需要使用 `yarn build` 或 `npm run build` 重新构建管理面板。
 :::
 
 ::::: tabs card
 
 :::: tab Subdomain
 
-#### Subdomain Strapi configuration
+#### 子域 Strapi 配置
 
 ---
 
-- Example domain: `api.example.com`
-- Example admin: `api.example.com/admin`
-- Example API: `api.example.com/api`
-- Example uploaded files (local provider): `api.example.com/uploads`
+- 示例 domain: `api.example.com`
+- 示例 admin: `api.example.com/admin`
+- 示例 API: `api.example.com/api`
+- 示例 uploaded files (local provider): `api.example.com/uploads`
 
 <code-group>
 <code-block title="JAVASCRIPT">
@@ -59,14 +59,14 @@ export default ({ env }) => ({
 
 :::: tab Subfolder unified
 
-#### Subfolder unified Strapi configuration
+#### 子文件夹统一 Strapi 配置
 
 ---
 
-- Example domain: `example.com/test`
-- Example admin: `example.com/test/admin`
-- Example API: `example.com/test/api`
-- Example uploaded Files (local provider): `example.com/test/uploads`
+- 示例 domain: `example.com/test`
+- 示例 admin: `example.com/test/admin`
+- 示例 API: `example.com/test/api`
+- 示例 uploaded Files (local provider): `example.com/test/uploads`
 
 <code-group>
 <code-block title="JAVASCRIPT">
@@ -104,14 +104,14 @@ export default ({ env }) => ({
 
 :::: tab Subfolder split
 
-#### Subfolder split Strapi configuration
+#### 子文件夹拆分 Strapi 配置
 
 ---
 
-- Example domain: `example.com`
-- Example admin: `example.com/dashboard`
-- Example API: `example.com/api`
-- Example uploaded files (local provider): `example.com/uploads`
+- 示例 domain: `example.com`
+- 示例 admin: `example.com/dashboard`
+- 示例 API: `example.com/api`
+- 示例 uploaded files (local provider): `example.com/uploads`
 
 <code-group>
 <code-block title="JAVASCRIPT">

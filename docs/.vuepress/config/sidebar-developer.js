@@ -1,12 +1,12 @@
 const developer = [
   {
-    title: '🚀 Getting Started',
+    title: '🚀 开始',
     collapsable: false,
     children: [
-      ['/developer-docs/latest/getting-started/introduction', 'Introduction'],
-      ['/developer-docs/latest/getting-started/quick-start', 'Quick Start Guide'],
-      ['/developer-docs/latest/getting-started/troubleshooting', 'Frequently Asked Questions'],
-      ['/developer-docs/latest/getting-started/usage-information', 'Usage Information'],
+      ['/developer-docs/latest/getting-started/introduction', '介绍'],
+      ['/developer-docs/latest/getting-started/quick-start', '快速安装指南'],
+      ['/developer-docs/latest/getting-started/troubleshooting', '常见问题'],
+      ['/developer-docs/latest/getting-started/usage-information', '使用信息'],
     ],
   },
   {
@@ -102,13 +102,13 @@ const developer = [
         ],
       },
       {
-        title: 'Deployment',
+        title: '部署',
         path: '/developer-docs/latest/setup-deployment-guides/deployment',
         collapsable: true,
         initialOpenGroupIndex: -1, // make sure that no subgroup is open by default — if set to 0, 'Hosting Provider Guides' is expanded
         children: [
           {
-            title: 'Hosting Provider Guides',
+            title: '托管服务提供商指南',
             path:
               '/developer-docs/latest/setup-deployment-guides/deployment.html#hosting-provider-guides',
             collapsable: true,
@@ -157,7 +157,7 @@ const developer = [
             sidebarDepth: 2,
           },
           {
-            title: 'Optional Software Guides',
+            title: '可选软件指南',
             path:
               '/developer-docs/latest/setup-deployment-guides/deployment.html#optional-software-guides',
             collapsable: true,

@@ -1,24 +1,24 @@
 ---
-title: Nginx Proxying - Strapi Developer Docs
-description: Learn how you can use a proxy application like Nginx to secure your Strapi application.
+title: Nginx 代理 - Strapi 开发人员文档
+description: 了解如何使用像 Nginx 这样的代理应用程序来保护您的 Strapi 应用程序。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment/optional-software/nginx-proxy.html
 ---
 
-# Nginx Proxying
+# Nginx 代理
 
-As Strapi does not handle SSL directly and hosting a Node.js service on the "edge" network is not a secure solution it is recommended that you use some sort of proxy application such as Nginx, Apache, HAProxy, Traefik, or others. Below you will find some sample configurations for Nginx, naturally these configs may not suit all environments and you will likely need to adjust them to fit your needs.
+由于 Strapi 不直接处理 SSL，并且在 "edge" 网络上托管 Node.js 服务不是一个安全的解决方案，因此建议您使用某种代理应用程序，例如 Nginx, Apache, HAProxy, Traefik 等。下面你会发现 Nginx 的一些示例配置，当然，这些配置可能不适合所有环境，你可能需要调整它们以满足您的需求。 
 
-## Configuration
+## 配置
 
-The below configuration is based on Nginx virtual hosts, this means that you create configurations for each domain to allow serving multiple domains on the same port such as 80 (HTTP) or 443 (HTTPS). It also uses a central upstream file to store an alias to allow for easier management, load balancing, and failover in the case of clustering multiple Strapi deployments.
+以下配置基于 Nginx 虚拟主机，这意味着您可以为每个域创建配置，以允许在同一端口（例如 80（HTTP）或 443（HTTPS）上为多个域提供服务。它还使用中央上游文件来存储别名，以便在群集多个 Strapi 部署时更轻松地进行管理、负载平衡和故障转移。
 
 !!!include(developer-docs/latest/setup-deployment-guides/deployment/optional-software/snippets/strapi-server.md)!!!
 
-### Nginx Upstream
+### Nginx 上游
 
-Upstream blocks are used to map an alias such as `strapi` to a specific URL such as `localhost:1337`. While it would be useful to define these in each virtual host file, Nginx currently doesn't support loading these within the virtual host if you have multiple virtual host files. Instead, configure these within the `conf.d` directory as this is loaded before any virtual host files.
+上游块用于将别名，如 `strapi` 映射到 `localhost:1337`。虽然在每个虚拟主机文件中定义这些文件会很有用，但如果您有多个虚拟主机文件，Nginx目前不支持在虚拟主机中加载这些内容。相反，请在 `conf.d` 目录中配置这些，因为这是在任何虚拟主机文件之前加载的。
 
-In the following configuration the `localhost:1337` is mapped to the Nginx alias `strapi`:
+在以下配置中，`localhost:1337` 映射到 Nginx 别名 `strapi`：
 
 ```sh
 # path: /etc/nginx/conf.d/upstream.conf
@@ -29,32 +29,32 @@ upstream strapi {
 }
 ```
 
-### Nginx Virtual Host
+### Nginx 虚拟主机
 
-Virtual host files are what store the configuration for a specific app, service, or proxied service. For usage with Strapi this virtual host file is handling HTTPS connections and proxying them to Strapi running locally on the server. This configuration also redirects all HTTP requests to HTTPs using a 301 redirect.
+虚拟主机文件用于存储特定应用、服务或代理服务的配置。为了与 Strapi 一起使用，此虚拟主机文件正在处理 HTTPS 连接，并将它们代理到服务器上本地运行的 Strapi。此配置还会使用 301 重定向将所有 HTTP 请求重定向到 HTTP。
 
-In the below examples you will need to replace your domain and likewise your paths to SSL certificates will need to be changed based on where you place them or, if you are using Let's Encrypt, where your script places them. Please also note that while the path below shows `sites-available` you will need to symlink the file to `sites-enabled` in order for Nginx to enable the config.
+在下面的示例中，您将需要替换您的域，同样，您需要根据放置 SSL 证书的位置进行更改，或者，如果您使用的是 Let's Encrypt，则需要根据脚本放置它们的位置进行更改。另请注意，虽然下面的路径显示 `sites-available`，但您需要将文件符号链接到 `sites-enabled`，以便 Nginx 启用配置。
 
-Below are 3 example Nginx configurations:
+以下是 Nginx 配置的 3 个示例：
 
-- subdomain based such as `api.example.com`
-- subfolder based with both the API and Admin on the same subfolder such as `example.com/test/api` and `example.com/test/admin`
-- subfolder based with split API and Admin such as `example.com/api` and `example.com/dashboard`
+- 基于子域，如 `api.example.com`
+- 基于API和管理员在同一子文件夹，例如 `example.com/test/api` 和 `example.com/test/admin` 上的子文件夹
+- 基于拆分API和管理员的子文件夹，例如 `example.com/api` 和 `example.com/dashboard`
 
 ::::: tabs card
 
 :::: tab Subdomain
 
-#### Subdomain
+#### 子域名
 
-This configuration is using the subdomain that is dedicated to Strapi only. It will redirect normal HTTP traffic over to SSL and proxies all requests (both API and admin) to the Strapi server running on the upstream alias configured above.
+此配置使用专用于 Strapi 的子域。它将正常的 HTTP 流量重定向到 SSL，并将所有请求（API和admin）代理到在上面配置的上游别名上运行的 Strapi 服务器。
 
 ---
 
-- Example domain: `api.example.com`
-- Example admin panel: `api.example.com/admin`
-- Example API: `api.example.com/api`
-- Example uploaded Files (local provider): `api.example.com/uploads`
+- 示例 domain: `api.example.com`
+- 示例 admin panel: `api.example.com/admin`
+- 示例 API: `api.example.com/api`
+- 示例 uploaded Files (local provider): `api.example.com/uploads`
 
 ```sh
 # path: /etc/nginx/sites-available/strapi.conf
@@ -98,9 +98,9 @@ server {
 
 :::: tab Subfolder unified
 
-#### Subfolder unified
+#### 子文件夹统一
 
-This configuration is using a subfolder dedicated to Strapi only. It will redirect normal HTTP traffic over to SSL and hosts the front-end files on `/var/www/html` like a normal web server, but proxies all strapi requests on the `example.com/test` sub-path.
+此配置使用专用于 Strapi 的子文件夹。它会将正常的 HTTP 流量重定向到 SSL，并将前端文件托管在 `/var/www/html` 上，就像普通的 Web 服务器一样，但将所有 strapi 请求代理在 `example.com/test` 子路径上。
 
 :::note
 This example configuration is not focused on the front end hosting and should be adjusted to your front-end software requirements.
@@ -108,10 +108,10 @@ This example configuration is not focused on the front end hosting and should be
 
 ---
 
-- Example domain: `example.com/test`
-- Example admin: `example.com/test/admin`
-- Example API: `example.com/test/api`
-- Example uploaded files (local provider): `example.com/test/uploads`
+- 示例 domain: `example.com/test`
+- 示例 admin: `example.com/test/admin`
+- 示例 API: `example.com/test/api`
+- 示例 uploaded files (local provider): `example.com/test/uploads`
 
 ```sh
 # path: /etc/nginx/sites-available/strapi.conf
@@ -161,22 +161,22 @@ server {
 
 :::: tab Subfolder split
 
-#### Subfolder split
+#### 子文件夹拆分
 
-This configuration is using 2 subfolders dedicated to Strapi. It will redirect normal HTTP traffic over to SSL and hosts the front end files on `/var/www/html` like a normal web server, but proxies all strapi API requests on the `example.com/api` sub-path and all admin requests on the `example.com/dashboard` subpath.
+此配置使用 2 个专用于 Strapi 的子文件夹。它会将正常的 HTTP 流量重定向到 SSL，并像普通的 Web 服务器一样在 `/var/www/html` 上托管前端文件，但是在 `example.com/api` 子路径上代理所有 strapi API请求，并在 `example.com/dashboard` 子路径上代理所有管理员请求。
 
-Alternatively for the admin, you can replace the proxy instead with serving the admin `build` folder directly from Nginx, such centralizing the admin but load balancing the backend APIs. The example for this is not shown, but it would likely be something you would build into your CI/CD platform.
+或者，对于管理员，您可以替换代理，而是直接从Nginx提供管理员 `build` 文件夹，例如集中管理员但对后端 API 进行负载平衡。未显示此示例，但它可能是要内置到 CI/CD 平台中的内容。
 
 :::note
-This example configuration is not focused on the front end hosting and should be adjusted to your front-end software requirements.
+此示例配置不侧重于前端托管，应根据前端软件要求进行调整。
 :::
 
 ---
 
-- Example domain: `example.com`
-- Example admin: `example.com/dashboard`
-- Example API: `example.com/api`
-- Example uploaded files (local provider): `example.com/uploads`
+- 示例 domain: `example.com`
+- 示例 admin: `example.com/dashboard`
+- 示例 API: `example.com/api`
+- 示例 uploaded files (local provider): `example.com/uploads`
 
 ```sh
 # path: /etc/nginx/sites-available/strapi.conf
