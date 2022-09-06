@@ -245,7 +245,7 @@ const developer = [
                 children: [
                   [
                     '/developer-docs/latest/developer-resources/database-apis-reference/rest/filtering-locale-publication.md',
-                    'Filtering, Locale, and Publication State'
+                    '筛选、区域设置和发布状态'
                   ],
                   [
                     '/developer-docs/latest/developer-resources/database-apis-reference/rest/populating-fields.md',
@@ -253,7 +253,7 @@ const developer = [
                   ],
                   [
                     '/developer-docs/latest/developer-resources/database-apis-reference/rest/sort-pagination.md',
-                    'Sort & Pagination'
+                    '排序 & 分页'
                   ],
                 ]
               },
@@ -264,14 +264,14 @@ const developer = [
             'GraphQL API',
           ],
           {
-            title: 'Entity Service API',
+            title: '实体服务 API',
             path:
               '/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api',
             collapsable: true,
             children: [
               [
                 '/developer-docs/latest/developer-resources/database-apis-reference/entity-service/crud.md',
-                'CRUD operations',
+                'CRUD 操作',
               ],
               [
                 '/developer-docs/latest/developer-resources/database-apis-reference/entity-service/filter.md',
@@ -283,16 +283,16 @@ const developer = [
               ],
               [
                 '/developer-docs/latest/developer-resources/database-apis-reference/entity-service/order-pagination.md',
-                'Ordering & pagination',
+                '排序 & 分页',
               ],
               [
                 '/developer-docs/latest/developer-resources/database-apis-reference/entity-service/components-dynamic-zones.md',
-                'Components and dynamic zones',
+                '组件和动态区域',
               ],
             ],
           },
           {
-            title: 'Query Engine API',
+            title: '查询引擎 API',
             path:
               '/developer-docs/latest/developer-resources/database-apis-reference/query-engine-api.html',
             collapsable: true,
@@ -300,11 +300,11 @@ const developer = [
             children: [
               [
                 '/developer-docs/latest/developer-resources/database-apis-reference/query-engine/single-operations.md',
-                'Single Operations',
+                '单一操作',
               ],
               [
                 '/developer-docs/latest/developer-resources/database-apis-reference/query-engine/bulk-operations.md',
-                'Bulk Operations',
+                '批量操作',
               ],
               [
                 '/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md',
@@ -316,7 +316,7 @@ const developer = [
               ],
               [
                 '/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md',
-                'Ordering & pagination',
+                '排序 & 分页',
               ],
             ],
           },

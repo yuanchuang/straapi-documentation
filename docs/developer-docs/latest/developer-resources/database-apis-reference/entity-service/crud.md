@@ -1,27 +1,27 @@
 ---
-title: CRUD operations with Entity Service API - Strapi Developer Docs
+title: 使用实体服务 API 的 CRUD 操作 - Strapi 开发人员文档
 description: Use Strapi's Entity Service API to perform CRUD (create, read, update, delete) operations on your content.
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/entity-service/crud.html
 ---
 
-# Entity Service API: CRUD operations
+# 实体服务 API：CRUD 操作
 
-The [Entity Service API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) is built on top of the the [Query Engine API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) and uses it to perform CRUD operations on entities.
+[实体服务 API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) 构建在 [查询引擎 API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) 并使用它来对实体执行 CRUD 操作。
 
 ## findOne()
 
-Finds the first entry matching the parameters.
+查找与参数匹配的第一个条目。
 
-Syntax: `findOne(uid: string, id: ID, parameters: Params)` ⇒ `Entry`
+语法: `findOne(uid: string, id: ID, parameters: Params)` ⇒ `Entry`
 
-### Parameters
+### 参数
 
-| Parameter  | Description                                                                                                                                            | Type                                                                                                                                          |
+| 参数  | 描述                                                                                                                                            | 类型                                                                                                                                          |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fields`   | Attributes to return                                                                                                                                   | `String[]`                                                                                                                                    |
-| `populate` | Relations, components and dynamic zones to [populate](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) |
+| `fields`   | 要返回的属性                                                                                                                                  | `String[]`                                                                                                                                    |
+| `populate` | Relations, components 和 dynamic zones 的 [populate](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) |
 
-### Example
+### 示例
 
 ```js
 const entry = await strapi.entityService.findOne('api::article.article', 1, {
@@ -32,23 +32,23 @@ const entry = await strapi.entityService.findOne('api::article.article', 1, {
 
 ## findMany()
 
-Finds entries matching the parameters.
+查找与参数匹配的条目。
 
-Syntax: `findMany(uid: string, parameters: Params)` ⇒ `Entry[]`
+语法: `findMany(uid: string, parameters: Params)` ⇒ `Entry[]`
 
-### Parameters
+### 参数
 
-| Parameter          | Description                                                                                                                                                        | Type                                                                                                                                                  |
+| 参数          | 描述                                                                                                                                                        | 类型                                                                                                                                                  |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fields`           | Attributes to return                                                                                                                                               | `String[]`                                                                                                                                            |
+| `fields`           | 要返回的属性                                                                                                                                               | `String[]`                                                                                                                                            |
 | `filters`          | [Filters](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/filter.md) to use                                                      | [`FiltersParameters`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/filter.md)             |
-| `start`            | Number of entries to skip (see [pagination](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/order-pagination.md#pagination))   | `Number`                                                                                                                                              |
-| `limit`            | Number of entries to return (see [pagination](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/order-pagination.md#pagination)) | `Number`                                                                                                                                              |
+| `start`            | 要跳过的条目数 (参见 [pagination](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/order-pagination.md#pagination))   | `Number`                                                                                                                                              |
+| `limit`            | 要返回的条目数 (参见 [pagination](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/order-pagination.md#pagination)) | `Number`                                                                                                                                              |
 | `sort`             | [Order](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/order-pagination.md) definition                                       | [`OrderByParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/order-pagination.md) |
-| `populate`         | Relations, components and dynamic zones to [populate](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md)             | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md)         |
-| `publicationState` | Publication state, can be:<ul><li>`live` to return only published entries (default)</li><li>`preview` to return both draft entries & published entries</li></ul>   | `PublicationStateParameter`                                                                                                                           |
+| `populate`         | Relations, components 和 dynamic zones 的 [populate](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md)             | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md)         |
+| `publicationState` | 发布状态，可以是：<ul><li>`live` 仅返回已发布的条目 (默认)</li><li>`preview` 返回草稿条目和已发布的条目</li></ul>   | `PublicationStateParameter`                                                                                                                           |
 
-### Example
+### 示例
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -61,19 +61,19 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ## create()
 
-Creates one entry and returns it
+创建一个条目并将其返回
 
-Syntax: `create(uid: string, parameters: Params)` ⇒ `Entry`
+语法: `create(uid: string, parameters: Params)` ⇒ `Entry`
 
-### Parameters
+### 参数
 
-| Parameter  | Description                                                                                                                                            | Type                                                                                                                                          |
+| 参数  | 描述                                                                                                                                            | 类型                                                                                                                                          |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fields`   | Attributes to return                                                                                                                                   | `String[]`                                                                                                                                    |
-| `populate` | Relations, components and dynamic zones to [populate](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) |
-| `data`     | Input data                                                                                                                                             | `Object`                                                                                                                                      |
+| `fields`   | 要返回的属性                                                                                                                                   | `String[]`                                                                                                                                    |
+| `populate` | Relations, components 和 dynamic zones 的 [populate](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) |
+| `data`     | 输入数据                                                                                                                                             | `Object`                                                                                                                                      |
 
-### Example
+### 示例
 
 ```js
 const entry = await strapi.entityService.create('api::article.article', {
@@ -85,23 +85,23 @@ const entry = await strapi.entityService.create('api::article.article', {
 
 ## update()
 
-Updates one entry and returns it.
+更新一个条目并将其返回。
 
 :::note
-`update()` only performs a partial update, so existing fields that are not included won't be replaced.
+`update()` 仅执行部分更新，因此不会替换未包含的现有字段。
 :::
 
-Syntax: `update(uid: string, id: ID, parameters: Params)` ⇒ `Entry`
+语法: `update(uid: string, id: ID, parameters: Params)` ⇒ `Entry`
 
-### Parameters
+### 参数
 
-| Parameter  | Description                                                                                                                                            | Type                                                                                                                                          |
+| 参数  | 描述                                                                                                                                            | 类型                                                                                                                                          |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fields`   | Attributes to return                                                                                                                                   | `String[]`                                                                                                                                    |
-| `populate` | Relations, components and dynamic zones to [populate](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) |
-| `data`     | Input data                                                                                                                                             | `object`                                                                                                                                      |
+| `fields`   | 要返回的属性                                                                                                                                   | `String[]`                                                                                                                                    |
+| `populate` | Relations, components 和 dynamic zones 的 [populate](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) |
+| `data`     | 输入数据                                                                                                                                             | `object`                                                                                                                                      |
 
-### Example
+### 示例
 
 ```js
 const entry = await strapi.entityService.update('api::article.article', 1, {
@@ -113,18 +113,18 @@ const entry = await strapi.entityService.update('api::article.article', 1, {
 
 ## delete()
 
-Deletes one entry and returns it.
+删除一个条目并将其返回。
 
-Syntax: `delete(uid: string, id: ID, parameters: Params)` ⇒ `Entry`
+语法: `delete(uid: string, id: ID, parameters: Params)` ⇒ `Entry`
 
-### Parameters
+### 参数
 
-| Parameter  | Description                                                                                                                                            | Type                                                                                                                                          |
+| 参数  | 描述                                                                                                                                            | 类型                                                                                                                                          |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fields`   | Attributes to return                                                                                                                                   | `String[]`                                                                                                                                    |
-| `populate` | Relations, components and dynamic zones to [populate](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) |
+| `fields`   | 要返回的属性                                                                                                                                   | `String[]`                                                                                                                                    |
+| `populate` | Relations, components 和 dynamic zones 的 [populate](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.md) |
 
-### Example
+### 示例
 
 ```js
 const entry = await strapi.entityService.delete('api::article.article', 1);

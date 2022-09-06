@@ -1,20 +1,20 @@
 ---
-title: Query Engine API - Strapi Developer Docs
-description: Strapi provides a Query Engine API to give unrestricted internal access to the database layer at a lower level.
+title: 查询引擎 API - Strapi Developer Docs
+description: Strapi 提供了一个查询引擎 API，用于在较低级别提供对数据库层的无限制内部访问。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/query-engine-api.html
 ---
 
-# Query Engine API
+# 查询引擎 API
 
-Strapi provides a Query Engine API to interact with the database layer at a lower level. It should mostly be used by plugin developers and developers adding custom business logic to their applications. In most use cases, it's recommended to use the [Entity Service API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) instead.
+Strapi 提供了一个查询引擎 API，用于在较低级别与数据库层进行交互。它应该主要由插件开发人员和向其应用程序添加自定义业务逻辑的开发人员使用。在大多数用例中，建议改用 [Entity Service API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) 。
 
-::: strapi Entity Service API vs. Query Engine API
+::: strapi 实体服务 API vs. 查询引擎 API
 !!!include(developer-docs/latest/developer-resources/database-apis-reference/snippets/entity-query-knex-callout.md)!!!
 :::
 
-## Basic usage
+## 基本用法
 
-The Query Engine is available through `strapi.db.query`:
+查询引擎可通过 `strapi.db.query` 获得：
 
 ```js
 strapi.db.query('api::blog.article').findMany({ // uid syntax: 'api::api-name.content-type-name'
@@ -30,9 +30,9 @@ strapi.db.query('api::blog.article').findMany({ // uid syntax: 'api::api-name.co
 });
 ```
 
-## Available operations
+## 可用操作
 
-The Query Engine allows operations on database entries, such as:
+查询引擎允许对数据库条目执行操作，例如：
 
-- CRUD operations on [single entries](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/single-operations.md) or [multiple entries](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/bulk-operations.md)
-- [filtering entries](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md), [populating relations](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md) and [ordering and paginating queries results](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md)
+- [single entries](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/single-operations.md) 或 [multiple entries](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/bulk-operations.md) CRUD
+- [filtering entries](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md), [populating relations](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md) 和 [ordering and paginating queries results](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md)

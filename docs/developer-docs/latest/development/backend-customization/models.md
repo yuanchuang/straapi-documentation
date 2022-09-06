@@ -27,10 +27,10 @@ Strapi中有2种不同类型的模型：
 - 使用 [管理面板的 Content-type Builder ](/user-docs/latest/content-types-builder/introduction-to-content-types-builder.md)
 - 使用 [Strapi's 交互式 CLI `strapi generate`](/developer-docs/latest/developer-resources/cli/CLI.md#strapi-generate) 命令
 
-内容类型使用以下文件：
+内容类型使用以下文件： 
 
-- `schema.json` 表示模型的 [schema](#model-schema) 定义。（使用任一方法创建内容类型时自动生成）
-- `lifecycles.js` 表示 [lifecycle hooks](#lifecycle-hooks)。必须手动创建此文件。
+- `schema.json` 表示模型的 [schema](#模型架构) 定义。（使用任一方法创建内容类型时自动生成）
+- `lifecycles.js` 表示 [lifecycle hooks](#生命周期-hooks)。必须手动创建此文件。
 
 这些模型文件存储在 `./src/api/[api-name]/content-types/[content-type-name]/`中，在这些文件夹中找到的任何 JavaScript 或 JSON 文件都将作为内容类型的模型加载 (参见 [project structure](/developer-docs/latest/setup-deployment-guides/file-structure.md)).
 
@@ -556,14 +556,14 @@ The `tableName` key defines the name of the join table. It has to be specified o
 }
 ```
 
-## 生命周期挂钩
+## 生命周期 hooks
 
 生命周期钩子是在调用 Strapi 查询时触发的函数。当通过管理面板管理内容或使用 `query` 开发自定义代码时，它们会自动触发。
 
-生命周期挂钩可以通过声明方式或编程方式进行自定义。
+生命周期 hooks 可以通过声明方式或编程方式进行自定义。
 
 :::caution
-当直接使用  [knex](https://knexjs.org/) 库而不是 Strapi 函数时，不会触发生命周期钩子。
+当直接使用  [knex](https://knexjs.org/) 库而不是 Strapi 函数时，不会触发生命周期 hooks。
 :::
 
 ### 可用的生命周期事件

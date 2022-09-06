@@ -1,23 +1,23 @@
 ---
-title: Entity Service API - Populating - Strapi Developer Docs
-description: Use Strapi's Entity Service API to populate relations in your queries.
+title: 实体服务 API - Populating - Strapi 开发人员文档
+description: 使用 Strapi 的实体服务 API 填充查询中的关系。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/entity-service/populate.html
 ---
 
-# Entity Service API: Populating
+# 实体服务 API: Populating
 
-The [Entity Service API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) does not populate relations, components or dynamic zones by default.
+[实体服务 API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) 默认情况下，不会填充关系、元件或动态区域。
 
-## Basic populating
+## 基本 populating
 
-To populate all the root level relations, use `populate: '*'`:
+要填充所有根级别关系，请使用 `populate: '*'`:
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
   populate: '*',
 });
 ```
 
-Populate various component or relation fields by passing an array of attribute names:
+通过传递属性名称数组来填充各种组件或关系字段：
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -25,9 +25,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 });
 ```
 
-## Advanced populating
+## 高级 populating
 
-An object can be passed for more advanced populating:
+可以传递对象以进行更高级的填充：
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -45,7 +45,7 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 });
 ```
 
-Complex populating can be achieved by using the [`filters` parameter](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/filter.md) and select or populate nested relations or components:
+复杂的填充可以通过使用 [`filters` 参数](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/filter.md) 并选择或填充嵌套关系或组件来实现：
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {

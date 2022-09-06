@@ -1,28 +1,28 @@
 ---
-title: Bulk Operations for Query Engine API - Strapi Developer Docs
-description: Use Strapi's Query Engine API to perform operations on multiple entries.
+title: 查询引擎 API 的批量操作 - Strapi 开发人员文档
+description: 使用 Strapi 的 Query Engine API 对多个条目执行操作。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/query-engine/bulk-operations.html
 ---
 
-# Query Engine API: Bulk Operations
+# 查询引擎 API：批量操作
 
 :::caution
-To avoid performance issues, bulk operations are not allowed on relations.
+为避免性能问题，不允许对关系执行批量操作。
 :::
 
 ## createMany()
 
-Creates multiple entries.
+创建多个条目。
 
-Syntax: `createMany(parameters) => { count: number }`
+语法: `createMany(parameters) => { count: number }`
 
-### Parameters
+### 参数
 
-| Parameter | Type       | Description         |
+| 参数 | 类型       | 描述         |
 | --------- | ---------- | ------------------- |
 | `data`      | Array of objects | Array of input data |
 
-### Example
+### 示例
 
 ```js
 await strapi.db.query('api::blog.article').createMany({
@@ -41,18 +41,18 @@ await strapi.db.query('api::blog.article').createMany({
 
 ## updateMany()
 
-Updates multiple entries matching the parameters.
+更新与参数匹配的多个条目。
 
-Syntax: `updateMany(parameters) => { count: number }`
+语法: `updateMany(parameters) => { count: number }`
 
-### Parameters
+### 参数
 
-| Parameter | Type                       | Description         |
+| 参数 | 类型                       | 描述         |
 | --------- | -------------------------- | ------------------- |
-| `where`     | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) | [Filters](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) to use             |
-| `data`      | Object                   | Input data |
+| `where`     | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) | [筛选](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)            |
+| `data`      | Object                   | 输入数据 |
 
-### Example
+### 示例
 
 ```js
 await strapi.db.query('api::shop.article').updateMany({
@@ -69,17 +69,17 @@ await strapi.db.query('api::shop.article').updateMany({
 
 ## deleteMany()
 
-Deletes multiple entries matching the parameters.
+删除与参数匹配的多个条目。
 
-Syntax: `deleteMany(parameters) => { count: number }`
+语法: `deleteMany(parameters) => { count: number }`
 
-### Parameters
+### 参数
 
-| Parameter | Type                       | Description |
+| 参数 | 类型                       | 描述 |
 | --------- | -------------------------- | ----------- |
-| `where`     | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) | [Filters](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) to use             |
+| `where`     | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) | [筛选](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)              |
 
-### Example
+### 示例
 
 ```js
 await strapi.db.query('api::blog.article').deleteMany({
@@ -93,19 +93,19 @@ await strapi.db.query('api::blog.article').deleteMany({
 // { count: 42 }
 ```
 
-## Aggregations
+## 聚合
 
 ### count()
 
-Counts entries matching the parameters.
+对与参数匹配的条目进行计数。
 
-Syntax: `count(parameters) => number`
+语法: `count(parameters) => number`
 
-#### Parameters
+#### 参数
 
-| Parameter | Type                       | Description |
+| 参数 | 类型                       | 描述 |
 | --------- | -------------------------- | ----------- |
-| `where`     | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) | [Filters](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) to use             |
+| `where`     | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) | [筛选](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)              |
 
 ```js
 const count = await strapi.db.query('api::blog.article').count({

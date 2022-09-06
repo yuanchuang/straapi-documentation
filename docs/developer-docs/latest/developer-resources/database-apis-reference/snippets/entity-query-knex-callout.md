@@ -1,5 +1,5 @@
-Strapi v4 offers several layers to interact with the backend and build your queries:
+Strapi v4 提供了多个层来与后端交互并构建查询：
 
-- The Entity Service API is the recommended API to interact with your application's database. The Entity Service is the layer that handles Strapi's complex data structures like components and dynamic zones, which the lower-level layers are not aware of.
-- The Query Engine API interacts with the database layer at a lower level and is used under the hood to execute database queries. It gives unrestricted internal access to the database layer, but should be used only if the Entity Service API does not cover your use case.
-- If you need direct access to `knex` functions, use `strapi.db.connection`.
+- 实体服务 API 是推荐用于与应用程序数据库交互的 API。实体服务是处理 Strapi 的复杂数据结构（如组件和动态区域）的层，而较低级别的层并不知道这些结构。
+- 查询引擎 API 在较低级别与数据库层交互，并在后台用于执行数据库查询。它提供对数据库层的无限制内部访问，但仅当实体服务 API 未涵盖您的用例时才应使用。
+- 如果您需要直接访问 `knex` 功能，请使用 `strapi.db.connection`。

@@ -901,13 +901,13 @@ axios
   });
 ```
 
-## User object in Strapi context
+## Strapi 上下文中的用户对象
 
-The `user` object is available to successfully authenticated requests.
+ `user` 对象可用于成功通过身份验证的请求。
 
-#### Usage
+#### 用法
 
-- The authenticated `user` object is a property of `ctx.state`.
+- 经过身份验证的 `user` 对象是 `ctx.state` 的属性。
 
 ```js
 create: async ctx => {
@@ -925,10 +925,11 @@ create: async ctx => {
 };
 ```
 
-## Adding a new provider (to your project)
+## 添加新的提供程序（添加到项目中）
 
 ::: caution
-This documentation is not up-to-date with Strapi v4 and is a work in progress. In the meantime, [contributions](https://github.com/strapi/documentation/blob/main/CONTRIBUTING.md) are most welcome.
+本文档不是 Strapi v4 的最新文档，是一项正在进行的工作。同时欢迎[贡献](https://github.com/strapi/documentation/blob/main/CONTRIBUTING.md)。
+
 :::
 
 **[Grant](https://github.com/simov/grant) supplies configuration for a number of commonly used OAuth providers. [Custom](https://github.com/simov/grant#misc-custom-providers) providers are also supported**. <br> You can view and try out the 200+ supported providers here: [OAuth Playground](https://grant.outofindex.com/).

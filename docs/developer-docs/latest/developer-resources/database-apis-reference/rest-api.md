@@ -7,15 +7,15 @@ canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/d
 
 # REST API
 
-The REST API allows accessing the [content-types](/developer-docs/latest/development/backend-customization/models.md) through API endpoints. Strapi automatically creates [API endpoints](#endpoints) when a content-type is created. [API parameters](/developer-docs/latest/developer-resources/database-apis-reference/rest/api-parameters.md) can be used when querying API endpoints to refine the results.
+REST API 允许通过 API 端点访问 [content-types](/developer-docs/latest/development/backend-customization/models.md) 。Strapi 在创建内容类型时自动创建 [API endpoints](#端点) 。[API parameters](/developer-docs/latest/developer-resources/database-apis-reference/rest/api-parameters.md) 可以在查询 API 端点以优化结果时使用。
 
 ::: note
-The REST API by default does not populate any relations, media fields, components, or dynamic zones. Use the [`populate` parameter](/developer-docs/latest/developer-resources/database-apis-reference/rest/populating-fields.md) to populate specific fields.
+默认情况下，REST API 不会填充任何关系、媒体字段、组件或动态区域。使用 [`populate` parameter](/developer-docs/latest/developer-resources/database-apis-reference/rest/populating-fields.md) 来填充特定字段。
 :::
 
-## Endpoints
+## 端点
 
-For each Content-Type, the following endpoints are automatically generated:
+对于每个内容类型，将自动生成以下端点：
 
 <style lang="stylus">
 #endpoint-table
@@ -116,31 +116,31 @@ For each Content-Type, the following endpoints are automatically generated:
 :::::
 
 ::: note
-[Components](/developer-docs/latest/development/backend-customization/models.md#components) don't have API endpoints.
+[Components](/developer-docs/latest/development/backend-customization/models.md#components) 没有 API 端点。
 :::
 
-## Requests
+## 请求
 
-Requests return a response as an object which usually includes the following keys:
+请求将响应作为对象返回，该对象通常包含以下键：
 
-- `data`: the response data itself, which could be:
-  - a single entry, as an object with the following keys:
+- `data`: 响应数据本身，可以是：
+  - 单个条目，作为具有以下键的对象
     - `id` (number)
     - `attributes` (object)
     - `meta` (object)
-  - a list of entries, as an array of objects
-  - a custom response
+  - 条目列表，作为对象数组
+  - 自定义响应
 
-- `meta` (object): information about pagination, publication state, available locales, etc.
+- `meta` (object): 有关分页、发布状态、可用区域设置等的信息。
 
-- `error` (object, _optional_): information about any [error](/developer-docs/latest/developer-resources/error-handling.md) thrown by the request
+- `error` (object, _optional_): 有关请求引发的任何 [error](/developer-docs/latest/developer-resources/error-handling.md) 的信息
 
 ::: note
-Some plugins (including Users & Permissions and Upload) may not follow this response format.
+某些插件（包括用户和权限和上传）可能不遵循此响应格式。
 :::
 ### Get entries
 
-Returns entries matching the query filters (see [API parameters](/developer-docs/latest/developer-resources/database-apis-reference/rest/api-parameters.md) documentation).
+返回与查询筛选器匹配的条目（请参阅 [API 参数](/developer-docs/latest/developer-resources/database-apis-reference/rest/api-parameters.md) 文档）。
 
 :::: api-call
 
@@ -187,7 +187,7 @@ Returns entries matching the query filters (see [API parameters](/developer-docs
 
 ### Get an entry
 
-Returns an entry by `id`.
+返回按 `id` 的条目。
 
 :::: api-call
 
@@ -222,9 +222,9 @@ Returns an entry by `id`.
 
 ### Create an entry
 
-Creates an entry and returns its value.
+创建一个条目并返回其值。
 
-If the [Internationalization (i18n) plugin](/developer-docs/latest/plugins/i18n.md) is installed, it's possible to use POST requests to the REST API to [create localized entries](/developer-docs/latest/plugins/i18n.md#creating-a-new-localized-entry).
+如果安装了 [Internationalization (i18n) plugin](/developer-docs/latest/plugins/i18n.md)，则可以使用 POST 请求对 REST API 来 [创建本地化条目](/developer-docs/latest/plugins/i18n.md#creating-a-new-localized-entry).
 
 :::: api-call
 
@@ -267,9 +267,9 @@ If the [Internationalization (i18n) plugin](/developer-docs/latest/plugins/i18n.
 
 ### Update an entry
 
-Partially updates an entry by `id` and returns its value.
+按 `id` 部分更新条目并返回其值。
 
-Fields that aren't sent in the query are not changed in the database. Send a `null` value to clear fields.
+未在查询中发送的字段不会在数据库中更改。发送 `null` 值以清除字段。
 
 :::: api-call
 
@@ -305,12 +305,12 @@ Fields that aren't sent in the query are not changed in the database. Send a `nu
 ::::
 
 :::note
-Even with the [Internationalization (i18n) plugin](/developer-docs/latest/plugins/i18n.md) installed, it's currently not possible to [update the locale of an entry](/developer-docs/latest/plugins/i18n.md#updating-an-entry).
+即使安装了 [Internationalization (i18n) plugin](/developer-docs/latest/plugins/i18n.md)，目前也无法 [更新本地条目](/developer-docs/latest/plugins/i18n.md#updating-an-entry).
 :::
 
 ### Delete an entry
 
-Deletes an entry by `id` and returns its value.
+删除按 `id` 排列的条目并返回其值。
 
 :::: api-call
 

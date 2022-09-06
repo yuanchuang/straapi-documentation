@@ -1,18 +1,18 @@
 ---
-title: Ordering & Pagination for Query Engine API - Strapi Developer Docs
-description: Use Strapi's Query Engine API to order and paginate the results of your queries.
+title: 查询引擎 API 排序 & 分页  - Strapi 开发人员文档
+description: 使用 Strapi 的查询引擎 API 对查询结果进行排序和分页。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.html
 ---
 
-# Query Engine API: Ordering & Paginating
+# 查询引擎 API: 排序 & 分页
 
-The [Query Engine API](/developer-docs/latest/developer-resources/database-apis-reference/query-engine-api.md) offers the ability to [order](#ordering) and [paginate](#pagination) results.
+[Query Engine API](/developer-docs/latest/developer-resources/database-apis-reference/query-engine-api.md) 提供了[排序](#排序)和[分页](#分页)结果的功能。
 
-## Ordering
+## 排序
 
-To order results returned by the Query Engine, use the `orderBy` parameter. Results can be ordered based on a [single](#single) or on [multiple](#multiple) attributes and can also use [relational ordering](#relational-ordering).
+若要对查询引擎返回的结果进行排序，请使用 `orderBy`参数。结果可以基于[单个字段](#单个字段)或[多个字段](#多个字段) 属性进行排序，也可以使用[关系排序](#关系排序)。
 
-### Single
+### 单个字段
 
 ```js
 strapi.db.query('api::article.article').findMany({
@@ -25,7 +25,7 @@ strapi.db.query('api::article.article').findMany({
 });
 ```
 
-### Multiple
+### 多个字段
 
 ```js
 strapi.db.query('api::article.article').findMany({
@@ -38,7 +38,7 @@ strapi.db.query('api::article.article').findMany({
 });
 ```
 
-### Relational ordering
+### 关系排序
 
 ```js
 strapi.db.query('api::article.article').findMany({
@@ -50,9 +50,9 @@ strapi.db.query('api::article.article').findMany({
 });
 ```
 
-## Pagination
+## 分页
 
-To paginate results returned by the Query Engine API, use the `offset` and `limit` parameters:
+若要对查询引擎 API 返回的结果进行分页，请使用 `offset` 和 `limit` 参数：
 
 ```js
 strapi.db.query('api::article.article').findMany({

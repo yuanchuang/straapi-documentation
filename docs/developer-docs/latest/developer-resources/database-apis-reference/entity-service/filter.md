@@ -1,23 +1,23 @@
 ---
-title: Filtering with Entity Service API - Strapi Developer Docs
-description: Use Strapi's Entity Service API to filter your queries results.
+title: 使用实体服务 API 进行筛选 - Strapi 开发人员文档
+description: 使用 Strapi 的实体服务 API 筛选查询结果。
 sidebarDepth: 3
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/entity-service/filter.html
 ---
 
-# Entity Service API: Filtering
+# 实体服务 API：筛选
 
-The [Entity Service API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) offers the ability to filter results found with its [findMany()](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/crud.md#findmany) method.
+[实体服务 API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) 提供了过滤使用其 [findMany()](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/crud.md#findmany) 方法找到的结果的功能。
 
-Results are filtered with the `filters` parameter that accepts [logical operators](#logical-operators) and [attribute operators](#attribute-operators). Every operator should be prefixed with `$`.
+使用 [逻辑运算符](#逻辑运算符) 和 [属性运算符](#属性运算符) 的 `filters` 参数筛选结果。每个运算符都应以 `$` 为前缀。
 
-## Logical operators
-
+## 逻辑运算符
+ 
 ### `$and`
 
-All nested conditions must be `true`.
+所有条件都必须为 `true`.
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -34,7 +34,7 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 });
 ```
 
-`$and` will be used implicitly when passing an object with nested conditions:
+`$and` 在传递具有条件的对象时将隐式使用：
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -47,9 +47,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$or`
 
-One or many nested conditions must be `true`.
+一个或多个条件必须为 `true`。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -68,9 +68,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$not`
 
-Negates the nested conditions.
+否定条件。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -83,27 +83,27 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 ```
 
 :::note
-`$not` can be used:
+`$not` 可用于：
 
-- as a logical operator (e.g. in `filters: { $not: { // conditions… }}`)
-- or [as an attribute operator](#not-2) (e.g. in `filters: { attribute-name: $not: { … } }`).
+- 作为逻辑运算符 (例如，在 `filters: { $not: { // conditions… }}`)
+- [作为属性运算符](#not-2) (例如，在 `filters: { attribute-name: $not: { … } }`).
 :::
 
 :::tip
 `$and`, `$or` and `$not` operators are nestable inside of another `$and`, `$or` or `$not` operator.
 :::
 
-## Attribute Operators
+## 属性运算符
 
 :::caution
-Using these operators may give different results depending on the database's implementation, as the comparison is handled by the database and not by Strapi.
+根据数据库的实现，使用这些运算符可能会给出不同的结果，因为比较由数据库而不是 Strapi 处理。
 :::
 
 ### `$not`
 
-Negates the nested condition(s).
+否定条件。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -119,9 +119,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$eq`
 
-Attribute equals input value.
+属性等于输入值。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -133,7 +133,7 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 });
 ```
 
-`$eq` can be omitted:
+`$eq` 可以省略：
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -145,9 +145,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$eqi`
 
-Attribute equals input value (case-insensitive).
+属性等于输入值（不区分大小写）。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -161,9 +161,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$ne`
 
-Attribute does not equal input value.
+属性不等于输入值。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -177,9 +177,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$in`
 
-Attribute is contained in the input list.
+属性包含在输入列表中。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -191,7 +191,7 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 });
 ```
 
-`$in` can be ommited when passing an array of values:
+`$in` 在传递值数组时可以省略：
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -203,9 +203,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$notIn`
 
-Attribute is not contained in the input list.
+属性不包含在输入列表中。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -219,9 +219,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$lt`
 
-Attribute is less than the input value.
+属性小于输入值。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -235,9 +235,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$lte`
 
-Attribute is less than or equal to the input value.
+属性小于或等于输入值。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -251,9 +251,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$gt`
 
-Attribute is greater than the input value.
+属性大于输入值。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -267,9 +267,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$gte`
 
-Attribute is greater than or equal to the input value.
+属性大于或等于输入值。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -283,9 +283,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$between`
 
-Attribute is between the 2 input values.
+属性介于 2 个输入值之间。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -299,9 +299,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$contains`
 
-Attribute contains the input value (case-sensitive).
+属性包含输入值（区分大小写）。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -315,9 +315,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$notContains`
 
-Attribute does not contain the input value (case-sensitive).
+属性不包含输入值（区分大小写）。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -331,9 +331,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$containsi`
 
-Attribute contains the input value. `$containsi` is not case-sensitive, while [$contains](#contains) is.
+属性包含输入值。`$containsi` 不区分大小写，而 [$contains](#contains) 则不区分大小写。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -347,9 +347,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$notContainsi`
 
-Attribute does not contain the input value. `$notContainsi` is not case-sensitive, while [$notContains](#notcontains) is.
+属性不包含输入值。`$notContainsi` 不区分大小写，而 [$notContains](#notcontains) 则区分大小写。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -363,9 +363,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$startsWith`
 
-Attribute starts with input value.
+属性以输入值开头。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -379,9 +379,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$endsWith`
 
-Attribute ends with input value.
+属性以输入值结尾。
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -395,9 +395,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$null`
 
-Attribute is `null`.
+属性为 `null`.
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {
@@ -411,9 +411,9 @@ const entries = await strapi.entityService.findMany('api::article.article', {
 
 ### `$notNull`
 
-Attribute is not `null`.
+属性不为 `null`.
 
-**Example**
+**示例**
 
 ```js
 const entries = await strapi.entityService.findMany('api::article.article', {

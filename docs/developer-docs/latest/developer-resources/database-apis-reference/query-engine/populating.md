@@ -1,14 +1,14 @@
 ---
-title: Populating for Query Engine API - Strapi Developer Docs
-description: Use Strapi's Query Engine API to populate relations when querying your content.
+title: 查询引擎 API 填充 - Strapi 开发人员文档
+description: 使用 Strapi 的查询引擎 API 在查询您的内容时填充关系。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.html
 ---
 
-# Query Engine API: Populating
+# 查询引擎 API: Populating
 
-Relations and components have a unified API for populating them.
+关系和组件具有用于填充它们的统一 API。
 
-To populate all the root level relations, use `populate: true`:
+要填充所有根级别关系，请使用 `populate: true`：
 
 ```js
 strapi.db.query('api::article.article').findMany({
@@ -16,7 +16,7 @@ strapi.db.query('api::article.article').findMany({
 });
 ```
 
-Select which data to populate by passing an array of attribute names:
+通过传递属性名称数组来选择要填充的数据：
 
 ```js
 strapi.db.query('api::article.article').findMany({
@@ -24,7 +24,7 @@ strapi.db.query('api::article.article').findMany({
 });
 ```
 
-An object can be passed for more advanced usage:
+可以传递对象以进行更高级的用法：
 
 ```js
 strapi.db.query('api::article.article').findMany({
@@ -36,7 +36,7 @@ strapi.db.query('api::article.article').findMany({
 });
 ```
 
-Complex populating can also be achieved by applying `where` filters and select or populate nested relations:
+复杂的填充也可以通过应用 `where` 过滤器并选择或填充嵌套关系来实现：
 
 ```js
 strapi.db.query('api::article.article').findMany({

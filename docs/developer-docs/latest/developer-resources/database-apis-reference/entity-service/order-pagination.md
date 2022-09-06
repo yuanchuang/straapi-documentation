@@ -1,23 +1,23 @@
 ---
-title: Ordering & Pagination with Entity Service API - Strapi Developer Docs
-description: Use Strapi's Entity Service API to order and paginate queries results.
+title: 使用实体服务 API 进行排序和分页 - Strapi 开发人员文档
+description: 使用 Strapi 的实体服务 API 对查询结果进行排序和分页。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/entity-service/order-pagination.html
 ---
 
-# Entity Service API: Ordering & Pagination
+# 实体服务 API：排序和分页
 
-The [Entity Service API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) offers the ability to [order](#ordering) and [paginate](#pagination) results found with its [findMany()](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/crud.md#findmany) method.
+[实体服务 API](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) 提供了 [排序](#排序) 和 [分页](#pagination) 结果的能力，可以通过其 [findMany()](/developer-docs/latest/developer-resources/database-apis-reference/entity-service/crud.md#findmany) 方法。
 
-## Ordering
+## 排序
 
-To order results returned by the Entity Service API, use the `sort` parameter. Results can be ordered based on a [single](#single) or on [multiple](#multiple) attribute(s) and can also use [relational ordering](#relational-ordering).
+要对实体服务 API 返回的结果进行排序，请使用 `sort` 参数。结果可以基于[单个字段](#单个字段)或[多个字段](#多个字段)属性进行排序，也可以使用[关系排序](#关系排序)。
 
-### Single
+### 单个字段
 
-To order results by a single field, just pass it to the `sort` parameter:
+要按单个字段对结果进行排序，只需将其传递给 `sort` 参数：
 
-- either as a string to sort with the default ascending order
-- or as an object to define both the field name and the order (i.e. `'asc'` for ascending order or `'desc'` for descending order)
+- 作为字符串以默认升序排序
+- 或作为一个对象来定义字段名称和顺序（即 `'asc'` 表示升序或 `'desc'` 表示降序）
 
 ```js
 strapi.entityService.findMany('api::article.article', {
@@ -30,12 +30,12 @@ strapi.entityService.findMany('api::article.article', {
 });
 ```
 
-### Multiple
+### 多个字段
 
-To order results by multiple fields, pass the fields as an array to the `sort` parameter:
+要按多个字段对结果进行排序，请将这些字段作为数组传递给 `sort` 参数：
 
-- either as an array of strings to sort multiple fields using the default ascending order
-- or as an array of objects to define both the field name and the order (i.e. `'asc'` for ascending order or `'desc'` for descending order)
+- 作为字符串数组，使用默认升序对多个字段进行排序
+- 或作为对象数组来定义字段名称和顺序（即 `'asc'` 表示升序或 `'desc'` 表示降序）
 
 ```js
 strapi.entityService.findMany('api::article.article', {
@@ -48,9 +48,9 @@ strapi.entityService.findMany('api::article.article', {
 });
 ```
 
-### Relational ordering
+### 关系排序
 
-Fields can also be sorted based on fields from relations:
+字段也可以根据关系中的字段进行排序：
 
 ```js
 strapi.entityService.findMany('api::article.article', {
@@ -62,9 +62,9 @@ strapi.entityService.findMany('api::article.article', {
 });
 ```
 
-## Pagination
+## 分页
 
-To paginate results returned by the Entity Service API, use the `start` and `limit` parameters:
+要对实体服务 API 返回的结果进行分页，请使用 `start` 和 `limit` 参数：
 
 ```js
 strapi.entityService.findMany('api::article.article', {

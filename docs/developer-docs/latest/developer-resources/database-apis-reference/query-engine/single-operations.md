@@ -1,28 +1,28 @@
 ---
-title: Single Operations for Query Engine API - Strapi Developer Docs
-description: Use Strapi's Query Engine API to perform operations on single entries.
+title: 查询引擎 API的单一操作 - Strapi 开发人员文档
+description: 使用 Strapi的 Query Engine API 对单个条目执行操作。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/query-engine/single-operations.html
 ---
 
-# Query Engine API: Single Operations
+# 查询引擎 API：单个操作
 
 ## findOne()
 
-Finds the first entry matching the parameters.
+查找与参数匹配的第一个条目。
 
-Syntax: `findOne(parameters) ⇒ Entry`
+语法: `findOne(parameters) ⇒ Entry`
 
-### Parameters
+### 参数
 
-| Parameter  | Type                                                                                                                                         | Description                                                                                                             |
+| 参数  | 类型                                                                                                                                         | Description                                                                                                             |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `select`   | String, or Array of strings                                                                                                                  | [Attributes](/developer-docs/latest/development/backend-customization/models.md#model-attributes) to return |
-| `where`    | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)          | [Filters](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) to use                                                                                                                 |
-| `offset`   | Integer                                                                                                                                       | Number of entries to skip                                                                                                |
-| `orderBy`  | [`OrderByParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md) | [Order](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md) definition |
-| `populate` | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)      | Relations to [populate](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)
+| `select`   | String, or Array of strings                                                                                                                  | 返回 [属性](/developer-docs/latest/development/backend-customization/models.md#model-attributes) |
+| `where`    | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)          | [筛选](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)                                                                                                                 |
+| `offset`   | Integer                                                                                                                                       | 要跳过的条目数                                                                                                |
+| `orderBy`  | [`OrderByParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md) | [排序](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md) 定义 |
+| `populate` | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)      | 要[填充](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)的关系
 
-### Example
+### 示例
 
 ```js
 const entry = await strapi.db.query('api::blog.article').findOne({
@@ -34,22 +34,22 @@ const entry = await strapi.db.query('api::blog.article').findOne({
 
 ## findMany()
 
-Finds entries matching the parameters.
+查找与参数匹配的条目。
 
-Syntax: `findMany(parameters) ⇒ Entry[]`
+语法: `findMany(parameters) ⇒ Entry[]`
 
 ### Parameters
 
-| Parameter | Type                           | Description                                |
+| 参数 | 类型                           | 描述                                |
 | --------- | ------------------------------ | ------------------------------------------ |
-| `select`   | String, or Array of strings                                                                                                                  | [Attributes](/developer-docs/latest/development/backend-customization/models.md#model-attributes) to return |
-| `where`    | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)          | [Filters](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) to use                                                                                                                 |
-| `limit`     | Integer                       | Number of entries to return                 |
-| `offset`   | Integer                                                                                                                                       | Number of entries to skip                                                                                                |
-| `orderBy`  | [`OrderByParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md) | [Order](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md) definition |
-| `populate` | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)      | Relations to [populate](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)
+| `select`   | String, or Array of strings                                                                                                                  | 返回 [属性](/developer-docs/latest/development/backend-customization/models.md#model-attributes) |
+| `where`    | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)          | [筛选](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)                                                                                                                 |
+| `limit`     | Integer                       | 要返回的条目数               |
+| `offset`   | Integer                                                                                                                                       | 要跳过的条目数                                                                                                |
+| `orderBy`  | [`OrderByParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md) | [排序](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md) 定义 |
+| `populate` | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)      | 要[填充](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)的关系
 
-### Example
+### 示例
 
 ```js
 const entries = await strapi.db.query('api::blog.article').findMany({
@@ -62,23 +62,23 @@ const entries = await strapi.db.query('api::blog.article').findMany({
 
 ## findWithCount()
 
-Finds and counts entries matching the parameters.
+查找与参数匹配的条目并对其进行计数。
 
-Syntax: `findWithCount(parameters) => [Entry[], number]`
+语法: `findWithCount(parameters) => [Entry[], number]`
 
 ### Parameters
 
-| Parameter | Type                           | Description                                |
+| 参数 | 类型                           | 描述                                |
 | --------- | ------------------------------ | ------------------------------------------ |
-| `select`   | String, or Array of strings                                                                                                                  | [Attributes](/developer-docs/latest/development/backend-customization/models.md#model-attributes) to return |
-| `where`    | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)          | [Filters](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) to use                                                                                                                 |
-| `limit`     | Integer                       | Number of entries to return                 |
-| `offset`   | Integer                                                                                                                                       | Number of entries to skip                                                                                                |
-| `orderBy`  | [`OrderByParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md) | [Order](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md) definition |
-| `populate` | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)      | Relations to [populate](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)
+| `select`   | String, or Array of strings                                                                                                                  | 返回 [属性](/developer-docs/latest/development/backend-customization/models.md#model-attributes) |
+| `where`    | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)          | [筛选](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)                                                                                                                 |
+| `limit`     | Integer                       | 要返回的条目数               |
+| `offset`   | Integer                                                                                                                                       | 要跳过的条目数                                                                                                |
+| `orderBy`  | [`OrderByParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md) | [排序](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/order-pagination.md) 定义 |
+| `populate` | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)      | 要[填充](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)的关系
 |
 
-### Example
+### 示例
 
 ```js
 const [entries, count] = await strapi.db.query('api::blog.article').findWithCount({
@@ -91,19 +91,19 @@ const [entries, count] = await strapi.db.query('api::blog.article').findWithCoun
 
 ## create()
 
-Creates one entry and returns it.
+创建一个条目并返回该条目。
 
-Syntax: `create(parameters) => Entry`
+语法: `create(parameters) => Entry`
 
 ### Parameters
 
-| Parameter | Type                           | Description                                |
+| 参数 | 类型                           | 描述                                |
 | --------- | ------------------------------ | ------------------------------------------ |
-| `select`   | String, or Array of strings                                                                                                                  | [Attributes](/developer-docs/latest/development/backend-customization/models.md#model-attributes) to return |
-| `populate` | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)      | Relations to [populate](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)
-| data      | Object                      | Input data                                 |
+| `select`   | String, or Array of strings                                                                                                                  | 返回 [属性](/developer-docs/latest/development/backend-customization/models.md#model-attributes) |
+| `populate` | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)      | 要[填充](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)的关系
+| data      | Object                      | 输入数据                                 |
 
-### Example
+### 示例
 
 ```js
 const entry = await strapi.db.query('api::blog.article').create({
@@ -115,20 +115,20 @@ const entry = await strapi.db.query('api::blog.article').create({
 
 ## update()
 
-Updates one entry and returns it.
+更新一个条目并将其返回。
 
-Syntax: `update(parameters) => Entry`
+语法: `update(parameters) => Entry`
 
 ### Parameters
 
-| Parameter | Type                           | Description                                |
+| 参数 | 类型                           | 描述                                |
 | --------- | ------------------------------ | ------------------------------------------ |
-| `select`   | String, or Array of strings                                                                                                                  | [Attributes](/developer-docs/latest/development/backend-customization/models.md#model-attributes) to return |
-| `populate` | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)      | Relations to [populate](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)
-| `where`    | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)          | [Filters](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) to use                                                                                                                 |
-| `data`      | Object                      | Input data                                 |
+| `select`   | String, or Array of strings                                                                                                                  | 返回 [属性](/developer-docs/latest/development/backend-customization/models.md#model-attributes) |
+| `populate` | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)      | 要[填充](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)的关系
+| `where`    | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)          | [筛选](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)                                                                                                                 |
+| `data`      | Object                      | 输入数据                                 |
 
-### Example
+### 示例
 
 ```js
 const entry = await strapi.db.query('api::blog.article').update({
@@ -141,19 +141,19 @@ const entry = await strapi.db.query('api::blog.article').update({
 
 ## delete()
 
-Deletes one entry and returns it.
+删除一个条目并将其返回。
 
-Syntax: `delete(parameters) => Entry`
+语法: `delete(parameters) => Entry`
 
 ### Parameters
 
-| Parameter | Type                           | Description                                |
+| 参数 | 类型                           | 描述                                |
 | --------- | ------------------------------ | ------------------------------------------ |
-| `select`   | String, or Array of strings                                                                                                                  | [Attributes](/developer-docs/latest/development/backend-customization/models.md#model-attributes) to return |
-| `populate` | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)      | Relations to [populate](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)
-| `where`    | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)          | [Filters](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md) to use                                      |
+| `select`   | String, or Array of strings                                                                                                            | 返回 [属性](/developer-docs/latest/development/backend-customization/models.md#model-attributes) |
+| `populate` | [`PopulateParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)      | 要[填充](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/populating.md)的关系
+| `where`    | [`WhereParameter`<Fa-Link color="grey"/>](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)          | [筛选](/developer-docs/latest/developer-resources/database-apis-reference/query-engine/filtering.md)                                      |
 
-### Example
+### 示例
 
 ```js
 const entry = await strapi.db.query('api::blog.article').delete({

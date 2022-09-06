@@ -1,16 +1,16 @@
 ---
-title: Components and Dynamic Zones with Entity Service API - Strapi Developer Docs
-description: Use Strapi's Entity Service to create and update components and dynamic zones.
+title: 具有实体服务 API 的组件和动态区域 - Strapi 开发人员文档
+description: 使用 Strapi 的实体服务创建和更新组件和动态区域。
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/entity-service/components-dynamic-zones.html
 ---
 
-# Entity Service API: Components and dynamic zones
+# 实体服务 API：组件和动态区域
 
-The [Entity Service](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) is the layer that handles [components](/developer-docs/latest/development/backend-customization/models.md#components) and [dynamic zones](/developer-docs/latest/development/backend-customization/models.md#dynamic-zones) logic. With the Entity Service API, components and dynamic zones can be [created](#creation) and [updated](#update) while creating or updating entries.
+[Entity Service](/developer-docs/latest/developer-resources/database-apis-reference/entity-service-api.md) 是处理 [组件](/developer-docs/latest/development/backend-customization/models.md#components) 和 [动态区域](/developer-docs/latest/development/backend-customization/models.md#dynamic-zones) 逻辑的层。使用实体服务 API，可以在创建或更新条目时[创建](#创建)和[更新](#更新)组件和动态区域。
 
-## Creation
+## 创建
 
-A [component](/developer-docs/latest/development/backend-customization/models.md#components) can be created while creating an entry with the Entity Service API:
+在使用实体服务 API 创建条目时，可以创建 [组件](/developer-docs/latest/development/backend-customization/models.md#components)：
 
 ```js
 strapi.entityService.create('api::article.article', {
@@ -22,7 +22,7 @@ strapi.entityService.create('api::article.article', {
 });
 ```
 
-A [dynamic zone](/developer-docs/latest/development/backend-customization/models.md#dynamic-zones) (i.e. a list of components) can be created while creating an entry with the Entity Service API:
+在使用实体服务 API 创建条目时，可以创建 [动态区域](/developer-docs/latest/development/backend-customization/models.md#dynamic-zones)（即组件列表）：
 
 ```js
 strapi.entityService.create('api::article.article', {
@@ -41,9 +41,9 @@ strapi.entityService.create('api::article.article', {
 });
 ```
 
-## Update
+## 更新
 
-A [component](/developer-docs/latest/development/backend-customization/models.md#components) can be updated while updating an entry with the Entity Service API. If a component `id` is specified, the component is updated, otherwise the old one is deleted and a new one is created:
+在使用实体服务 API 更新条目时，可以更新 [组件](/developer-docs/latest/development/backend-customization/models.md#components) 。如果指定了组件 `id`，则会更新该组件，否则将删除旧组件并创建一个新组件：
 
 ```js
 strapi.entityService.update('api::article.article', 1, {
@@ -56,7 +56,7 @@ strapi.entityService.update('api::article.article', 1, {
 });
 ```
 
-A [dynamic zone](/developer-docs/latest/development/backend-customization/models.md#dynamic-zones) (i.e. a list of components) can be updated while updating an entry with the Entity Service API. If a component `id` is specified, the component is updated, otherwise the old one is deleted and a new one is created:
+[dynamic zone](/developer-docs/latest/development/backend-customization/models.md#dynamic-zones)（即组件列表）可以在使用实体服务 API 更新条目时进行更新。如果指定了组件 `id`，则会更新该组件，否则将删除旧组件并创建一个新组件：
 
 ```js
 strapi.entityService.update('api::article.article', 1, {
