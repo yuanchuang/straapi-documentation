@@ -277,7 +277,7 @@ async delete(ctx) {
 ::::
 :::::
 
-::::: details Single type examples
+::::: details 单一类型示例
 :::: tabs card
 
 ::: tab find()
@@ -336,5 +336,5 @@ strapi.controller('plugin::plugin-name.controller-name');
 ```
 
 ::: tip
-要列出所有可用的控制器，请运行 `yarn strapi controllers:list`.
+要列出所有可用的控制器，请运行 `yarn strapi controllers:list`
 :::

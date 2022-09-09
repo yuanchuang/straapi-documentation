@@ -1,50 +1,49 @@
 ---
-title: Usage information - Strapi Developer Docs
-description: We are committed to providing a solution, with Strapi, that exceeds the expectations of the users and community. We are also committed to continuing to develop and make Strapi even better than it is today.
+title: 使用信息 - Strapi 开发人员文档
+description: 我们致力于与 Strapi 一起提供超出用户和社区期望的解决方案。我们还致力于继续发展，使 Strapi 比今天更好。
 sidebarDepth: 0
 canonicalUrl: https://docs.strapi.io/developer-docs/latest/getting-started/usage-information.html
 ---
 
-# Collected Usage Information
+# 收集的使用信息
 
-We are committed to providing a solution, with Strapi, that exceeds the expectations of the users and community. We are also committed to continuing to develop and make Strapi even better than it is today. To that end, Strapi contains a feature in which anonymous and otherwise non-sensitive data is collected. This data is collectively aggregated for all our users, which when taken together give us a better global understanding of how users are interacting and using Strapi.
+我们致力于与 Strapi 一起提供超出用户和社区期望的解决方案。我们还致力于继续发展，使 Strapi 比今天更好。为此，Strapi 包含一项功能，其中收集匿名和非敏感数据。这些数据是我们所有用户的集体汇总，当这些数据结合在一起时，我们可以更好地了解用户如何互动和使用 Strapi。
 
-## Context
+## 内容
 
-The number of developers using Strapi is growing significantly. As mentioned earlier, we are committed to providing the best experience to our users. We will always continue to do hands-on UI/UX testing, surveys, issue tracking, roadmap votes, etc... and otherwise talk with the Strapi Community while striving to understand and deliver what is being asked for and what is needed, by any means available.
+使用 Strapi 的开发人员数量正在显著增长。如前所述，我们致力于为用户提供最佳体验。我们将始终继续进行动手的UI / UX测试，调查，问题跟踪，路线图投票等...并以其他方式与Stati社区交谈，同时努力通过任何可用的方式理解和交付所要求的内容和需求。
 
-However, these above actions alone are often insufficient to maintain an overall picture of some aspects of the global usage of Strapi and its features. Globally aggregated data helps us answer and make choices around questions like these:
+然而，仅凭上述这些行动往往不足以全面了解Stati全球使用及其功能的某些方面。全球汇总数据有助于我们回答以下问题并做出选择：
 
-- Are our users using a particular feature or not? For those who are using it, what do they use it for? Is it activated and used alongside another plugin? Which specific plugin? Or something else, like, only in development/production?
-- How long does setting up a project take? If the global install time increases, does it mean that users are encountering issues or the process is simply too complicated?
-- What type of errors our users are facing?
-- What are the most used plugins?
-- Should we focus our efforts on being compatible with Node 16? Maybe our community uses version 16 in greater percentages than the global Node.js community?
-- And more...
+- 我们的用户是否使用特定功能？对于那些使用它的人来说，他们用它来做什么？它是否被激活并与另一个插件一起使用？哪个特定的插件？还是其他一些东西，比如，只在开发/生产中？
+- 设置项目需要多长时间？如果全局安装时间增加，是否意味着用户遇到问题或过程太复杂？
+- 我们的用户面临什么类型的错误？
+- 最常用的插件是什么？
+- 我们是否应该将精力集中在与节点16兼容上？也许我们的社区使用版本 16 的比例高于全球 Node.js 社区？
+- 以及更多...
 
-Without these metrics, we wouldn't be able to make the right choices as we continue to move forward with the roadmap and provide what you, the community and users, are asking for.
+如果没有这些指标，我们将无法做出正确的选择，因为我们将继续推进路线图，并提供您，社区和用户的要求。
 
-## Collected data
+## 收集的数据
 
-The following data is collected:
+收集以下数据：
 
-- Unique project ID (generated with UUID)
-- Unique machine ID (generated with [node-machine-id](https://www.npmjs.com/package/node-machine-id))
-- Environment state (development, staging, production)
-- System information (OS)
-- Build configurations
+- 唯一的项目 ID（使用 UUID 生成）
+- 唯一的计算机 ID（使用 [节点-机器-id](https://www.npmjs.com/package/node-machine-id)生成）
+- 环境状态（开发、暂存、生产）
+- 系统信息
+- 构建配置
 
 ::: caution GDPR
-The collected data are of a non-sensitive nature and no personal data is collected. We are compliant with the European GDPR recommendations (see our [Privacy Policy](https://strapi.io/privacy)). We do not collect databases configurations, password or custom variables. Any data collected (as above) is secured, encrypted and anonymized.
+收集的数据具有非敏感性，不会收集任何个人数据。我们遵守欧洲GDPR的建议（请参阅我们的[隐私政策](https://strapi.io/privacy))。我们不收集数据库配置、密码或自定义变量。收集的任何数据（如上所述）都是安全，加密和匿名的。
 :::
 
-### Opt-out
+### 选择退出
 
 ::: caution
-Strapi previously recommended disabling data collection by removing the `uuid` property in the `package.json` file located in the project root. While this method will still work it is discouraged since the `uuid` might be required for certain project functionality and adding a `uuid` at a later date would re-enable data collection without informing the user.
- :::
+Strapi 之前建议通过删除位于项目根目录中的 `package.json` 文件中的 `uuid` 属性来禁用数据收集。虽然此方法仍然有效，但不鼓励这样做，因为某些项目功能可能需要 `uuid`，并且在以后添加 `uuid` 将在不通知用户的情况下重新启用数据收集。
 
-The default data collection feature can be disabled using the following CLI command:
+可以使用以下 CLI 命令禁用默认数据收集功能：
 
 <code-group>
 
@@ -68,10 +67,10 @@ yarn strapi telemetry:disable
 
 </code-group>
 
-Alternatively, the `telemetryDisabled: true` flag in the project `package.json` file will also disable data collection.
+或者，项目 `package.json` 文件中的 `telemetryDisabled: true` 标志也将禁用数据收集。
 
-Data collection can later be re-enabled by deleting the flag or setting it to false, or by using the `telemetry:enable` command.
+以后可以通过删除标志或将其设置为 false，或者使用 `telemetry:enable` 命令来重新启用数据收集。
 
 ::: note
-If you have any questions or concerns regarding data collection, please contact us at the following email address [privacy@strapi.io](mailto:privacy@strapi.io).
+如果您对数据收集有任何疑问或疑虑，请通过以下电子邮件地址 [privacy@strapi.io](mailto:privacy@strapi.io) 与我们联系。
 :::
