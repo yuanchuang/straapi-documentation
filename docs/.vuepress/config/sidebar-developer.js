@@ -225,7 +225,7 @@ const developer = [
     sidebarDepth: 2,
     children: [
       {
-        title: 'APIs Reference',
+        title: 'APIs 参考',
         collapsable: true,
         sidebarDepth: 1,
         children: [
@@ -320,7 +320,6 @@ const developer = [
               ],
             ],
           },
-
           {
             title: '插件 API 参考',
             collapsable: true,
@@ -337,10 +336,10 @@ const developer = [
           },
         ],
       },
-      ['/developer-docs/latest/developer-resources/cli/CLI', 'Command Line Interface'],
-      ['/developer-docs/latest/developer-resources/error-handling.md', 'Error handling'],
+      ['/developer-docs/latest/developer-resources/cli/CLI', '命令行界面'],
+      ['/developer-docs/latest/developer-resources/error-handling.md', '错误处理'],
       {
-        title: 'Integrations',
+        title: '集成',
         path: '/developer-docs/latest/developer-resources/content-api/integrations.html',
         collapsable: true,
         sidebarDepth: 1,

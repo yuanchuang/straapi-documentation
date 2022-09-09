@@ -2,17 +2,17 @@ const themeConfig = {
   logo: '/assets/logo.svg',
   nav: [
     {
-      text: 'Resource Center',
+      text: '资源中心',
       link: 'https://strapi.io/resource-center',
     },
     {
-      text: 'v4 Documentation',
+      text: 'v4 文档',
       items: [
         {
-          text: 'Developer Docs',
+          text: '开发人员文档',
           items: [
             {
-              text: 'Getting Started',
+              text: '开始',
               link: '/developer-docs/latest/getting-started/introduction.html',
             },
             {
@@ -20,15 +20,15 @@ const themeConfig = {
               link: '/developer-docs/latest/setup-deployment-guides/installation.html',
             },
             {
-              text: 'Plugins',
+              text: '插件',
               link: '/developer-docs/latest/plugins/plugins-intro.html',
             },
             {
-              text: 'Development',
+              text: '部署',
               link: '/developer-docs/latest/development/backend-customization.html',
             },
             {
-              text: 'Update & Migration',
+              text: '更新 & 迁移',
               link: '/developer-docs/latest/update-migration-guides/update-version.html',
             },
             {
@@ -38,18 +38,18 @@ const themeConfig = {
           ],
         },
         {
-          text: 'User Guide',
+          text: '用户指南',
           items: [
             {
-              text: 'Getting Started',
+              text: '开始',
               link: '/user-docs/latest/getting-started/introduction.html',
             },
             {
-              text: 'Content Manager',
+              text: '内容管理',
               link: '/user-docs/latest/content-manager/introduction-to-content-manager.html',
             },
             {
-              text: 'Content-type Builder',
+              text: '内容类型生成器',
               link:
                 '/user-docs/latest/content-types-builder/introduction-to-content-types-builder.html',
             },
@@ -59,16 +59,16 @@ const themeConfig = {
                 '/user-docs/latest/users-roles-permissions/introduction-to-users-roles-permissions.html',
             },
             {
-              text: 'Media Library',
+              text: '媒体库',
               link:
                 '/user-docs/latest/media-library/introduction-to-media-library.html',
             },
             {
-              text: 'Plugins',
+              text: '插件',
               link: '/user-docs/latest/plugins/introduction-to-plugins.html',
             },
             {
-              text: 'General Settings',
+              text: '常规设置',
               link: '/user-docs/latest/settings/managing-global-settings.html',
             },
           ],
@@ -76,11 +76,11 @@ const themeConfig = {
       ],
     },
     {
-      text: 'v3 documentation',
+      text: 'v3 文档',
       link: 'https://docs-v3.strapi.io',
     },
     {
-      text: 'Ecosystem',
+      text: '生态系统',
       items: [
         {
           text: 'Strapi',
@@ -100,7 +100,7 @@ const themeConfig = {
           ],
         },
         {
-          text: 'Community',
+          text: '社区',
           items: [
             {
               text: 'Forum',
@@ -117,7 +117,7 @@ const themeConfig = {
           ],
         },
         {
-          text: 'Resources',
+          text: '资源',
           items: [
             {
               text: 'Tutorials',
@@ -132,7 +132,7 @@ const themeConfig = {
       ],
     },
     {
-      text: "We're hiring!",
+      text: "我们正在招聘！",
       link: 'https://strapi.io/careers#open-positions',
     },
   ],
